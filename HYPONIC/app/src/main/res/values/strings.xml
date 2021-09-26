@@ -1,9 +1,0 @@
-<resources>
-    <string name="app_name">Hyponic</string>
-    <string name="emailLabel">Email</string>
-    <string name="passwordLabel">Password</string>
-    <string name="loginText">Masuk</string>
-    <string name="atau_masuk_dengan">atau masuk dengan</string>
-    <string name="belum_mempunyai_akun">Belum mempunyai akun?</string>
-    <string name="daftarText">Daftar</string>
-</resources>
