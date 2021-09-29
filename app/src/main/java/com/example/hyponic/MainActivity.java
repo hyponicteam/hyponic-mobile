@@ -13,6 +13,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity{
     private EditText edtPassword,edtEmail;
     private Button btnMasuk;
+    private int coba;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
