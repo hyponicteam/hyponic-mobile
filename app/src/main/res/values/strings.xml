@@ -6,4 +6,8 @@
     <string name="atau_masuk_dengan">Atau masuk dengan</string>
     <string name="belum_mempunyai_akun">Belum mempunyai akun?</string>
     <string name="daftarText">Daftar</string>
+    <string name="sapaan">Bagaimana kabarmu?</string>
+    <string name="nama">Nama User</string>
+    <string name="selesaikanDailyActivity">Selesaikan daily activitymu</string>
+    <string name="artikel_terbaru">Artikel Terbaru</string>
 </resources>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BerandaActivity">
+
+    <TextView
+        android:id="@+id/sapaan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="15dp"
+        android:text="@string/sapaan"
+        android:textColor="@color/blackHyponic"
+        android:textSize="16sp"
+        android:textStyle="bold"
+
+        app:layout_constraintEnd_toStartOf="@+id/profilUser"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/nama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="15dp"
+        android:gravity="center_vertical"
+        android:text="@string/nama"
+        android:textColor="@color/grey"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/profilUser"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sapaan" />
+
+    <TextView
+        android:id="@+id/selesaikanDailyActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="36dp"
+        android:text="@string/selesaikanDailyActivity"
+        android:textColor="@color/blackHyponic"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/nama"
+        app:layout_constraintStart_toStartOf="@+id/nama"
+        app:layout_constraintTop_toBottomOf="@+id/nama" />
+
+    <ImageView
+        android:id="@+id/gambarDailyActivity"
+        android:layout_width="95dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="35dp"
+        app:layout_constraintStart_toStartOf="@+id/selesaikanDailyActivity"
+        app:layout_constraintTop_toBottomOf="@+id/selesaikanDailyActivity"
+        app:srcCompat="@drawable/logo_font" />
+
+    <TextView
+        android:id="@+id/JudulDailyActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="36dp"
+        android:text="Hyponic Daily Activity"
+        android:textColor="@color/blackHyponic"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.009"
+        app:layout_constraintStart_toEndOf="@+id/gambarDailyActivity"
+        app:layout_constraintTop_toTopOf="@+id/gambarDailyActivity" />
+
+    <TextView
+        android:id="@+id/namaTanaman"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="36dp"
+        android:text="Sawi"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.005"
+        app:layout_constraintStart_toEndOf="@+id/gambarDailyActivity"
+        app:layout_constraintTop_toBottomOf="@+id/JudulDailyActivity" />
+
+    <TextView
+        android:id="@+id/progres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12sp"
+        android:layout_marginEnd="36dp"
+        android:text="Progress 40%"
+        android:textColor="@color/buttonHyponic"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/gambarDailyActivity"
+        app:layout_constraintTop_toBottomOf="@+id/gambarDailyActivity" />
+
+    <TextView
+        android:id="@+id/ArtikelTerbaru"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="36dp"
+        android:text="@string/artikel_terbaru"
+        android:textColor="@color/blackHyponic"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.008"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progres" />
+
+    <ImageView
+        android:id="@+id/gambarArtikel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ArtikelTerbaru"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="36dp"
+        android:text="Apa yang harus dihindari dalam merawat tanaman hidroponik?"
+        android:textColor="@color/blackHyponic"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/gambarArtikel"
+        app:layout_constraintTop_toTopOf="@+id/gambarArtikel" />
+
+    <TextView
+        android:id="@+id/kategoriArtikel"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Kategori Artikel"
+        android:textStyle="normal"
+        android:textSize="12sp"
+        android:textColor="@color/buttonHyponic"
+        app:layout_constraintBottom_toBottomOf="@+id/gambarArtikel"
+        app:layout_constraintEnd_toEndOf="@+id/textView6"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintVertical_bias="0.155" />
+    <ImageView
+        android:id="@+id/gambarArtikel2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gambarArtikel"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/judulArtikel"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="36dp"
+        android:text="Menurut seorang public figure, hidroponik punya prospek yang besar!"
+        android:textColor="@color/blackHyponic"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/gambarArtikel2"
+        app:layout_constraintTop_toTopOf="@+id/gambarArtikel2" />
+
+    <TextView
+        android:id="@+id/kategoriArtikel2"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Kategori Artikel"
+        android:textStyle="normal"
+        android:textSize="12sp"
+        android:textColor="@color/buttonHyponic"
+        app:layout_constraintBottom_toBottomOf="@+id/gambarArtikel2"
+        app:layout_constraintEnd_toEndOf="@+id/judulArtikel"
+        app:layout_constraintStart_toStartOf="@+id/judulArtikel"
+        app:layout_constraintTop_toBottomOf="@+id/judulArtikel"
+        app:layout_constraintVertical_bias="0.155" />
+
+    <ImageView
+        android:id="@+id/profilUser"
+        android:layout_width="41dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars"
+        android:src="@drawable/google_logo"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

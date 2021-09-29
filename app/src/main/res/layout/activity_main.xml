@@ -46,6 +46,7 @@
     <EditText
         android:id="@+id/emailText"
         android:textSize="14sp"
+        android:inputType="textEmailAddress"
         android:fontFamily="sans-serif"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -74,6 +75,7 @@
         android:id="@+id/passwordText"
         android:textSize="14sp"
         android:fontFamily="sans-serif"
+        android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
@@ -86,7 +88,8 @@
     <Button
         android:id="@+id/loginButton"
         android:text="@string/loginText"
-        android:backgroundTint="@color/warnaDasar"
+        android:onClick="onClickMasuk"
+        android:backgroundTint="@color/buttonHyponic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
@@ -145,11 +148,11 @@
         android:layout_marginEnd="36dp"
         android:onClick="onClickDaftar"
         android:text="@string/daftarText"
-        android:textColor="@color/warnaDasar"
+        android:textColor="@color/buttonHyponic"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.024"
         app:layout_constraintStart_toEndOf="@+id/opsidaftar"
         app:layout_constraintTop_toTopOf="@+id/opsidaftar"
-        tools:textColor="@color/warnaDasar" />
+        tools:textColor="@color/buttonHyponic" />
     </androidx.constraintlayout.widget.ConstraintLayout>

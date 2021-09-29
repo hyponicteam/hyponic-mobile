@@ -7,8 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="warnaDasar">#FF38AC91</color>
+    <color name="buttonHyponic">#FF38AC91</color>
+    <color name="navHyponic">#FF86D4B9</color>
     <color name="grey">#FF999999</color>
     <color name="melon">#FF8ED486</color>
+    <color name="blackHyponic">#FF333333</color>
 
 </resources>
