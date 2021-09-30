@@ -2,12 +2,14 @@
     <string name="app_name">Hyponic</string>
     <string name="emailLabel">Email</string>
     <string name="passwordLabel">Kata Sandi</string>
+    <string name="confirmPassLabel">Konfirmasi Kata Sandi</string>
     <string name="loginText">Masuk</string>
     <string name="atau_masuk_dengan">Atau masuk dengan</string>
     <string name="belum_mempunyai_akun">Belum mempunyai akun?</string>
+    <string name="sudah_mempunyai_akun">Sudah mempunyai akun?</string>
     <string name="daftarText">Daftar</string>
     <string name="sapaan">Bagaimana kabarmu?</string>
-    <string name="nama">Nama User</string>
+    <string name="nama">Nama Lengkap</string>
     <string name="selesaikanDailyActivity">Selesaikan daily activitymu</string>
     <string name="artikel_terbaru">Artikel Terbaru</string>
 </resources>
