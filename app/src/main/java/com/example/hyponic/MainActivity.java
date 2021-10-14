@@ -17,6 +17,7 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import static com.example.hyponic.constant.ApiConstant.BASE_URL;
 
 public class MainActivity extends AppCompatActivity{
     private EditText edtPassword,edtEmail;
@@ -42,9 +43,39 @@ public class MainActivity extends AppCompatActivity{
     public void onClickMasuk(View view) {
         email = edtEmail.getText().toString();
         password = edtPassword.getText().toString();
+        if(email.equals("")|| password.equals("")){
+            edtEmail.setError("email tidak boleh kosong");
+            edtPassword.setError("password tidak boleh kosong");
+        }else{
+            AndroidNetworking.post(BASE_URL+"auth/login")
+                    .addBodyParameter("email", email)
+                    .addBodyParameter("password",password)
+                    .setTag("test")
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                if(response.getJSONObject("meta").getString("status").equals("success")){
+                                    Toast.makeText(getApplicationContext(),"Login Berhasil",Toast.LENGTH_SHORT).show();
+                                    Intent moveIntent = new Intent(getApplicationContext(), BerandaActivity.class);
+                                    startActivity(moveIntent);
+                                }else{
+                                    Toast.makeText(getApplicationContext(),"Login Gagal",Toast.LENGTH_SHORT).show();
+                                }
 
-        Intent moveIntent = new Intent(this, BerandaActivity.class);
-        startActivity(moveIntent);
+                            }catch (JSONException e){
+                                Toast.makeText(getApplicationContext(),"Login Gagal"+e,Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        @Override
+                        public void onError(ANError error) {
+                            // handle error
+                            Toast.makeText(getApplicationContext(),""+error, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
 
     }
 }
