@@ -3,7 +3,6 @@ package com.example.hyponic.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,7 +23,7 @@ public class ArtikelAdapter extends RecyclerView.Adapter<ArtikelAdapter.ListView
     @NonNull
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_card_artikel, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row_artikel, parent, false);
         return new ListViewHolder(view);
     }
 
@@ -33,7 +32,7 @@ public class ArtikelAdapter extends RecyclerView.Adapter<ArtikelAdapter.ListView
         Artikel artikel = listArtikel.get(position);
         //holder.artikelPhoto.setImageResource(artikel.getImage_url());
         holder.tvTitle.setText(artikel.getTitle());
-        holder.tvCategory.setText(artikel.getArticle_categories_id());
+        holder.tvCategory.setText(artikel.getCategory().getName());
 
     }
 

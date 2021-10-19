@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity{
                         public void onResponse(JSONObject response) {
                             try {
                                 if(response.getJSONObject("meta").getString("status").equals("success")){
-                                    Toast.makeText(getApplicationContext(),"Login Berhasil",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),response.getJSONObject("meta").getString("message"),Toast.LENGTH_SHORT).show();
                                     Intent moveIntent = new Intent(getApplicationContext(), BerandaActivity.class);
                                     startActivity(moveIntent);
                                 }else{
