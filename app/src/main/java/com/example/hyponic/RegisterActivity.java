@@ -76,7 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 try {
                                     if(response.getJSONObject("meta").getString("status").equals("success")){
                                         Toast.makeText(getApplicationContext(),"Register Berhasil",Toast.LENGTH_SHORT).show();
-                                        Intent moveIntent = new Intent(RegisterActivity.this, MainActivity.class);
+                                        Intent moveIntent = new Intent(RegisterActivity.this, LoginActivity.class);
                                         startActivity(moveIntent);
                                     }else{
                                         Toast.makeText(getApplicationContext(),"Register Gagal",Toast.LENGTH_SHORT).show();

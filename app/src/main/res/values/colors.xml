@@ -5,12 +5,15 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
+    <color name="black">#FF333333</color>
     <color name="white">#FFFFFFFF</color>
     <color name="buttonHyponic">#FF38AC91</color>
     <color name="navHyponic">#FF86D4B9</color>
     <color name="grey">#FF999999</color>
     <color name="melon">#FF8ED486</color>
     <color name="blackHyponic">#FF333333</color>
+    <color name="hyponicLogo">#145D45</color>
+    <color name="yellow">#FFB900</color>
+    <color name="orange">#E74C3C</color>
 
 </resources>
