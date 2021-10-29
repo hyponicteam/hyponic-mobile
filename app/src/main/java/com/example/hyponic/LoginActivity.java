@@ -7,37 +7,38 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.example.hyponic.model.SharedPrefManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import static com.example.hyponic.constant.ApiConstant.BASE_URL;
 
-public class MainActivity extends AppCompatActivity{
+public class LoginActivity extends AppCompatActivity{
     private EditText edtPassword,edtEmail;
     private Button btnLogin;
     private String email, password;
-
+    SharedPrefManager preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         init();
     }
     public void init(){
         edtPassword = findViewById(R.id.passwordText);
         edtEmail= findViewById(R.id.emailText);
         btnLogin =findViewById(R.id.loginButton);
+        preferences = new SharedPrefManager(this);
     }
     public void onClickDaftar(View view) {
-        Intent moveIntent = new Intent(MainActivity.this, RegisterActivity.class);
+        Intent moveIntent = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(moveIntent);
     }
     public void onClickMasuk(View view) {
@@ -58,8 +59,17 @@ public class MainActivity extends AppCompatActivity{
                         public void onResponse(JSONObject response) {
                             try {
                                 if(response.getJSONObject("meta").getString("status").equals("success")){
-                                    Toast.makeText(getApplicationContext(),response.getJSONObject("meta").getString("message"),Toast.LENGTH_SHORT).show();
-                                    Intent moveIntent = new Intent(getApplicationContext(), BerandaActivity.class);
+                                    JSONObject dataUser = response.getJSONObject("data").getJSONObject("user");
+                                    String token = response.getJSONObject("data").getString("access_token");
+
+                                    Toast.makeText(getApplicationContext(),response.getJSONObject("meta")
+                                            .getString("message"),Toast.LENGTH_SHORT).show();
+
+                                    preferences.saveSPString(preferences.SP_NAMA,dataUser.getString("name"));
+                                    preferences.saveSPInt(String.valueOf(preferences.SP_ID),dataUser.getInt("id"));
+                                    preferences.saveSPString(preferences.SP_TOKEN,token);
+
+                                    Intent moveIntent = new Intent(getApplicationContext(),Home1Activity.class);
                                     startActivity(moveIntent);
                                 }else{
                                     Toast.makeText(getApplicationContext(),"Login Gagal",Toast.LENGTH_SHORT).show();
@@ -75,6 +85,8 @@ public class MainActivity extends AppCompatActivity{
                             Toast.makeText(getApplicationContext(),""+error, Toast.LENGTH_SHORT).show();
                         }
                     });
+            //Intent moveIntent = new Intent(getApplicationContext(),Home1Activity.class);
+            //startActivity(moveIntent);
         }
 
     }

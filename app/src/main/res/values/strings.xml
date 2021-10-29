@@ -8,7 +8,7 @@
     <string name="belum_mempunyai_akun">Belum mempunyai akun?</string>
     <string name="sudah_mempunyai_akun">Sudah mempunyai akun?</string>
     <string name="daftarText">Daftar</string>
-    <string name="sapaan">Bagaimana kabarmu?</string>
+    <string name="sapaan">Selamat Datang di Hyponic</string>
     <string name="nama">Nama Lengkap</string>
     <string name="selesaikanDailyActivity">Selesaikan daily activitymu</string>
     <string name="artikel_terbaru">Artikel Terbaru</string>
@@ -21,6 +21,9 @@
     <string name="progress">Progress 40%</string>
     <string name="title">Judul</string>
     <string name="description">Kategori artikel</string>
+    <string name="tanamanku">Tanamanku</string>
+    <string name="terakhir">Terakhir di ubah</string>
+    <string name="selengkapnya">Selengkapnya ></string>
     <string-array name="data_title">
         <item>Ahmad Dahlan</item>
         <item>Ahmad Yani</item>
@@ -43,5 +46,23 @@
         <item>1</item>
         <item>1</item>
     </string-array>
+    <string name="title_activity_home1">Home1Activity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="plantName">Nama Tanamanku</string>
+    <string name="plantDate">Tanggal terakhir diubah</string>
+    <string name="edit">Ubah</string>
+    <string name="delete">Hapus</string>
+    <string name="seeDetail">lihat</string>
+    <string name="dialog_create_new_plant">Buat Tanaman Baruku</string>
+    <string name="insertNamePlant">Masukkan nama pantauanmu!</string>
+    <string name="cancel">BATAL</string>
+    <string name="save">SIMPAN</string>
 
 </resources>
