@@ -1,8 +1,11 @@
 package com.example.hyponic.adapter;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,9 +33,10 @@ public class ArtikelAdapter extends RecyclerView.Adapter<ArtikelAdapter.ListView
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         Artikel artikel = listArtikel.get(position);
-        //holder.artikelPhoto.setImageResource(artikel.getImage_url());
+
         holder.tvTitle.setText(artikel.getTitle());
         holder.tvCategory.setText(artikel.getCategory().getName());
+        //holder.artikelPhoto.setImageResource(Integer.parseInt(artikel.getImage_url()));
 
     }
 
@@ -42,11 +46,11 @@ public class ArtikelAdapter extends RecyclerView.Adapter<ArtikelAdapter.ListView
     }
 
     public class ListViewHolder extends RecyclerView.ViewHolder {
-        //ImageView artikelPhoto;
+        public ImageView artikelPhoto;
         TextView tvTitle,tvCategory;
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
-            //imgPhoto = itemView.findViewById(R.id.img_item_photo);
+            //artikelPhoto = itemView.findViewById(R.id.imageArtikel);
             tvTitle = itemView.findViewById(R.id.tv_artikel_title);
             tvCategory = itemView.findViewById(R.id.tv_artikel_category);
         }

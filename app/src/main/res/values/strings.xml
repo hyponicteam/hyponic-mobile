@@ -24,28 +24,6 @@
     <string name="tanamanku">Tanamanku</string>
     <string name="terakhir">Terakhir di ubah</string>
     <string name="selengkapnya">Selengkapnya ></string>
-    <string-array name="data_title">
-        <item>Ahmad Dahlan</item>
-        <item>Ahmad Yani</item>
-        <item>Sutomo</item>
-        <item>Gatot Soebroto</item>
-        <item>Ki Hadjar Dewantara</item>
-        <item>Mohammad Hatta</item>
-        <item>Soedirman</item>
-        <item>Soekarno</item>
-        <item>Soepomo</item>
-    </string-array>
-    <string-array name="data_category">
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-    </string-array>
     <string name="title_activity_home1">Home1Activity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -53,16 +31,16 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="plantName">Nama Tanamanku</string>
     <string name="plantDate">Tanggal terakhir diubah</string>
-    <string name="edit">Ubah</string>
-    <string name="delete">Hapus</string>
-    <string name="seeDetail">lihat</string>
-    <string name="dialog_create_new_plant">Buat Tanaman Baruku</string>
-    <string name="insertNamePlant">Masukkan nama pantauanmu!</string>
+    <string name="edit">UBAH</string>
+    <string name="delete">HAPUS</string>
+    <string name="seeDetail">LIHAT</string>
+    <string name="dialog_create_new_plant">Buat Tanaman Barumu</string>
+    <string name="insertNamePlant">Masukkan nama tanamanmu!</string>
     <string name="cancel">BATAL</string>
     <string name="save">SIMPAN</string>
+    <string name="editNamePlant">Masukkan nama baru tanamanmu</string>
+    <string name="dialog_edit_plant">Ubah Nama Tanamanmu</string>
 
 </resources>

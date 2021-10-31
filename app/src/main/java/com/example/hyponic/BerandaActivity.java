@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -19,6 +20,8 @@ import com.example.hyponic.adapter.ArtikelAdapter;
 import com.example.hyponic.interactor.ListArtikelInteractor;
 import com.example.hyponic.model.Artikel;
 import com.example.hyponic.model.Artikel_Kategori;
+import com.example.hyponic.model.DailyActivity;
+import com.example.hyponic.model.SharedPrefManager;
 import com.example.hyponic.model.Time;
 import com.example.hyponic.model.User;
 
@@ -30,24 +33,31 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class BerandaActivity extends AppCompatActivity {
-    private RecyclerView rvArtikel;
+    private RecyclerView rvArtikel,rvDailyActivity;
     private static ArrayList<Artikel> listArtikel;
+    private static ArrayList<DailyActivity> listDailyActivity;
     private static final String TAG ="data";
+    SharedPrefManager pref;
+    private TextView username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beranda);
         init();
+        username.setText(pref.getSPNama());
         AndroidNetworking.initialize(getApplicationContext());
         getDataArtikelApi();
+        //listDailyActivity.addAll(getListDailyActivity());
         //listArtikel.addAll(getListArtikel());
         showData();
     }
     public void init(){
-        rvArtikel = findViewById(R.id.rv_artikel);
+        username=findViewById(R.id.username);
+        //rvArtikel = findViewById(R.id.rv_artikel);
         rvArtikel.setHasFixedSize(true);
         listArtikel =new ArrayList<Artikel>();
+        pref = new SharedPrefManager(this);
     }
 
     public void onClickBacaArtikel(View view) {
@@ -55,17 +65,17 @@ public class BerandaActivity extends AppCompatActivity {
         startActivity(intent);
     }
     /*
-    public ArrayList<Artikel> getListArtikel() {
+    public ArrayList<DailyActivity> getListDailyActivity() {
         String[] dataTitle = getResources().getStringArray(R.array.data_title);
         String[] dataDescription = getResources().getStringArray(R.array.data_category);
         //TypedArray dataPhoto = getResources().obtainTypedArray(R.array.data_photo);
-        ArrayList<Artikel> listHero = new ArrayList<>();
+        ArrayList<DailyActivity> listHero = new ArrayList<>();
         for (int i = 0; i < dataTitle.length; i++) {
-            Artikel artikel = new Artikel();
-            artikel.setTitle(dataTitle[i]);
-            //artikel.setArticle_categories_id(dataDescription[i]);
+            DailyActivity dailyActivity = new DailyActivity();
+            dailyActivity.setName(dataTitle[i]);
+            dailyActivity.getTanaman().setName(dataDescription[i]);
             //hero.setPhoto(dataPhoto.getResourceId(i, -1));
-            listHero.add(artikel);
+           listHero.add(dailyActivity);
         }
         return listHero;
     }*/
