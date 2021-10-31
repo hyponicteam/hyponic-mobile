@@ -44,10 +44,12 @@ public class LoginActivity extends AppCompatActivity{
     public void onClickMasuk(View view) {
         email = edtEmail.getText().toString();
         password = edtPassword.getText().toString();
+        /*
         if(email.equals("")|| password.equals("")){
             edtEmail.setError("email tidak boleh kosong");
             edtPassword.setError("password tidak boleh kosong");
         }else{
+
             AndroidNetworking.post(BASE_URL+"auth/login")
                     .addBodyParameter("email", email)
                     .addBodyParameter("password",password)
@@ -85,9 +87,10 @@ public class LoginActivity extends AppCompatActivity{
                             Toast.makeText(getApplicationContext(),""+error, Toast.LENGTH_SHORT).show();
                         }
                     });
-            //Intent moveIntent = new Intent(getApplicationContext(),Home1Activity.class);
-            //startActivity(moveIntent);
-        }
+
+        }*/
+    Intent moveIntent = new Intent(getApplicationContext(),Home1Activity.class);
+    startActivity(moveIntent);
 
     }
 }

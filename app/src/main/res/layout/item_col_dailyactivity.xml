@@ -18,7 +18,7 @@
             android:orientation="horizontal"
             android:padding="16dp">
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imageArtikel"
+                android:id="@+id/imageDailyActivity"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/sayur"/>
@@ -28,16 +28,16 @@
                 android:orientation="vertical"
                 android:layout_marginLeft="12dp">
                 <TextView
-                    android:id="@+id/tv_item_title"
+                    android:id="@+id/tv_daylyActivity_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:gravity="start"
                     android:text="@string/title"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
                 <TextView
-                    android:id="@+id/tv_item_description"
+                    android:id="@+id/tv_item_jenisSayur"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"
