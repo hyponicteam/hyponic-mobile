@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +37,7 @@ public class LoginActivity extends AppCompatActivity{
         edtEmail= findViewById(R.id.emailText);
         btnLogin =findViewById(R.id.loginButton);
         preferences = new SharedPrefManager(this);
+        AndroidNetworking.initialize(getApplicationContext());
     }
     public void onClickDaftar(View view) {
         Intent moveIntent = new Intent(LoginActivity.this, RegisterActivity.class);
@@ -44,13 +46,13 @@ public class LoginActivity extends AppCompatActivity{
     public void onClickMasuk(View view) {
         email = edtEmail.getText().toString();
         password = edtPassword.getText().toString();
-        /*
+
         if(email.equals("")|| password.equals("")){
             edtEmail.setError("email tidak boleh kosong");
             edtPassword.setError("password tidak boleh kosong");
         }else{
-
             AndroidNetworking.post(BASE_URL+"auth/login")
+                    .addHeaders("Accept", "application/json")
                     .addBodyParameter("email", email)
                     .addBodyParameter("password",password)
                     .setTag("test")
@@ -59,6 +61,7 @@ public class LoginActivity extends AppCompatActivity{
                     .getAsJSONObject(new JSONObjectRequestListener() {
                         @Override
                         public void onResponse(JSONObject response) {
+                            Log.d("TAG", String.valueOf(response));
                             try {
                                 if(response.getJSONObject("meta").getString("status").equals("success")){
                                     JSONObject dataUser = response.getJSONObject("data").getJSONObject("user");
@@ -85,12 +88,12 @@ public class LoginActivity extends AppCompatActivity{
                         public void onError(ANError error) {
                             // handle error
                             Toast.makeText(getApplicationContext(),""+error, Toast.LENGTH_SHORT).show();
+                            Log.d("ERROR", String.valueOf(error));
                         }
                     });
-
-        }*/
-    Intent moveIntent = new Intent(getApplicationContext(),Home1Activity.class);
-    startActivity(moveIntent);
+            //Intent moveIntent = new Intent(getApplicationContext(),Home1Activity.class);
+            //startActivity(moveIntent);
+        }
 
     }
 }
