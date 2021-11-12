@@ -8,6 +8,7 @@ public class SharedPrefManager {
     public static final int SP_ID = 0;
     public static final String SP_NAMA = "spNama";
     public static final String SP_TOKEN = "spToken";
+    public static String SP_PLANT_ID="";
 
 
     SharedPreferences sp;
@@ -41,6 +42,9 @@ public class SharedPrefManager {
     }
     public int getSPID(){
         return sp.getInt(String.valueOf(SP_ID), 0);
+    }
+    public String getSPPlantId(){
+        return sp.getString(String.valueOf(SP_PLANT_ID), "");
     }
 
 }

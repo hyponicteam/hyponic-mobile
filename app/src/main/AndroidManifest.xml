@@ -5,13 +5,19 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Hyponic">
+        android:theme="@style/Theme.Hyponic"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".view.Plant.EditPlantActivity"
+            android:exported="true" />
+        <activity
+            android:name=".view.Plant.CreatePlantActivity"
+            android:exported="true" />
         <activity
             android:name=".Home1Activity"
             android:exported="true"

@@ -37,6 +37,13 @@ public class RegisterActivity extends AppCompatActivity {
                 simpanData();
             }
         });
+        binding.login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent moveIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(moveIntent);
+            }
+        });
 
 //        binding.daftarGoogle.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -60,7 +67,9 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else {
             if(password.equals(konfpass)) {
+                showLoading(true);
                 AndroidNetworking.post(BASE_URL+"auth/register")
+                        .addHeaders("Accept", "application/json")
                         .addBodyParameter("name", name)
                         .addBodyParameter("email", email)
                         .addBodyParameter("password", password)
@@ -72,6 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(JSONObject response) {
                                 // do anything with response
+                                showLoading(false);
 
                                 try {
                                     if(response.getJSONObject("meta").getString("status").equals("success")){
@@ -88,6 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                             @Override
                             public void onError(ANError error) {
+                                showLoading(false);
                                 // handle error
                                 Toast.makeText(getApplicationContext(),""+error, Toast.LENGTH_SHORT).show();
                             }
@@ -96,6 +107,13 @@ public class RegisterActivity extends AppCompatActivity {
             else {
                 Toast.makeText(this, "Konfirmasi password yang sesuai", Toast.LENGTH_LONG).show();
             }
+        }
+    }
+    private void showLoading(Boolean isLoading) {
+        if (isLoading) {
+            binding.progressBar.setVisibility(View.VISIBLE);
+        } else {
+            binding.progressBar.setVisibility(View.GONE);
         }
     }
 
