@@ -42,5 +42,6 @@
     <string name="save">SIMPAN</string>
     <string name="editNamePlant">Masukkan nama baru tanamanmu</string>
     <string name="dialog_edit_plant">Ubah Nama Tanamanmu</string>
+    <string name="namePlant">Nama Tanaman</string>
 
 </resources>

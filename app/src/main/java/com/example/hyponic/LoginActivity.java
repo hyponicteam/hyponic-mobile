@@ -14,6 +14,8 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.example.hyponic.databinding.ActivityLoginBinding;
+import com.example.hyponic.databinding.ActivityRegisterBinding;
 import com.example.hyponic.model.SharedPrefManager;
 
 import org.json.JSONException;
@@ -21,21 +23,18 @@ import org.json.JSONObject;
 import static com.example.hyponic.constant.ApiConstant.BASE_URL;
 
 public class LoginActivity extends AppCompatActivity{
-    private EditText edtPassword,edtEmail;
-    private Button btnLogin;
+    private ActivityLoginBinding binding;
     private String email, password;
     SharedPrefManager preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         init();
     }
     public void init(){
-        edtPassword = findViewById(R.id.passwordText);
-        edtEmail= findViewById(R.id.emailText);
-        btnLogin =findViewById(R.id.loginButton);
         preferences = new SharedPrefManager(this);
         AndroidNetworking.initialize(getApplicationContext());
     }
@@ -44,13 +43,14 @@ public class LoginActivity extends AppCompatActivity{
         startActivity(moveIntent);
     }
     public void onClickMasuk(View view) {
-        email = edtEmail.getText().toString();
-        password = edtPassword.getText().toString();
+        email = binding.emailText.getText().toString();
+        password =binding.passwordText.getText().toString();
 
         if(email.equals("")|| password.equals("")){
-            edtEmail.setError("email tidak boleh kosong");
-            edtPassword.setError("password tidak boleh kosong");
+            binding.emailText.setError("email tidak boleh kosong");
+            binding.passwordText.setError("Password tidak boleh kosong");
         }else{
+            showLoading(true);
             AndroidNetworking.post(BASE_URL+"auth/login")
                     .addHeaders("Accept", "application/json")
                     .addBodyParameter("email", email)
@@ -61,6 +61,7 @@ public class LoginActivity extends AppCompatActivity{
                     .getAsJSONObject(new JSONObjectRequestListener() {
                         @Override
                         public void onResponse(JSONObject response) {
+                            showLoading(false);
                             Log.d("TAG", String.valueOf(response));
                             try {
                                 if(response.getJSONObject("meta").getString("status").equals("success")){
@@ -86,6 +87,7 @@ public class LoginActivity extends AppCompatActivity{
                         }
                         @Override
                         public void onError(ANError error) {
+                            showLoading(false);
                             // handle error
                             Toast.makeText(getApplicationContext(),""+error, Toast.LENGTH_SHORT).show();
                             Log.d("ERROR", String.valueOf(error));
@@ -94,6 +96,12 @@ public class LoginActivity extends AppCompatActivity{
             //Intent moveIntent = new Intent(getApplicationContext(),Home1Activity.class);
             //startActivity(moveIntent);
         }
-
+    }
+    private void showLoading(Boolean isLoading) {
+        if (isLoading) {
+            binding.progressBar.setVisibility(View.VISIBLE);
+        } else {
+            binding.progressBar.setVisibility(View.GONE);
+        }
     }
 }
