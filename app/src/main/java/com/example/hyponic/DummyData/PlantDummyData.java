@@ -36,6 +36,7 @@ public class PlantDummyData {
         ArrayList<Plant> list = new ArrayList<>();
         for (int position = 0; position < 3; position++) {
             Plant hero = new Plant();
+            hero.setId(String.valueOf(position));
             hero.setName(heroNames[position]);
             hero.setTime(new Time());
             hero.getTime().setUpdated_at(heroDetails[position]);
