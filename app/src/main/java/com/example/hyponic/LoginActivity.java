@@ -93,6 +93,7 @@ public class LoginActivity extends AppCompatActivity{
                             Log.d("ERROR", String.valueOf(error));
                         }
                     });
+            //showLoading(false);
             //Intent moveIntent = new Intent(getApplicationContext(),Home1Activity.class);
             //startActivity(moveIntent);
         }
