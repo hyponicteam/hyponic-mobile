@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
+    android:id="@+id/layout2"
     tools:context=".Home1Activity"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -47,10 +48,10 @@
             android:id="@+id/imgUserProfile"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_toEndOf="@id/cardGreeting"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/user"
-            android:layout_marginEnd="0dp"/>
+            android:layout_marginEnd="0dp"
+            android:layout_toEndOf="@id/cardGreeting"
+            android:src="@drawable/user" />
 
     </RelativeLayout>
     <TextView

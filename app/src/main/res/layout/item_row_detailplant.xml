@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_detailplant"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="4dp"
+    app:cardMaxElevation="4dp"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tanggalPantau"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/DatePantau"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/panjang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="start"
+            android:text="@string/heightPlant"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tanggalPantau" />
+
+        <TextView
+            android:id="@+id/lebardaun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="12dp"
+            android:gravity="start"
+            android:text="@string/leafWidth"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/panjang"
+            app:layout_constraintTop_toBottomOf="@+id/tanggalPantau" />
+
+
+        <TextView
+            android:id="@+id/phair"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="12dp"
+            android:gravity="start"
+            android:text="@string/Acidity"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/lebardaun"
+            app:layout_constraintTop_toBottomOf="@+id/tanggalPantau" />
+
+        <TextView
+            android:id="@+id/suhu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="12dp"
+            android:gravity="start"
+            android:text="@string/temperature"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/phair"
+            app:layout_constraintTop_toBottomOf="@+id/tanggalPantau" />
+
+        <TextView
+            android:id="@+id/panjang2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="start"
+            android:text="@string/heightPlant"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/panjang" />
+
+        <TextView
+            android:id="@+id/lebardaun2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="12dp"
+            android:gravity="start"
+            android:text="@string/leafWidth"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/panjang2"
+            app:layout_constraintTop_toBottomOf="@+id/lebardaun" />
+
+
+        <TextView
+            android:id="@+id/phair2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="12dp"
+            android:gravity="start"
+            android:text="@string/Acidity"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/lebardaun2"
+            app:layout_constraintTop_toBottomOf="@+id/phair" />
+
+        <TextView
+            android:id="@+id/suhu2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="12dp"
+            android:gravity="start"
+            android:text="@string/temperature"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/phair2"
+            app:layout_constraintTop_toBottomOf="@+id/suhu" />
+
+        <TextView
+            android:id="@+id/deletedetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="38dp"
+            android:gravity="start"
+            android:text="@string/delete"
+            android:textColor="@color/orange"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/suhu2"
+            app:layout_constraintVertical_bias="0.058" />
+
+        <TextView
+            android:id="@+id/editdetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:gravity="start"
+            android:text="@string/edit"
+            android:textColor="@color/yellow"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/deletedetail"
+            app:layout_constraintTop_toBottomOf="@+id/phair2"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

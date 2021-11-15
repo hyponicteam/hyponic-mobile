@@ -2,6 +2,7 @@ package com.example.hyponic;
 
 import static com.example.hyponic.constant.ApiConstant.BASE_URL;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,6 +11,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.hyponic.DummyData.PlantDummyData;
+import com.example.hyponic.adapter.DetailPlantAdapter;
 import com.example.hyponic.adapter.PlantAdapter;
 import com.example.hyponic.model.Plant;
 import com.example.hyponic.model.SharedPrefManager;
@@ -61,6 +63,7 @@ public class Home1Activity extends AppCompatActivity{
 
             }
         });
+
 
         pref = new SharedPrefManager(this);
         tvusername=findViewById(R.id.username);

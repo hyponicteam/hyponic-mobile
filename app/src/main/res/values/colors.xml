@@ -15,5 +15,6 @@
     <color name="hyponicLogo">#145D45</color>
     <color name="yellow">#FFB900</color>
     <color name="orange">#E74C3C</color>
+    <color name="TextViewGreenLight">#037C70</color>
 
 </resources>
