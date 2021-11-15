@@ -36,6 +36,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/namePlant" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
