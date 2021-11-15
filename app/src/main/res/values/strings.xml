@@ -43,5 +43,13 @@
     <string name="editNamePlant">Masukkan nama baru tanamanmu</string>
     <string name="dialog_edit_plant">Ubah Nama Tanamanmu</string>
     <string name="namePlant">Nama Tanaman</string>
+    <string name="DatePantau">Tanggal Pantau</string>
+    <string name="heightPlant">Panjang Tanaman</string>
+    <string name="leafWidth">Lebar Daun</string>
+    <string name="temperature">Suhu</string>
+    <string name="Acidity">PH Air</string>
+    <string name="dialog_delete_detailplant">Yakin menghapus data perkembangan tanamanmu</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
