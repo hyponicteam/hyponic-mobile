@@ -1,11 +1,6 @@
 package com.example.hyponic.adapter;
-import static com.example.hyponic.constant.ApiConstant.BASE_URL;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,26 +8,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.common.Priority;
-import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.bumptech.glide.manager.SupportRequestManagerFragment;
-import com.example.hyponic.Home1Activity;
 import com.example.hyponic.R;
 import com.example.hyponic.model.Plant;
 import com.example.hyponic.model.SharedPrefManager;
 import com.example.hyponic.view.DeletePlantDialog;
 import com.example.hyponic.view.EditPlantDialog;
-import com.example.hyponic.view.Plant.EditPlantActivity;
-import com.google.android.material.snackbar.Snackbar;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.hyponic.view.Plant.DeletePlantFragment;
+import com.example.hyponic.view.Plant.EditPlantFragment;
 
 import java.util.ArrayList;
 
@@ -46,6 +31,11 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ListViewHold
     public PlantAdapter(Context context,FragmentManager fragment, ArrayList<Plant> list) {
         this.plantContext=context;
         fragmentManager = fragment;
+        this.listPlant=list;
+        this.mInflater = LayoutInflater.from(this.plantContext);
+    }
+    public PlantAdapter(Context context, ArrayList<Plant> list) {
+        this.plantContext=context;
         this.listPlant=list;
         this.mInflater = LayoutInflater.from(this.plantContext);
     }
@@ -73,17 +63,23 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ListViewHold
             @Override
             public void onClick(View view) {
                 pref.saveSPString(pref.SP_PLANT_ID,plant.getId());
-                EditPlantDialog dialog = new EditPlantDialog();
-                dialog.show(fragmentManager,"Dialog");
+                //EditPlantDialog dialog = new EditPlantDialog();
+                //dialog.show(fragmentManager,"Dialog");
+                EditPlantFragment editPlantFragmentFragment = new EditPlantFragment();
+                FragmentManager mFragmentManager = fragmentManager;
+                editPlantFragmentFragment.show(mFragmentManager, EditPlantFragment.class.getSimpleName());
             }
         });
         holder.tvDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                DeletePlantDialog dialog = new DeletePlantDialog();
-                dialog.show(fragmentManager,"Delete Dialog");
+                //DeletePlantDialog dialog = new DeletePlantDialog();
+                //dialog.show(fragmentManager,"Delete Dialog");
                 pref.saveSPString(pref.SP_PLANT_ID,plant.getId());
+                DeletePlantFragment deletePlantFragment = new DeletePlantFragment();
+                FragmentManager mFragmentManager = fragmentManager;
+                deletePlantFragment.show(mFragmentManager, EditPlantFragment.class.getSimpleName());
 
             }
         });

@@ -49,6 +49,7 @@
         app:layout_constraintEnd_toEndOf="@+id/inputLayout"
         app:layout_constraintTop_toBottomOf="@+id/inputLayout" />
 
+
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"

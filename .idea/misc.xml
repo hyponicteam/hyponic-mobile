@@ -3,11 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/kuliah/hyponic-mobile/app/src/main/res/layout/activity_create_plant.xml" value="0.175" />
         <entry key="..\:/kuliah/hyponic-mobile/app/src/main/res/layout/activity_edit_plant.xml" value="0.25" />
+        <entry key="..\:/kuliah/hyponic-mobile/app/src/main/res/layout/activity_edit_user.xml" value="0.22" />
         <entry key="..\:/kuliah/hyponic-mobile/app/src/main/res/layout/activity_home1.xml" value="0.12273550724637682" />
         <entry key="..\:/kuliah/hyponic-mobile/app/src/main/res/layout/activity_login.xml" value="0.12590579710144928" />
-        <entry key="..\:/kuliah/hyponic-mobile/app/src/main/res/layout/content_home1.xml" value="0.12273550724637682" />
+        <entry key="..\:/kuliah/hyponic-mobile/app/src/main/res/layout/activity_main.xml" value="0.129981884057971" />
+        <entry key="..\:/kuliah/hyponic-mobile/app/src/main/res/layout/content_home1.xml" value="0.22" />
         <entry key="..\:/kuliah/hyponic-mobile/app/src/main/res/layout/dialog_edit_plant.xml" value="0.16259057971014493" />
+        <entry key="..\:/kuliah/hyponic-mobile/app/src/main/res/layout/fragment_create_plant.xml" value="0.19010416666666666" />
+        <entry key="..\:/kuliah/hyponic-mobile/app/src/main/res/layout/fragment_dashboard.xml" value="0.129981884057971" />
+        <entry key="..\:/kuliah/hyponic-mobile/app/src/main/res/layout/fragment_delete_plant.xml" value="0.16818181818181818" />
+        <entry key="..\:/kuliah/hyponic-mobile/app/src/main/res/layout/fragment_edit_plant.xml" value="0.1" />
+        <entry key="..\:/kuliah/hyponic-mobile/app/src/main/res/layout/fragment_edit_user.xml" value="0.20416666666666666" />
+        <entry key="..\:/kuliah/hyponic-mobile/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/kuliah/hyponic-mobile/app/src/main/res/layout/fragment_plant.xml" value="0.2" />
+        <entry key="..\:/kuliah/hyponic-mobile/app/src/main/res/layout/item_top_heigh_growth.xml" value="0.153125" />
+        <entry key="..\:/kuliah/hyponic-mobile/app/src/main/res/layout/item_top_leaf_width_growth.xml" value="0.1" />
+        <entry key="..\:/kuliah/hyponic-mobile/app/src/main/res/menu/action_options.xml" value="0.20416666666666666" />
+        <entry key="..\:/kuliah/hyponic-mobile/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/kuliah/semester5/hyponic/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.17222222222222222" />
         <entry key="..\:/kuliah/semester5/hyponic/app/src/main/res/drawable/ellipse_1.xml" value="0.17222222222222222" />
         <entry key="..\:/kuliah/semester5/hyponic/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.18333333333333332" />
@@ -48,7 +62,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.12273550724637682" />
+        <option name="scale" value="0.20416666666666666" />
       </ProjectState>
     </option>
   </component>

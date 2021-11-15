@@ -43,5 +43,21 @@
     <string name="editNamePlant">Masukkan nama baru tanamanmu</string>
     <string name="dialog_edit_plant">Ubah Nama Tanamanmu</string>
     <string name="namePlant">Nama Tanaman</string>
+    <string name="editPhoto">Ubah Foto Profil</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Beranda</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile">Akun Saya</string>
+    <string name="myPlant">Tanamanku</string>
+    <string name="create_new_plant">buat tanaman baru</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="dialog_delete_plant">Yakin untuk menghapus tanamanmu?</string>
+    <string name="insight">Insight Pertumbuhan Tinggi Tanaman</string>
+    <string name="insightWidth">Insight Lebar Daun Tanaman</string>
+    <string name="myPlat">Tanamanku</string>
 
 </resources>
