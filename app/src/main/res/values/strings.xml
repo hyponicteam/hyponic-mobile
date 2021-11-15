@@ -51,5 +51,18 @@
     <string name="dialog_delete_detailplant">Yakin menghapus data perkembangan tanamanmu</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Beranda</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="dialog_delete_plant">Yakin ingin menghapus tanamanmu?</string>
+    <string name="myPlant">Tanamanku</string>
+    <string name="insightWidth">Top 3 Pelebaran Daun</string>
+    <string name="insight">Top 3 Pertumbuhan Tinggi Tercepat</string>
+    <string name="list_plant">Daftar Tanamanku</string>
+    <string name="growth_per_day">16,5 mm/hari</string>
+    <string name="no">1</string>
+    <string name="profile">Akun Saya</string>
+    <string name="editPhoto">Ubah foto profil</string>
 
 </resources>
