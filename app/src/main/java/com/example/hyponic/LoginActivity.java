@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity{
                                     preferences.saveSPInt(String.valueOf(preferences.SP_ID),dataUser.getInt("id"));
                                     preferences.saveSPString(preferences.SP_TOKEN,token);
 
-                                    Intent moveIntent = new Intent(getApplicationContext(),Detailplantfragment.class);
+                                    Intent moveIntent = new Intent(getApplicationContext(),Home1Activity.class);
                                     startActivity(moveIntent);
                                 }else{
                                     Toast.makeText(getApplicationContext(),"Login Gagal",Toast.LENGTH_SHORT).show();

@@ -47,6 +47,7 @@ public class CreatePlantActivity extends AppCompatActivity{
     private void savePlant(View view) {
         showLoading(true);
         String namePlant = binding.edNamePlat.getText().toString();
+
         Log.d("Nama Tanaman",""+namePlant);
         AndroidNetworking.post(BASE_URL+"plants")
                 .addHeaders("Authorization","Bearer "+pref.getSPToken())
