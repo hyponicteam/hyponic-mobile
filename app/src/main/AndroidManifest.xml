@@ -13,6 +13,10 @@
         android:theme="@style/Theme.Hyponic"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/title_activity_main" />
+        <activity
             android:name=".CreateDetailTanaman"
             android:exported="true" />
         <activity
