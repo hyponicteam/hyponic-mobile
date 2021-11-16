@@ -2,7 +2,6 @@ package com.example.hyponic.model;
 
 public class DetailPlant {
 
-    private String plant_id;
     private String id;
     private String plant_height;
     private String leaf_widht;
@@ -24,14 +23,12 @@ public class DetailPlant {
         this.acidity = acidity;
     }
 
-
-
-    public String getPlant_id() {
-        return plant_id;
+    public String getId() {
+        return id;
     }
 
-    public void setPlant_id(String plant_id) {
-        this.plant_id = plant_id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getPlant_height() {

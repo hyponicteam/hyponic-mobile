@@ -22,9 +22,11 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.hyponic.adapter.DetailPlantAdapter;
+import com.example.hyponic.adapter.TableAdapter;
 import com.example.hyponic.databinding.FragmentDetailplantfragmentBinding;
 import com.example.hyponic.model.DetailPlant;
 import com.example.hyponic.model.SharedPrefManager;
+import com.example.hyponic.model.TabelModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +38,8 @@ import java.util.ArrayList;
 public class Detailplantfragment extends Fragment {
 
     private RecyclerView rvdetailPlant;
+    private RecyclerView rvTabelDetail;
+    private ArrayList<TabelModel> tabelList = new ArrayList<>();
     private ArrayList<DetailPlant> detailPlantList = new ArrayList<>();
     private FragmentDetailplantfragmentBinding binding;
     SharedPrefManager pref;
@@ -60,6 +64,13 @@ public class Detailplantfragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         pref = new SharedPrefManager(getContext());
+
+        binding.rvListdetTanaman.setHasFixedSize(true);
+        binding.rvListtabelTanaman.setHasFixedSize(true);
+
+        getGrowth();
+        getTabelGrowth();
+
     }
 
     public void getGrowth(){
@@ -97,10 +108,52 @@ public class Detailplantfragment extends Fragment {
                     }
                 });
     }
+
+    public void getTabelGrowth(){
+        AndroidNetworking.get(BASE_URL+"/plants/fb21a915-a119-464a-8b89-f2884388e1cb")
+                .addHeaders("Accept", "application/json")
+                .addHeaders("Authorization","Bearer "+pref.getSPToken())
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+
+                            Log.d("TAG", "respon: " + response.getJSONObject("data").getJSONArray("growths"));
+                            JSONArray data = response.getJSONObject("data").getJSONArray("growths");
+                            for(int i=0; i<data.length(); i++){
+                                JSONObject jsontabelList = data.getJSONObject(i);
+                                Log.d("TAG","ke -"+i+" : "+data.getJSONObject(i));
+                                TabelModel tabellist = new TabelModel(jsontabelList.getString("id"),
+                                        jsontabelList.getString("plant_height"), jsontabelList.getString("leaf_width"), jsontabelList.getString("temperature"), jsontabelList.getString("acidity"), jsontabelList.getString("created_at"));
+
+                                tabelList.add(tabellist);
+                            }
+                            Log.d("SIZE: ",""+tabelList.size());
+                            showTabelList(tabelList);
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        Log.d("TAG", "onError: " + error); //untuk log pada onerror
+                    }
+                });
+
+    }
     private void showRecyclerList(ArrayList<DetailPlant> detailplants) {
         rvdetailPlant.setLayoutManager(new LinearLayoutManager(getContext()));
         DetailPlantAdapter listDetailPlantAdapter = new DetailPlantAdapter(detailplants, getParentFragmentManager(), getContext());
         rvdetailPlant.setAdapter(listDetailPlantAdapter);
+    }
 
+    private void showTabelList(ArrayList<TabelModel> tabellist ){
+        rvTabelDetail.setLayoutManager(new LinearLayoutManager(getContext()));
+        TableAdapter listTabelAdapter = new TableAdapter(tabellist,getParentFragmentManager(),getContext());
+        rvTabelDetail.setAdapter(listTabelAdapter);
     }
 }
