@@ -64,5 +64,6 @@
     <string name="dialog_delete_plant">Yakin ingin menghapus tanamanmu?</string>
     <string name="editPhoto">Ubah photo profil</string>
     <string name="logout">LogOut</string>
+    <string name="blank_data">Belum ada data</string>
 
 </resources>
