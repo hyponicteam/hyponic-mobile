@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.15260416666666668" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/activity_main.xml" value="0.11730072463768115" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/content_home1.xml" value="0.13858695652173914" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/fragment_create_plant.xml" value="0.14402173913043478" />
@@ -11,7 +12,9 @@
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/fragment_notifications.xml" value="0.1" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/fragment_plants.xml" value="0.1" />
+        <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/fragment_profile.xml" value="0.22" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/fragment_user.xml" value="0.1" />
+        <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/item_row_detailplant.xml" value="0.25" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/item_top_height_growth.xml" value="0.14402173913043478" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/item_top_width_growth.xml" value="0.14402173913043478" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
@@ -56,12 +59,5 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.12273550724637682" />
-      </ProjectState>
-    </option>
   </component>
 </project>
