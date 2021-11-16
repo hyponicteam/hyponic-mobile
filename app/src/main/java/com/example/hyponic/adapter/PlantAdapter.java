@@ -1,32 +1,22 @@
 package com.example.hyponic.adapter;
-import static com.example.hyponic.constant.ApiConstant.BASE_URL;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.common.Priority;
-import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.bumptech.glide.manager.SupportRequestManagerFragment;
-import com.example.hyponic.Home1Activity;
+import com.example.hyponic.DetailPlantActivity;
+import com.example.hyponic.Detailplantfragment;
+import com.example.hyponic.MainActivity;
 import com.example.hyponic.R;
 import com.example.hyponic.model.Plant;
 import com.example.hyponic.model.SharedPrefManager;
-import com.example.hyponic.view.DeletePlantDialog;
 import com.example.hyponic.view.Plant.DeletePlantFragment;
 import com.example.hyponic.view.Plant.EditPlantFragment;
 import java.util.ArrayList;
@@ -58,7 +48,20 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ListViewHold
         holder.tvLastEdit.setText(plant.getTime().getUpdated_at());
         pref = new SharedPrefManager(plantContext);
 
-        holder.tvView.setOnClickListener(view -> Toast.makeText(plantContext.getApplicationContext(), "Ganti dengan Action lihat", Toast.LENGTH_SHORT).show());
+        holder.tvView.setOnClickListener(view -> {
+            pref.saveSPString(pref.SP_PLANT_ID,plant.getId());
+//            Detailplantfragment mCategoryFragment = new Detailplantfragment();
+//            FragmentManager mFragmentManager = fragmentManager;
+//            mFragmentManager
+//                    .beginTransaction()
+//                    .replace(R.id.plantlayout, mCategoryFragment, Detailplantfragment.class.getSimpleName())
+//                    .addToBackStack(null)
+//                    .commit();
+            Intent moveIntent = new Intent(plantContext, DetailPlantActivity.class);
+            plantContext.startActivity(moveIntent);
+
+
+        });
         holder.tvEdit.setOnClickListener(view -> {
             pref.saveSPString(pref.SP_PLANT_ID,plant.getId());
             EditPlantFragment editPlantFragmentFragment = new EditPlantFragment();
