@@ -12,13 +12,13 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_plants"
         android:name="com.example.hyponic.view.Plant.PlantsFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_plants" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_profile"
         android:name="com.example.hyponic.view.Profile.UserFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_user" />
