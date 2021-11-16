@@ -15,6 +15,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.hyponic.databinding.ActivityCreateDetailTanamanBinding;
+import com.example.hyponic.model.DetailPlant;
 import com.example.hyponic.model.SharedPrefManager;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -26,6 +27,7 @@ public class CreateDetailTanaman extends AppCompatActivity {
     private ActivityCreateDetailTanamanBinding binding;
     private String panjang, lebar, suhu, ph;
     SharedPrefManager pref;
+    private DetailPlant detailplant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,7 @@ public class CreateDetailTanaman extends AppCompatActivity {
             AndroidNetworking.post(BASE_URL+"growths")
                     .addHeaders("Authorization","Bearer "+pref.getSPToken())
                     .addHeaders("Accept", "application/json")
+                    .addBodyParameter("plant_id", detailplant.getPlant().getId())
                     .addBodyParameter("plant_height", panjang)
                     .addBodyParameter("leaf_width", lebar)
                     .addBodyParameter("temperature", suhu)
@@ -77,12 +80,12 @@ public class CreateDetailTanaman extends AppCompatActivity {
                             Log.d("TAG", String.valueOf(response));
                             try {
                                 if(response.getJSONObject("meta").getString("status").equals("success")){
-                                    Snackbar.make(view, "Tanaman Berhasil Disimpan", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                                    Snackbar.make(view, "Data Tanaman Berhasil Disimpan", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                                     Log.d("Data",""+response.getJSONObject("data"));
                                     Intent moveIntent = new Intent(getApplicationContext(), Detailplantfragment.class);
                                     startActivity(moveIntent);
                                 }else {
-                                    Snackbar.make(view, "Tanaman Gagal Disimpan", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                                    Snackbar.make(view, "Data Tanaman Gagal Disimpan", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                                 }
 
                             }catch (JSONException e){
