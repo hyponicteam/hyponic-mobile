@@ -9,6 +9,7 @@ public class SharedPrefManager {
     public static final String SP_NAMA = "spNama";
     public static final String SP_TOKEN = "spToken";
     public static String SP_PLANT_ID="";
+    public static final String SP_IS_LOGIN = "isLogin";
 
 
     SharedPreferences sp;
@@ -46,5 +47,7 @@ public class SharedPrefManager {
     public String getSPPlantId(){
         return sp.getString(String.valueOf(SP_PLANT_ID), "");
     }
-
+    public Boolean getSPIsLogin(){
+        return sp.getBoolean(SP_IS_LOGIN, false);
+    }
 }

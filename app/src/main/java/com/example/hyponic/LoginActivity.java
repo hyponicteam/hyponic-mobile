@@ -33,6 +33,12 @@ public class LoginActivity extends AppCompatActivity{
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         init();
+
+        if (preferences.getSPIsLogin()){
+            startActivity(new Intent(LoginActivity.this, MainActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            finish();
+        }
     }
     public void init(){
         preferences = new SharedPrefManager(this);
@@ -74,9 +80,11 @@ public class LoginActivity extends AppCompatActivity{
                                     preferences.saveSPString(preferences.SP_NAMA,dataUser.getString("name"));
                                     preferences.saveSPInt(String.valueOf(preferences.SP_ID),dataUser.getInt("id"));
                                     preferences.saveSPString(preferences.SP_TOKEN,token);
+                                    preferences.saveSPBoolean(preferences.SP_IS_LOGIN,true);
 
                                     Intent moveIntent = new Intent(getApplicationContext(),MainActivity.class);
                                     startActivity(moveIntent);
+                                    finish();
                                 }else{
                                     Toast.makeText(getApplicationContext(),"Login Gagal",Toast.LENGTH_SHORT).show();
                                 }
