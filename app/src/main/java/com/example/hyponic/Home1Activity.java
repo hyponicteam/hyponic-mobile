@@ -2,16 +2,12 @@ package com.example.hyponic;
 
 import static com.example.hyponic.constant.ApiConstant.BASE_URL;
 
-import android.app.FragmentManager;
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.example.hyponic.DummyData.PlantDummyData;
-import com.example.hyponic.adapter.DetailPlantAdapter;
 import com.example.hyponic.adapter.PlantAdapter;
 import com.example.hyponic.model.Plant;
 import com.example.hyponic.model.SharedPrefManager;
@@ -28,7 +24,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hyponic.databinding.ActivityHome1Binding;
-import com.example.hyponic.view.Plant.CreatePlantActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;

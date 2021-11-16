@@ -23,14 +23,12 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ListViewHold
     private final ArrayList<TabelModel> listTabel;
     private final FragmentManager fragmentManager;
     private final Context tabelContext;
-    private LayoutInflater mInflater;
     private SharedPrefManager pref;
 
     public TableAdapter(ArrayList<TabelModel> listTabel, FragmentManager fragmentManager, Context tabelContext) {
         this.listTabel = listTabel;
         this.fragmentManager = fragmentManager;
         this.tabelContext = tabelContext;
-        this.mInflater = mInflater;
     }
 
     @NonNull
@@ -43,6 +41,7 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ListViewHold
     @Override
     public void onBindViewHolder(@NonNull TableAdapter.ListViewHolder holder, int position) {
         TabelModel tabel = listTabel.get(position);
+
         holder.tvTanggal.setText(tabel.getTime().getCreated_at());
         holder.tvPanjang.setText(tabel.getPlant_height());
         holder.tvLebardaun.setText(tabel.getLeaf_widht());
@@ -52,9 +51,8 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ListViewHold
 
     @Override
     public int getItemCount() {
-        return 0;
+        return listTabel.size();
     }
-
 
     public class ListViewHolder extends RecyclerView.ViewHolder {
         TextView tvPanjang, tvLebardaun, tvSuhu, tvPhAir, tvTanggal;

@@ -11,8 +11,8 @@
         android:id="@+id/ViewTanaman"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="40dp"
         android:textColor="@color/black"
         android:textSize="25sp"
@@ -26,9 +26,9 @@
         android:id="@+id/detailtanaman"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginEnd="16dp"
         android:text="Pertumbuhan Tanaman"
         android:textColor="@color/TextViewGreenLight"
         android:textSize="20sp"
@@ -37,41 +37,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ViewTanaman" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_listdet_tanaman"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.228"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailtanaman" />
 
     <TextView
         android:id="@+id/insighttanaman"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
         android:text="Insight Tanamanku"
         android:textColor="@color/TextViewGreenLight"
         android:textSize="20sp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="30dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_listdet_tanaman" />
+        app:layout_constraintTop_toBottomOf="@+id/detailtanaman" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_listtabel_tanaman"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/insighttanaman" />
 

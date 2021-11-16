@@ -19,9 +19,7 @@ import android.view.ViewGroup;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.example.hyponic.adapter.DetailPlantAdapter;
 import com.example.hyponic.adapter.TableAdapter;
 import com.example.hyponic.databinding.FragmentDetailplantfragmentBinding;
 import com.example.hyponic.model.DetailPlant;
@@ -37,13 +35,11 @@ import java.util.ArrayList;
 
 public class Detailplantfragment extends Fragment {
 
-    private RecyclerView rvdetailPlant;
-    private RecyclerView rvTabelDetail;
     private ArrayList<TabelModel> tabelList = new ArrayList<>();
     private ArrayList<DetailPlant> detailPlantList = new ArrayList<>();
     private FragmentDetailplantfragmentBinding binding;
     SharedPrefManager pref;
-    private String token;
+
 
     public Detailplantfragment() {
         // Required empty public constructor
@@ -96,7 +92,6 @@ public class Detailplantfragment extends Fragment {
                                 detailPlantList.add(detailplant);
                             }
                             Log.d("SIZE: ",""+detailPlantList.size());
-                            showRecyclerList(detailPlantList);
 
                         }catch (JSONException e){
                             e.printStackTrace();
@@ -145,15 +140,10 @@ public class Detailplantfragment extends Fragment {
                 });
 
     }
-    private void showRecyclerList(ArrayList<DetailPlant> detailplants) {
-        rvdetailPlant.setLayoutManager(new LinearLayoutManager(getContext()));
-        DetailPlantAdapter listDetailPlantAdapter = new DetailPlantAdapter(detailplants, getParentFragmentManager(), getContext());
-        rvdetailPlant.setAdapter(listDetailPlantAdapter);
-    }
 
     private void showTabelList(ArrayList<TabelModel> tabellist ){
-        rvTabelDetail.setLayoutManager(new LinearLayoutManager(getContext()));
+      binding.rvListtabelTanaman.setLayoutManager(new LinearLayoutManager(getContext()));
         TableAdapter listTabelAdapter = new TableAdapter(tabellist,getParentFragmentManager(),getContext());
-        rvTabelDetail.setAdapter(listTabelAdapter);
+       binding.rvListtabelTanaman.setAdapter(listTabelAdapter);
     }
 }
