@@ -5,8 +5,10 @@ import static com.example.hyponic.constant.ApiConstant.BASE_URL;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -38,6 +40,14 @@ public class DetailPlantActivity extends AppCompatActivity {
         pref = new SharedPrefManager(this);
         binding.rvListtabelTanaman.setHasFixedSize(true);
         getTabelGrowth();
+
+        binding.btnAddDataPlant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent moveIntent = new Intent(DetailPlantActivity.this, CreateDetailTanaman.class);
+                startActivity(moveIntent);
+            }
+        });
     }
 
     public void getTabelGrowth(){

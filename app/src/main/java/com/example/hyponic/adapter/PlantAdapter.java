@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hyponic.DetailPlantActivity;
-import com.example.hyponic.Detailplantfragment;
+//import com.example.hyponic.Detailplantfragment;
 import com.example.hyponic.MainActivity;
 import com.example.hyponic.R;
 import com.example.hyponic.model.Plant;
