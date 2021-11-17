@@ -65,13 +65,13 @@ public class CreateDetailTanaman extends AppCompatActivity {
             AndroidNetworking.post(BASE_URL+"growths")
                     .addHeaders("Authorization","Bearer "+pref.getSPToken())
                     .addHeaders("Accept", "application/json")
-                    .addBodyParameter("plant_id", detailplant.getPlant().getId())
                     .addBodyParameter("plant_height", panjang)
                     .addBodyParameter("leaf_width", lebar)
                     .addBodyParameter("temperature", suhu)
                     .addBodyParameter("acidity", ph)
-                    .setTag("test")
+                    .addBodyParameter("plant_id", pref.getSPPlantId())
                     .setPriority(Priority.MEDIUM)
+                    .setTag("test")
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {
                         @Override
@@ -80,12 +80,11 @@ public class CreateDetailTanaman extends AppCompatActivity {
                             Log.d("TAG", String.valueOf(response));
                             try {
                                 if(response.getJSONObject("meta").getString("status").equals("success")){
-                                    Snackbar.make(view, "Data Tanaman Berhasil Disimpan", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                                     Log.d("Data",""+response.getJSONObject("data"));
-                                    Intent moveIntent = new Intent(getApplicationContext(), Detailplantfragment.class);
-                                    startActivity(moveIntent);
+                                    Toast.makeText(getApplicationContext(),"DATA BERHASIL DISIMPAN",Toast.LENGTH_SHORT).show();
+                                    Log.d("Data2",""+response.getJSONObject("data"));
                                 }else {
-                                    Snackbar.make(view, "Data Tanaman Gagal Disimpan", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                                    Toast.makeText(getApplicationContext(),"DATA GAGAl DISIMPAN",Toast.LENGTH_SHORT).show();
                                 }
 
                             }catch (JSONException e){
