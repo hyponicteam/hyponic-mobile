@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cv_item_note"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -15,79 +14,76 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/drawerLayout"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/sawi"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/plantdescription" />
+
         <TextView
             android:id="@+id/namePlant"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/poppins_bold"
             android:gravity="start"
             android:text="@string/plantName"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/drawerLayout"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/editPlant"
+            android:layout_width="24dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/white"
+            android:drawableTop="@drawable/ic_baseline_edit_24"
+            app:layout_constraintEnd_toStartOf="@+id/deletePlant"
+            app:layout_constraintTop_toTopOf="@+id/deletePlant" />
+
+        <Button
+            android:id="@+id/deletePlant"
+            android:layout_width="24dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="6dp"
+            android:backgroundTint="@color/white"
+            android:drawableTop="@drawable/ic_baseline_delete_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lastEditPlant" />
+
+        <Button
+            android:id="@+id/seePlant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/buttonHyponic"
+            android:padding="1dp"
+            android:text="@string/pantau"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_bold"
+            app:layout_constraintEnd_toStartOf="@+id/editPlant"
+            app:layout_constraintTop_toTopOf="@+id/editPlant" />
 
         <TextView
             android:id="@+id/lastEditPlant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/poppins_regular"
             android:gravity="start"
             android:text="@string/plantDate"
-            android:textColor="@color/melon"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/namePlant"
             app:layout_constraintTop_toBottomOf="@+id/namePlant" />
-
-        <TextView
-            android:id="@+id/seePlant"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:gravity="start"
-            android:text="@string/seeDetail"
-            android:textColor="@color/hyponicLogo"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/editPlant"
-            app:layout_constraintTop_toBottomOf="@+id/namePlant"
-            app:layout_constraintVertical_bias="0.058"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/editPlant"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:gravity="start"
-            android:text="@string/edit"
-            android:textColor="@color/yellow"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/deletePlant"
-            app:layout_constraintTop_toBottomOf="@+id/namePlant"
-            app:layout_constraintVertical_bias="0.058"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/deletePlant"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="start"
-            android:text="@string/delete"
-            android:textColor="@color/orange"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/namePlant"
-            app:layout_constraintVertical_bias="0.058"
-            tools:ignore="MissingConstraints" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
