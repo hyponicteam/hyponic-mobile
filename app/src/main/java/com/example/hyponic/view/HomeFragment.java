@@ -28,6 +28,7 @@ import com.example.hyponic.model.Plant;
 import com.example.hyponic.model.SharedPrefManager;
 import com.example.hyponic.model.Time;
 import com.example.hyponic.view.Plant.CreatePlantFragment;
+import com.example.hyponic.view.Profile.UserFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -116,9 +117,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.btnAddPlant){
-            CreatePlantFragment createPlantFragment = new CreatePlantFragment();
-            FragmentManager mFragmentManager = getChildFragmentManager();
-            createPlantFragment.show(mFragmentManager, CreatePlantFragment.class.getSimpleName());
+            CreatePlantFragment mCategoryFragment = new CreatePlantFragment();
+            FragmentManager mFragmentManager = getParentFragmentManager();
+            mFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.nav_host_fragment_activity_main, mCategoryFragment, CreatePlantFragment.class.getSimpleName())
+                    .addToBackStack(null)
+                    .commit();
         }
     }
     private void showLoading(Boolean isLoading) {
@@ -131,7 +136,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private void showRecyclerList(ArrayList<Plant> plants) {
         binding.rvNLatestPlant.setLayoutManager(new LinearLayoutManager(getContext()));
-        PlantAdapter listPlantAdapter = new PlantAdapter(getContext(),getChildFragmentManager(),plants);
+        PlantAdapter listPlantAdapter = new PlantAdapter(getContext(),getParentFragmentManager(),plants);
         binding.rvNLatestPlant.setAdapter(listPlantAdapter);
     }
 

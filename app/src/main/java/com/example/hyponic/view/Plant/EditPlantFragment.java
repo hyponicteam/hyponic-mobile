@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,7 +32,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class EditPlantFragment extends DialogFragment{
+public class EditPlantFragment extends Fragment{
 
     private FragmentEditPlantBinding binding;
     SharedPrefManager pref;
@@ -52,12 +53,21 @@ public class EditPlantFragment extends DialogFragment{
         pref = new SharedPrefManager(getContext());
         getNamePlant();
         binding.btnSave.setOnClickListener(v->{
-            editPlant(binding.edNamePlat.getText().toString());
-            getDialog().dismiss();
+            //editPlant(binding.edNamePlat.getText().toString());
+            backToHomeFragmet();
         });
         binding.btnCancel.setOnClickListener(v->{
-            getDialog().cancel();
+            backToHomeFragmet();
         });
+    }
+    private void backToHomeFragmet() {
+        HomeFragment mCategoryFragment = new HomeFragment();
+        FragmentManager mFragmentManager = getParentFragmentManager();
+        mFragmentManager
+                .beginTransaction()
+                .replace(R.id.nav_host_fragment_activity_main, mCategoryFragment, HomeFragment.class.getSimpleName())
+                .addToBackStack(null)
+                .commit();
     }
     @Override
     public void onDetach() {
@@ -66,10 +76,6 @@ public class EditPlantFragment extends DialogFragment{
 
     public void onAttach(Context context) {
         super.onAttach(context);
-        Fragment fragment = getParentFragment();
-        if (fragment instanceof HomeFragment) {
-            HomeFragment homeFragment = (HomeFragment) fragment;
-        }
     }
     private void getNamePlant() {
         AndroidNetworking.get(BASE_URL+"plants/"+pref.getSPPlantId())

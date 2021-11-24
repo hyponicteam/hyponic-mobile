@@ -7,8 +7,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +20,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.example.hyponic.R;
 import com.example.hyponic.databinding.FragmentCreatePlantBinding;
 import com.example.hyponic.model.SharedPrefManager;
 import com.example.hyponic.view.HomeFragment;
@@ -28,7 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class CreatePlantFragment extends DialogFragment{
+public class CreatePlantFragment extends Fragment{
     FragmentCreatePlantBinding binding;
     SharedPrefManager pref;
     public CreatePlantFragment() {
@@ -46,17 +47,27 @@ public class CreatePlantFragment extends DialogFragment{
         super.onViewCreated(view, savedInstanceState);
         pref = new SharedPrefManager(getContext());
         binding.btnSave.setOnClickListener(v->{
-            createPlant();
-            getDialog().dismiss();
+            //createPlant();
+            backToHomeFragmet();
         });
         binding.btnCancel.setOnClickListener(v->{
-            getDialog().cancel();
+            backToHomeFragmet();
         });
 
     }
 
+    private void backToHomeFragmet() {
+        HomeFragment mCategoryFragment = new HomeFragment();
+        FragmentManager mFragmentManager = getParentFragmentManager();
+        mFragmentManager
+                .beginTransaction()
+                .replace(R.id.nav_host_fragment_activity_main, mCategoryFragment, HomeFragment.class.getSimpleName())
+                .addToBackStack(null)
+                .commit();
+    }
+
     private void createPlant() {
-        showLoading(true);
+
         String namePlant = binding.edNamePlat.getText().toString();
         Log.d("Nama Tanaman",""+namePlant);
         AndroidNetworking.post(BASE_URL+"plants")
@@ -69,7 +80,7 @@ public class CreatePlantFragment extends DialogFragment{
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        showLoading(false);
+
                         Log.d("TAG", String.valueOf(response));
                         try {
                             if(response.getJSONObject("meta").getString("status").equals("success")){
@@ -86,7 +97,7 @@ public class CreatePlantFragment extends DialogFragment{
                     }
                     @Override
                     public void onError(ANError error) {
-                        showLoading(false);
+
                         // handle error
                         Toast.makeText(getContext(),""+error, Toast.LENGTH_SHORT).show();
                         Log.d("ERROR", String.valueOf(error));
@@ -102,16 +113,6 @@ public class CreatePlantFragment extends DialogFragment{
 
     public void onAttach(Context context) {
         super.onAttach(context);
-        Fragment fragment = getParentFragment();
-        if (fragment instanceof HomeFragment) {
-            HomeFragment homeFragment = (HomeFragment) fragment;
-        }
     }
-    private void showLoading(Boolean isLoading) {
-        if (isLoading) {
-            binding.progressBar.setVisibility(View.VISIBLE);
-        } else {
-            binding.progressBar.setVisibility(View.GONE);
-        }
-    }
+
 }

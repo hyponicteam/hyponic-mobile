@@ -70,5 +70,8 @@
     <string name="image_description">gambar artikel</string>
     <string name="pantau">Pantau</string>
     <string name="plantdescription">plantImage</string>
+    <string name="create_new_plant">Buat Tanaman Baru</string>
+    <string name="image_frame_description">imageFrame</string>
+    <string name="update_plant">Ubah Tanaman</string>
 
 </resources>

@@ -17,6 +17,7 @@ import com.example.hyponic.MainActivity;
 import com.example.hyponic.R;
 import com.example.hyponic.model.Plant;
 import com.example.hyponic.model.SharedPrefManager;
+import com.example.hyponic.view.Plant.CreatePlantFragment;
 import com.example.hyponic.view.Plant.DeletePlantFragment;
 import com.example.hyponic.view.Plant.EditPlantFragment;
 import java.util.ArrayList;
@@ -63,10 +64,17 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ListViewHold
 
         });
         holder.tvEdit.setOnClickListener(view -> {
-            pref.saveSPString(pref.SP_PLANT_ID,plant.getId());
-            EditPlantFragment editPlantFragmentFragment = new EditPlantFragment();
+            //pref.saveSPString(pref.SP_PLANT_ID,plant.getId());
+//            EditPlantFragment editPlantFragmentFragment = new EditPlantFragment();
+//            FragmentManager mFragmentManager = fragmentManager;
+//            editPlantFragmentFragment.show(mFragmentManager, EditPlantFragment.class.getSimpleName());
+            EditPlantFragment mCategoryFragment = new EditPlantFragment();
             FragmentManager mFragmentManager = fragmentManager;
-            editPlantFragmentFragment.show(mFragmentManager, EditPlantFragment.class.getSimpleName());
+            mFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.nav_host_fragment_activity_main, mCategoryFragment, EditPlantFragment.class.getSimpleName())
+                    .addToBackStack(null)
+                    .commit();
         });
         holder.tvDelete.setOnClickListener(new View.OnClickListener() {
             @Override
