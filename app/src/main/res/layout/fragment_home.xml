@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".view.HomeFragment"
     android:padding="16dp"
+    android:layout_marginBottom="50dp"
     android:id="@+id/homeFragment">
 
     <LinearLayout
@@ -38,6 +39,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/sapaan"
                     android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_bold"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -48,6 +50,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/nama"
                     android:textColor="@color/hyponicLogo"
+                    android:fontFamily="@font/poppins_bold"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -70,6 +73,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/tanamanku"
             android:textColor="@color/black"
+            android:fontFamily="@font/poppins_bold"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -79,6 +83,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/terakhir"
             android:textColor="@color/hyponicLogo"
+            android:fontFamily="@font/poppins_bold"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -94,8 +99,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="70dp"
-        app:srcCompat="@drawable/ic_action_add" />
+        app:srcCompat="@drawable/ic_action_add"
+        android:layout_marginBottom="10dp"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

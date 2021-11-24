@@ -65,5 +65,10 @@
     <string name="editPhoto">Ubah photo profil</string>
     <string name="logout">LogOut</string>
     <string name="blank_data">Belum ada data</string>
+    <string name="editUser">Ubah</string>
+    <string name="tutorial">Tutorial</string>
+    <string name="image_description">gambar artikel</string>
+    <string name="pantau">Pantau</string>
+    <string name="plantdescription">plantImage</string>
 
 </resources>

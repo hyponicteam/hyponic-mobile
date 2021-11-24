@@ -1,10 +1,7 @@
 package com.example.hyponic.adapter;
-
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -50,7 +47,7 @@ public class ArtikelAdapter extends RecyclerView.Adapter<ArtikelAdapter.ListView
         TextView tvTitle,tvCategory;
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
-            //artikelPhoto = itemView.findViewById(R.id.imageArtikel);
+            artikelPhoto = itemView.findViewById(R.id.imageArtikel);
             tvTitle = itemView.findViewById(R.id.tv_artikel_title);
             tvCategory = itemView.findViewById(R.id.tv_artikel_category);
         }

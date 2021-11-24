@@ -20,6 +20,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.example.hyponic.DummyData.PlantDummyData;
 import com.example.hyponic.R;
 import com.example.hyponic.adapter.PlantAdapter;
 import com.example.hyponic.databinding.FragmentHomeBinding;
@@ -54,11 +55,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         super.onViewCreated(view, savedInstanceState);
         pref = new SharedPrefManager(getContext());
         binding.username.setText(pref.getSPNama());
-        showLoading(true);
-        getPlantData();
+        //showLoading(true);
+        //getPlantData();
         binding.rvNLatestPlant.setHasFixedSize(true);
-        //planList.addAll(PlantDummyData.getListData());
-        //showRecyclerList(planList);
+        planList.addAll(PlantDummyData.getListData());
+        showRecyclerList(planList);
         binding.btnAddPlant.setOnClickListener(this);
 
     }

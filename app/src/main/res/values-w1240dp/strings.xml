@@ -2,4 +2,5 @@
 <resources>
     <string name="dialog_create_new_plant">Buat Tanaman Baruku</string>
     <string name="save">SIMPAN</string>
+    <string name="tutorial">Tutorial</string>
 </resources>

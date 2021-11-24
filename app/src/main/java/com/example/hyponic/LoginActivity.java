@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -15,9 +13,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.hyponic.databinding.ActivityLoginBinding;
-import com.example.hyponic.databinding.ActivityRegisterBinding;
 import com.example.hyponic.model.SharedPrefManager;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import static com.example.hyponic.constant.ApiConstant.BASE_URL;
@@ -78,6 +74,7 @@ public class LoginActivity extends AppCompatActivity{
                                             .getString("message"),Toast.LENGTH_SHORT).show();
 
                                     preferences.saveSPString(preferences.SP_NAMA,dataUser.getString("name"));
+                                    preferences.saveSPString(preferences.SP_EMAIL,dataUser.getString("email"));
                                     preferences.saveSPInt(String.valueOf(preferences.SP_ID),dataUser.getInt("id"));
                                     preferences.saveSPString(preferences.SP_TOKEN,token);
                                     preferences.saveSPBoolean(preferences.SP_IS_LOGIN,true);
