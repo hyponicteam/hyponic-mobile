@@ -73,5 +73,9 @@
     <string name="create_new_plant">Buat Tanaman Baru</string>
     <string name="image_frame_description">imageFrame</string>
     <string name="update_plant">Ubah Tanaman</string>
+    <string name="article">Artikel</string>
+    <string name="article_subheading">Artikel utuk membantu anda</string>
+    <string name="description1">deskripsi logo</string>
+    <string name="edited_by">Oleh</string>
 
 </resources>
