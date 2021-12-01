@@ -1,6 +1,7 @@
 package com.example.hyponic.DummyData;
 
 import com.example.hyponic.R;
+import com.example.hyponic.model.Artikel;
 import com.example.hyponic.model.Plant;
 import com.example.hyponic.model.Time;
 

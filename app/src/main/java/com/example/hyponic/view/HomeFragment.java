@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         super.onViewCreated(view, savedInstanceState);
         pref = new SharedPrefManager(getContext());
         binding.username.setText(pref.getSPNama());
-        //showLoading(true);
+        showLoading(true);
         //getPlantData();
         binding.rvNLatestPlant.setHasFixedSize(true);
         planList.addAll(PlantDummyData.getListData());

@@ -9,6 +9,7 @@ public class Artikel  {
     private String content;
     private String image_url;
     private User author;
+    private String author2;
     private Artikel_Kategori category;
     private Time time;
     public Artikel(){
@@ -20,6 +21,14 @@ public class Artikel  {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getAuthor2() {
+        return author2;
+    }
+
+    public void setAuthor2(String author2) {
+        this.author2 = author2;
     }
 
     public String getTitle() {
@@ -65,6 +74,7 @@ public class Artikel  {
     public Time getTime() {
         return time;
     }
+
 
     public void setTime(Time time) {
         this.time = time;
