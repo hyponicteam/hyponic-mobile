@@ -36,17 +36,21 @@ public class EditUserFragment extends Fragment {
         binding.edName.setHint(pref.getSPNama());
         binding.edEmail.setHint(pref.getSPEmail());
 
-        binding.btnCancel.setOnClickListener(v-> cancel());
+        binding.btnCancel.setOnClickListener(v-> backToUserFragment());
         binding.btnSave.setOnClickListener(v-> save());
     }
 
     private void save() {
-        pref.saveSPString(pref.SP_NAMA,binding.edName.getText().toString());
-        pref.saveSPString(pref.SP_EMAIL,binding.edEmail.getText().toString());
-        cancel();
+        if(!binding.edEmail.getText().toString().equals("")){
+            pref.saveSPString(pref.SP_EMAIL,binding.edEmail.getText().toString());
+        }
+        if(!binding.edName.getText().toString().equals("")){
+            pref.saveSPString(pref.SP_NAMA,binding.edName.getText().toString());
+        }
+        backToUserFragment();
     }
 
-    private void cancel() {
+    private void backToUserFragment() {
         UserFragment mCategoryFragment = new UserFragment();
         FragmentManager mFragmentManager = getParentFragmentManager();
         mFragmentManager

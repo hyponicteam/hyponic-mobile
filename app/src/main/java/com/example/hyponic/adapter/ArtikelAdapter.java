@@ -1,4 +1,5 @@
 package com.example.hyponic.adapter;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -6,15 +7,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hyponic.R;
 import com.example.hyponic.model.Artikel;
+import com.example.hyponic.model.SharedPrefManager;
 
 import java.util.ArrayList;
 
 public class ArtikelAdapter extends RecyclerView.Adapter<ArtikelAdapter.ListViewHolder> {
-    private ArrayList<Artikel> listArtikel;
+    private ArrayList<Artikel> listArtikel = new ArrayList<>();
 
     public ArtikelAdapter(ArrayList<Artikel> list){
         this.listArtikel=list;
@@ -30,11 +33,8 @@ public class ArtikelAdapter extends RecyclerView.Adapter<ArtikelAdapter.ListView
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         Artikel artikel = listArtikel.get(position);
-
         holder.tvTitle.setText(artikel.getTitle());
-        holder.tvCategory.setText(artikel.getCategory().getName());
-        //holder.artikelPhoto.setImageResource(Integer.parseInt(artikel.getImage_url()));
-
+        holder.tvCategory.setText(artikel.getAuthor2());
     }
 
     @Override

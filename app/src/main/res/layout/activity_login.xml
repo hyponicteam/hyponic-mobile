@@ -15,7 +15,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_font" />
+        app:srcCompat="@drawable/logo_font"
+        android:contentDescription="@string/description1" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -27,18 +28,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo_image"
-        app:srcCompat="@drawable/logo_img" />
+        app:srcCompat="@drawable/logo_img"
+        android:contentDescription="@string/description1"/>
 
     <TextView
         android:id="@+id/emailLabel"
         android:text="@string/emailLabel"
         android:textSize="14sp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/poppins_bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="36dp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
@@ -47,7 +50,8 @@
         android:id="@+id/emailText"
         android:textSize="14sp"
         android:inputType="textEmailAddress"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
@@ -61,7 +65,8 @@
         android:id="@+id/passwordLabel"
         android:text="@string/passwordLabel"
         android:textSize="14sp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
@@ -74,7 +79,8 @@
     <EditText
         android:id="@+id/passwordText"
         android:textSize="14sp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/black"
         android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -85,60 +91,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordLabel"
         tools:ignore="MissingConstraints" />
+
     <Button
         android:id="@+id/loginButton"
-        android:text="@string/loginText"
-        android:onClick="onClickMasuk"
-        android:backgroundTint="@color/buttonHyponic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="36dp"
+        android:backgroundTint="@color/buttonHyponic"
+        android:fontFamily="@font/poppins_bold"
+        android:onClick="onClickMasuk"
+        android:text="@string/loginText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordText"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="36dp"
-        android:text="@string/atau_masuk_dengan"
-        android:textColor="@color/grey"
-        android:textSize="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/google_logo" />
-
-    <TextView
         android:id="@+id/opsidaftar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/poppins_regular"
         android:text="@string/belum_mempunyai_akun"
         android:textColor="#FF333333"
         android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.403"
+        app:layout_constraintHorizontal_bias="0.43"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/loginButton"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/daftarText"
@@ -148,6 +134,7 @@
         android:layout_marginEnd="36dp"
         android:onClick="onClickDaftar"
         android:text="@string/daftarText"
+        android:fontFamily="@font/poppins_bold"
         android:textColor="@color/buttonHyponic"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"

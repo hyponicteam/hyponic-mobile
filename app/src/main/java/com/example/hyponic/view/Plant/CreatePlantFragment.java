@@ -33,7 +33,7 @@ public class CreatePlantFragment extends Fragment{
     FragmentCreatePlantBinding binding;
     SharedPrefManager pref;
     public CreatePlantFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -53,6 +53,7 @@ public class CreatePlantFragment extends Fragment{
         binding.btnCancel.setOnClickListener(v->{
             backToHomeFragmet();
         });
+       // binding.btnCancel.setOnClickListener(v-> backToHomeFragmet());
 
     }
 
@@ -84,11 +85,11 @@ public class CreatePlantFragment extends Fragment{
                         Log.d("TAG", String.valueOf(response));
                         try {
                             if(response.getJSONObject("meta").getString("status").equals("success")){
-                                Log.d("Data",""+response.getJSONObject("data"));
-                                Toast.makeText(getActivity(),"DATA BERHASIL DISIMPAN",Toast.LENGTH_SHORT).show();
-                                Log.d("Data2",""+response.getJSONObject("data"));
+                                Log.d("New Plant",""+response.getJSONObject("data"));
+                                Toast.makeText(getContext(),"DATA BERHASIL DISIMPAN",Toast.LENGTH_SHORT).show();
+                                //backToHomeFragmet();
                             }else {
-                                Toast.makeText(getActivity(),"DATA GAGAl DISIMPAN",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(),"DATA GAGAl DISIMPAN",Toast.LENGTH_SHORT).show();
                             }
 
                         }catch (JSONException e){
@@ -103,7 +104,6 @@ public class CreatePlantFragment extends Fragment{
                         Log.d("ERROR", String.valueOf(error));
                     }
                 });
-
     }
 
     @Override
