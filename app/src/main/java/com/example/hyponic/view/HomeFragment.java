@@ -3,6 +3,7 @@ package com.example.hyponic.view;
 import static com.example.hyponic.constant.ApiConstant.BASE_URL;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,13 +22,17 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.hyponic.DummyData.PlantDummyData;
+import com.example.hyponic.LihatArtikelActivity;
 import com.example.hyponic.R;
+import com.example.hyponic.adapter.ArticleAdapter;
 import com.example.hyponic.adapter.PlantAdapter;
 import com.example.hyponic.databinding.FragmentHomeBinding;
+import com.example.hyponic.model.Artikel;
 import com.example.hyponic.model.Plant;
 import com.example.hyponic.model.SharedPrefManager;
 import com.example.hyponic.model.Time;
 import com.example.hyponic.view.Plant.CreatePlantFragment;
+import com.example.hyponic.view.Plant.EditPlantFragment;
 import com.example.hyponic.view.Profile.UserFragment;
 
 import org.json.JSONArray;
@@ -55,12 +60,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         pref = new SharedPrefManager(getContext());
-        binding.username.setText(pref.getSPNama());
+        binding.username.setText("Hai "+pref.getSPNama()+",");
         showLoading(true);
-        //getPlantData();
+        getPlantData();
         binding.rvNLatestPlant.setHasFixedSize(true);
-        planList.addAll(PlantDummyData.getListData());
-        showRecyclerList(planList);
+        //planList.addAll(PlantDummyData.getListData());tr
+        //showRecyclerList(planList);
         binding.btnAddPlant.setOnClickListener(this);
 
     }
@@ -138,6 +143,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         binding.rvNLatestPlant.setLayoutManager(new LinearLayoutManager(getContext()));
         PlantAdapter listPlantAdapter = new PlantAdapter(getContext(),getParentFragmentManager(),plants);
         binding.rvNLatestPlant.setAdapter(listPlantAdapter);
+
+        listPlantAdapter.setOnItemClickCallback(new PlantAdapter.OnItemClickCallback() {
+
+            @Override
+            public void onEditClicked(Plant plant) {
+                EditPlantFragment mCategoryFragment = new EditPlantFragment();
+                FragmentManager mFragmentManager = getParentFragmentManager();
+                mFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.nav_host_fragment_activity_main, mCategoryFragment, EditPlantFragment.class.getSimpleName())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
     }
 
 }

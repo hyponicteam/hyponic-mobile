@@ -11,12 +11,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.example.hyponic.R;
 import com.example.hyponic.adapter.PlantAdapter;
 import com.example.hyponic.adapter.TopHeightAdapter;
 import com.example.hyponic.adapter.TopWidthAdapter;
@@ -202,6 +204,18 @@ public class PlantsFragment extends Fragment {
         binding.rvNLatestPlant.setLayoutManager(new LinearLayoutManager(getContext()));
         PlantAdapter listPlantAdapter = new PlantAdapter(getContext(),getChildFragmentManager(),plants);
         binding.rvNLatestPlant.setAdapter(listPlantAdapter);
+        listPlantAdapter.setOnItemClickCallback(new PlantAdapter.OnItemClickCallback() {
+            @Override
+            public void onEditClicked(Plant plant) {
+                EditPlantFragment mCategoryFragment = new EditPlantFragment();
+                FragmentManager mFragmentManager = getParentFragmentManager();
+                mFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.nav_host_fragment_activity_main, mCategoryFragment, EditPlantFragment.class.getSimpleName())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
     }
     private void showListGrowthHeight(ArrayList<TopGrowth> plants) {
         binding.rvNTopHeight.setLayoutManager(new LinearLayoutManager(getContext()));

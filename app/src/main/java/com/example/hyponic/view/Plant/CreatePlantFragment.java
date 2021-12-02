@@ -3,12 +3,12 @@ package com.example.hyponic.view.Plant;
 import static com.example.hyponic.constant.ApiConstant.BASE_URL;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,10 +20,9 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.example.hyponic.R;
+import com.example.hyponic.MainActivity;
 import com.example.hyponic.databinding.FragmentCreatePlantBinding;
 import com.example.hyponic.model.SharedPrefManager;
-import com.example.hyponic.view.HomeFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,25 +46,14 @@ public class CreatePlantFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
         pref = new SharedPrefManager(getContext());
         binding.btnSave.setOnClickListener(v->{
-            //createPlant();
-            backToHomeFragmet();
+            createPlant();
         });
         binding.btnCancel.setOnClickListener(v->{
-            backToHomeFragmet();
+            backToMainActivity();
         });
-       // binding.btnCancel.setOnClickListener(v-> backToHomeFragmet());
 
     }
 
-    private void backToHomeFragmet() {
-        HomeFragment mCategoryFragment = new HomeFragment();
-        FragmentManager mFragmentManager = getParentFragmentManager();
-        mFragmentManager
-                .beginTransaction()
-                .replace(R.id.nav_host_fragment_activity_main, mCategoryFragment, HomeFragment.class.getSimpleName())
-                .addToBackStack(null)
-                .commit();
-    }
 
     private void createPlant() {
 
@@ -87,7 +75,7 @@ public class CreatePlantFragment extends Fragment{
                             if(response.getJSONObject("meta").getString("status").equals("success")){
                                 Log.d("New Plant",""+response.getJSONObject("data"));
                                 Toast.makeText(getContext(),"DATA BERHASIL DISIMPAN",Toast.LENGTH_SHORT).show();
-                                //backToHomeFragmet();
+                                backToMainActivity();
                             }else {
                                 Toast.makeText(getContext(),"DATA GAGAl DISIMPAN",Toast.LENGTH_SHORT).show();
                             }
@@ -105,7 +93,10 @@ public class CreatePlantFragment extends Fragment{
                     }
                 });
     }
-
+    private void backToMainActivity() {
+        Intent moveIntent = new Intent(getActivity(), MainActivity.class);
+        startActivity(moveIntent);
+    }
     @Override
     public void onDetach() {
         super.onDetach();

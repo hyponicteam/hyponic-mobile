@@ -3,6 +3,7 @@ package com.example.hyponic.view.Plant;
 import static com.example.hyponic.constant.ApiConstant.BASE_URL;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.example.hyponic.MainActivity;
 import com.example.hyponic.databinding.FragmentDeletePlantBinding;
 import com.example.hyponic.model.SharedPrefManager;
 
@@ -45,7 +47,8 @@ public class DeletePlantFragment extends DialogFragment {
         pref= new SharedPrefManager(getContext());
         binding.btnDelete.setOnClickListener(v->{
             deletePlant();
-            getDialog().dismiss();
+            //getDialog().dismiss();
+            backToMainActivity();
         });
         binding.btnCancel.setOnClickListener(v->{
             getDialog().cancel();
@@ -69,22 +72,27 @@ public class DeletePlantFragment extends DialogFragment {
                         Log.d("TAG", String.valueOf(response));
                         try {
                             if(response.getJSONObject("meta").getString("status").equals("success")){
-                                Toast.makeText(getContext(),"Berhasil dihapus",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getParentFragment().getContext(),"Berhasil dihapus",Toast.LENGTH_SHORT).show();
+
                             }else {
-                                Toast.makeText(getContext(), "Tanaman Gagal Dihapus",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getParentFragment().getContext(), "Tanaman Gagal Dihapus",Toast.LENGTH_SHORT).show();
                             }
 
                         }catch (JSONException e){
-                            Toast.makeText(getContext(),"Login Gagal"+e,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getParentFragment().getContext(),"Login Gagal"+e,Toast.LENGTH_SHORT).show();
                         }
                     }
                     @Override
                     public void onError(ANError error) {
                         // handle error
-                        Toast.makeText(getContext(),""+error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getParentFragment().getContext(),""+error, Toast.LENGTH_SHORT).show();
                         Log.d("ERROR", String.valueOf(error));
                     }
                 });
 
+    }
+    private void backToMainActivity() {
+        Intent moveIntent = new Intent(getActivity(), MainActivity.class);
+        startActivity(moveIntent);
     }
 }

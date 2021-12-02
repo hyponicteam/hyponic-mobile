@@ -7,11 +7,11 @@
     tools:context=".view.Profile.EditUserFragment"
     android:padding="16dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/imgProfile"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/user"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:src="@drawable/edit_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,29 +23,28 @@
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/white"
         android:padding="5dp"
-        android:text="@string/editPhoto"
+        android:text="Perbarui Profilmu!"
         android:textColor="@color/black"
         android:textAlignment="center"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgProfile" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Masukkan nama barumu!"
+        android:textColor="@color/black"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnChageProfilePhoto">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/emailLabel" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@+id/btnChageProfilePhoto" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputLayoutName"
@@ -55,14 +54,18 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputLayout">
+        app:layout_constraintTop_toBottomOf="@+id/description">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/nama" />
+            android:hint="@string/nama"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ProgressBar
@@ -84,7 +87,8 @@
         android:layout_marginTop="16dp"
         android:padding="5dp"
         android:text="@string/save"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
+        android:fontFamily="@font/poppins_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputLayoutName" />
@@ -95,7 +99,8 @@
         android:layout_marginTop="16dp"
         android:padding="5dp"
         android:text="@string/cancel"
-        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/white"
         android:backgroundTint="@color/grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

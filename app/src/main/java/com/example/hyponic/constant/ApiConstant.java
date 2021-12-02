@@ -1,5 +1,5 @@
 package com.example.hyponic.constant;
 
 public class ApiConstant {
-    public static final String BASE_URL = "http://192.168.196.12:8088/api/";
+    public static final String BASE_URL = "http://18.221.184.74:8088/api/";
 }
