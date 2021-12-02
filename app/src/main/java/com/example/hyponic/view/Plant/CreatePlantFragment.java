@@ -9,7 +9,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,10 +21,8 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.hyponic.MainActivity;
-import com.example.hyponic.R;
 import com.example.hyponic.databinding.FragmentCreatePlantBinding;
 import com.example.hyponic.model.SharedPrefManager;
-import com.example.hyponic.view.HomeFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;

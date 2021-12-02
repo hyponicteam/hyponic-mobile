@@ -18,7 +18,7 @@
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/fragment_create_plant.xml" value="0.14402173913043478" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/fragment_delete_plant.xml" value="0.14402173913043478" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/fragment_edit_plant.xml" value="0.1" />
-        <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/fragment_edit_user.xml" value="0.25" />
+        <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/fragment_edit_user.xml" value="0.17" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/fragment_home.xml" value="0.17" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/fragment_home_tutorial.xml" value="0.17708333333333334" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/fragment_notifications.xml" value="0.1" />
@@ -77,7 +77,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.1" />
+        <option name="scale" value="0.22" />
       </ProjectState>
     </option>
   </component>
