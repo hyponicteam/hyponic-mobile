@@ -3,13 +3,12 @@ package com.example.hyponic.view.Plant;
 import static com.example.hyponic.constant.ApiConstant.BASE_URL;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,12 +20,9 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.example.hyponic.DummyData.PlantDummyData;
-import com.example.hyponic.R;
+import com.example.hyponic.MainActivity;
 import com.example.hyponic.databinding.FragmentEditPlantBinding;
-import com.example.hyponic.databinding.FragmentHomeBinding;
 import com.example.hyponic.model.SharedPrefManager;
-import com.example.hyponic.view.HomeFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,21 +49,18 @@ public class EditPlantFragment extends Fragment{
         pref = new SharedPrefManager(getContext());
         getNamePlant();
         binding.btnSave.setOnClickListener(v->{
-            //editPlant(binding.edNamePlat.getText().toString());
-            backToHomeFragmet();
+            if(!binding.edNamePlat.getText().toString().equals("")){
+                editPlant(binding.edNamePlat.getText().toString());
+            }
+            backToMainActivity();
         });
         binding.btnCancel.setOnClickListener(v->{
-            backToHomeFragmet();
+            backToMainActivity();
         });
     }
-    private void backToHomeFragmet() {
-        HomeFragment mCategoryFragment = new HomeFragment();
-        FragmentManager mFragmentManager = getParentFragmentManager();
-        mFragmentManager
-                .beginTransaction()
-                .replace(R.id.nav_host_fragment_activity_main, mCategoryFragment, HomeFragment.class.getSimpleName())
-                .addToBackStack(null)
-                .commit();
+    private void backToMainActivity() {
+          Intent moveIntent = new Intent(getActivity(), MainActivity.class);
+          startActivity(moveIntent);
     }
     @Override
     public void onDetach() {

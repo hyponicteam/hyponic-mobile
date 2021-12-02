@@ -15,6 +15,7 @@ import com.example.hyponic.DetailPlantActivity;
 //import com.example.hyponic.Detailplantfragment;
 import com.example.hyponic.MainActivity;
 import com.example.hyponic.R;
+import com.example.hyponic.model.Artikel;
 import com.example.hyponic.model.Plant;
 import com.example.hyponic.model.SharedPrefManager;
 import com.example.hyponic.view.Plant.CreatePlantFragment;
@@ -28,13 +29,18 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ListViewHold
     private Context plantContext;
     private LayoutInflater mInflater;
     private SharedPrefManager pref;
+    private OnItemClickCallback onItemClickCallback;
 
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback;
+    }
     public PlantAdapter(Context context,FragmentManager fragment, ArrayList<Plant> list) {
         this.plantContext=context;
         fragmentManager = fragment;
         this.listPlant=list;
         this.mInflater = LayoutInflater.from(this.plantContext);
     }
+
     @NonNull
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -64,17 +70,15 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ListViewHold
 
         });
         holder.tvEdit.setOnClickListener(view -> {
-            //pref.saveSPString(pref.SP_PLANT_ID,plant.getId());
-//            EditPlantFragment editPlantFragmentFragment = new EditPlantFragment();
+            pref.saveSPString(pref.SP_PLANT_ID,plant.getId());
+            onItemClickCallback.onEditClicked(listPlant.get(holder.getAdapterPosition()));
+//            EditPlantFragment mCategoryFragment = new EditPlantFragment();
 //            FragmentManager mFragmentManager = fragmentManager;
-//            editPlantFragmentFragment.show(mFragmentManager, EditPlantFragment.class.getSimpleName());
-            EditPlantFragment mCategoryFragment = new EditPlantFragment();
-            FragmentManager mFragmentManager = fragmentManager;
-            mFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.nav_host_fragment_activity_main, mCategoryFragment, EditPlantFragment.class.getSimpleName())
-                    .addToBackStack(null)
-                    .commit();
+//            mFragmentManager
+//                    .beginTransaction()
+//                    .replace(R.id.nav_host_fragment_activity_main, mCategoryFragment, EditPlantFragment.class.getSimpleName())
+//                    .addToBackStack(null)
+//                    .commit();
         });
         holder.tvDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +98,8 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ListViewHold
     }
 
 
+
+
     public class ListViewHolder extends RecyclerView.ViewHolder {
         TextView tvName, tvLastEdit, tvEdit, tvView, tvDelete;
         public ListViewHolder(@NonNull View itemView) {
@@ -104,6 +110,9 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ListViewHold
             tvView=itemView.findViewById(R.id.seePlant);
             tvDelete=itemView.findViewById(R.id.deletePlant);
         }
+    }
+    public interface OnItemClickCallback {
+        void onEditClicked(Plant plant);
     }
 
 }

@@ -13,10 +13,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical">
 
         <RelativeLayout
             android:id="@+id/rvCardGreeting"
@@ -34,25 +31,27 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Hai, Admin"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="@string/sapaan"
                     android:textColor="@color/black"
-                    android:fontFamily="@font/poppins_bold"
-                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/username"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/nama"
-                    android:textColor="@color/hyponicLogo"
-                    android:fontFamily="@font/poppins_bold"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+
 
             </LinearLayout>
 
