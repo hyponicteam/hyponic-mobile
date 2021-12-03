@@ -34,12 +34,12 @@ public class DetailPlantActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityDetailPlantBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         pref = new SharedPrefManager(this);
-        binding.rvListtabelTanaman.setHasFixedSize(true);
-        getTabelGrowth();
+        //binding.rvListtabelTanaman.setHasFixedSize(true);
+        //getTabelGrowth();
 
         binding.btnAddDataPlant.setOnClickListener(new View.OnClickListener() {
             @Override

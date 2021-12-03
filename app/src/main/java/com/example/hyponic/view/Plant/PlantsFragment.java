@@ -2,6 +2,7 @@ package com.example.hyponic.view.Plant;
 
 import static com.example.hyponic.constant.ApiConstant.BASE_URL;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.example.hyponic.DetailPlantActivity;
 import com.example.hyponic.R;
 import com.example.hyponic.adapter.PlantAdapter;
 import com.example.hyponic.adapter.TopHeightAdapter;
@@ -115,19 +117,20 @@ public class PlantsFragment extends Fragment {
                 });
     }
     private void getTopHeigh() {
+        Log.d("TOKEN TOP HEIGHT", "respon: " + pref.getSPToken());
         ArrayList<TopGrowth> growths = new ArrayList<>();
-        AndroidNetworking.get(BASE_URL+"top-plants?category=plant_height&n=3")
-                .addHeaders("Authorization","Bearer "+pref.getSPToken())
+        AndroidNetworking.get("http://18.221.184.74:8088/api/top-plants?category=plant_height&n=3")
                 .addHeaders("Accept", "application/json")
+                .addHeaders("Authorization","Bearer "+pref.getSPToken())
                 .setPriority(Priority.LOW)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener(){
-
                     @Override
                     public void onResponse(JSONObject response) {
                         showLoading(false);
+                        Log.d("TOP HEIGT", "respon: " + response);
                         try {
-                            Log.d("TAG", "respon: " + response.getJSONArray("data"));
+
                             JSONArray data = response.getJSONArray("data");
                             for(int i=0; i<data.length(); i++){
                                 JSONObject jsonGrowth = data.getJSONObject(i);
@@ -140,22 +143,22 @@ public class PlantsFragment extends Fragment {
                                 growths.add(growth);
                             }
                             Log.d("SIZE: ",""+growths.size());
-                            showListGrowthHeight(growths);
+//                            showListGrowthHeight(growths);
 
                         }catch (JSONException e){
-                            e.printStackTrace();
+                           e.printStackTrace();
                         }
                     }
                     @Override
                     public void onError(ANError error) {
                         showLoading(false);
-                        Log.d("TAG", "onError: " + error); //untuk log pada onerror
+                        Log.d("TOP HEIGHT", "onError: " + error); //untuk log pada onerror
                     }
                 });
     }
     private void getTopWidth() {
         ArrayList<TopGrowth> growths = new ArrayList<>();
-        AndroidNetworking.get(BASE_URL+"top-plants?category=plant_height&n=3")
+        AndroidNetworking.get(BASE_URL+"top-plants?category=leaf_width&n=1")
                 .addHeaders("Authorization","Bearer "+pref.getSPToken())
                 .addHeaders("Accept", "application/json")
                 .setPriority(Priority.LOW)
@@ -165,8 +168,9 @@ public class PlantsFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         showLoading(false);
+                        Log.d("TOP WIDTH", "respon: " + response);
                         try {
-                            Log.d("TAG", "respon: " + response.getJSONArray("data"));
+                            //Log.d("TAG", "respon: " + response.getJSONArray("data"));
                             JSONArray data = response.getJSONArray("data");
                             for(int i=0; i<data.length(); i++){
                                 JSONObject jsonGrowth = data.getJSONObject(i);
@@ -179,7 +183,7 @@ public class PlantsFragment extends Fragment {
                                 growths.add(growth);
                             }
                             Log.d("SIZE: ",""+growths.size());
-                            showListGrowthWidth(growths);
+//                            showListGrowthWidth(growths);
 
                         }catch (JSONException e){
                             e.printStackTrace();
@@ -188,7 +192,7 @@ public class PlantsFragment extends Fragment {
                     @Override
                     public void onError(ANError error) {
                         showLoading(false);
-                        Log.d("TAG", "onError: " + error); //untuk log pada onerror
+                        Log.d("TOP WIDTH", "onError: " + error); //untuk log pada onerror
                     }
                 });
     }
@@ -214,6 +218,12 @@ public class PlantsFragment extends Fragment {
                         .replace(R.id.nav_host_fragment_activity_main, mCategoryFragment, EditPlantFragment.class.getSimpleName())
                         .addToBackStack(null)
                         .commit();
+            }
+
+            @Override
+            public void onViewClicked(Plant plant) {
+                Intent moveIntent = new Intent(getActivity(), DetailPlantActivity.class);
+                startActivity(moveIntent);
             }
         });
     }
