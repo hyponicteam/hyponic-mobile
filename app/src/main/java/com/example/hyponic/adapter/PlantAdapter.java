@@ -57,28 +57,11 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ListViewHold
 
         holder.tvView.setOnClickListener(view -> {
             pref.saveSPString(pref.SP_PLANT_ID,plant.getId());
-//            Detailplantfragment mCategoryFragment = new Detailplantfragment();
-//            FragmentManager mFragmentManager = fragmentManager;
-//            mFragmentManager
-//                    .beginTransaction()
-//                    .replace(R.id.plantlayout, mCategoryFragment, Detailplantfragment.class.getSimpleName())
-//                    .addToBackStack(null)
-//                    .commit();
-            Intent moveIntent = new Intent(plantContext, DetailPlantActivity.class);
-            plantContext.startActivity(moveIntent);
-
-
+            onItemClickCallback.onViewClicked(listPlant.get(holder.getAdapterPosition()));
         });
         holder.tvEdit.setOnClickListener(view -> {
             pref.saveSPString(pref.SP_PLANT_ID,plant.getId());
             onItemClickCallback.onEditClicked(listPlant.get(holder.getAdapterPosition()));
-//            EditPlantFragment mCategoryFragment = new EditPlantFragment();
-//            FragmentManager mFragmentManager = fragmentManager;
-//            mFragmentManager
-//                    .beginTransaction()
-//                    .replace(R.id.nav_host_fragment_activity_main, mCategoryFragment, EditPlantFragment.class.getSimpleName())
-//                    .addToBackStack(null)
-//                    .commit();
         });
         holder.tvDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,6 +96,7 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ListViewHold
     }
     public interface OnItemClickCallback {
         void onEditClicked(Plant plant);
+        void onViewClicked(Plant plant);
     }
 
 }

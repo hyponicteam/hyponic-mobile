@@ -21,6 +21,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.example.hyponic.DetailPlantActivity;
 import com.example.hyponic.DummyData.PlantDummyData;
 import com.example.hyponic.LihatArtikelActivity;
 import com.example.hyponic.R;
@@ -155,6 +156,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                         .replace(R.id.nav_host_fragment_activity_main, mCategoryFragment, EditPlantFragment.class.getSimpleName())
                         .addToBackStack(null)
                         .commit();
+            }
+
+            @Override
+            public void onViewClicked(Plant plant) {
+                Intent moveIntent = new Intent(getActivity(), DetailPlantActivity.class);
+                startActivity(moveIntent);
             }
         });
     }

@@ -62,7 +62,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="0dp"
                 android:layout_toEndOf="@id/cardGreeting"
-                android:src="@drawable/user"/>
+                android:src="@drawable/profil"/>
 
         </RelativeLayout>
 
