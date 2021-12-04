@@ -82,6 +82,7 @@ public class PlantsFragment extends Fragment {
 //        getTopWidth();
     }
 
+
     private void showTopWidth() {
         // Data-data yang akan ditampilkan di Chart
         List<BarEntry> dataPemasukan = new ArrayList<BarEntry>();
@@ -183,16 +184,20 @@ public class PlantsFragment extends Fragment {
                         try {
                             Log.d("TAG", "respon: " + response.getJSONArray("data"));
                             JSONArray data = response.getJSONArray("data");
-                            for(int i=0; i<data.length(); i++){
-                                JSONObject jsonPlant = data.getJSONObject(i);
-                                Log.d("TAG","ke -"+i+" : "+data.getJSONObject(i));
-                                Plant plant = new Plant(jsonPlant.getString("id"),
-                                        jsonPlant.getString("name"));
+                            if(data.length()==0){
+                                showNotFound(true);
+                            }else{
+                                for(int i=0; i<data.length(); i++){
+                                    JSONObject jsonPlant = data.getJSONObject(i);
+                                    Log.d("TAG","ke -"+i+" : "+data.getJSONObject(i));
+                                    Plant plant = new Plant(jsonPlant.getString("id"),
+                                            jsonPlant.getString("name"));
 
-                                plant.setTime(new Time());
-                                plant.getTime().setCreated_at(jsonPlant.getString("created_at"));
-                                plant.getTime().setUpdated_at(jsonPlant.getString("updated_at"));
-                                planList.add(plant);
+                                    plant.setTime(new Time());
+                                    plant.getTime().setCreated_at(jsonPlant.getString("created_at"));
+                                    plant.getTime().setUpdated_at(jsonPlant.getString("updated_at"));
+                                    planList.add(plant);
+                                }
                             }
                             Log.d("SIZE: ",""+planList.size());
                             showRecyclerList(planList);
@@ -200,15 +205,12 @@ public class PlantsFragment extends Fragment {
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
-
-
-
                     }
                     @Override
                     public void onError(ANError error) {
                         showLoading(false);
                         Log.d("TAG", "onError: " + error); //untuk log pada onerror
-
+                        showNotFound(true);
                     }
                 });
     }
@@ -321,5 +323,12 @@ public class PlantsFragment extends Fragment {
                 startActivity(moveIntent);
             }
         });
+    }
+    private void showNotFound(Boolean isAnyData){
+        if(isAnyData){
+            binding.notFound.setVisibility(View.VISIBLE);
+        }else{
+            binding.notFound.setVisibility(View.GONE);
+        }
     }
 }

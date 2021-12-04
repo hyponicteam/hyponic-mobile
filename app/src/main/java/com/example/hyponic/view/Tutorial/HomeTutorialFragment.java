@@ -148,7 +148,7 @@ public class HomeTutorialFragment extends Fragment {
     }
     public void showRecyclerList(ArrayList<Artikel> listArtikel){
         binding.rvarticle.setLayoutManager(new LinearLayoutManager(getContext()));
-        ArticleAdapter listArticleAdapter = new ArticleAdapter(listArtikel);
+        ArticleAdapter listArticleAdapter = new ArticleAdapter(listArtikel,getContext());
         binding.rvarticle.setAdapter(listArticleAdapter);
 
         listArticleAdapter.setOnItemClickCallback(new ArticleAdapter.OnItemClickCallback() {

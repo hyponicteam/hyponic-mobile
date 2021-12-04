@@ -11,7 +11,8 @@ public class SharedPrefManager {
     public static final String SP_TOKEN = "spToken";
     public static final String SP_PLANT_ID="";
     public static final String SP_IS_LOGIN = "isLogin";
-
+    public static final String SP_Created_At= "spCreatedAt";
+    public static final String SP_Edited_At="spEditedAt";
 
     SharedPreferences sp;
     SharedPreferences.Editor spEditor;
@@ -53,5 +54,11 @@ public class SharedPrefManager {
     }
     public Boolean getSPIsLogin(){
         return sp.getBoolean(SP_IS_LOGIN, false);
+    }
+    public String getSP_Created_At() {
+        return sp.getString(SP_Created_At,"null");
+    }
+    public String getSP_Edited_At() {
+        return sp.getString(SP_Edited_At,"null");
     }
 }
