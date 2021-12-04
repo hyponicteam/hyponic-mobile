@@ -44,47 +44,17 @@ public class UserFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         pref= new SharedPrefManager(getContext());
-        getUserData();
+
         binding.username.setText(pref.getSPNama());
         binding.email.setText(pref.getSPEmail());
+        binding.createdAt.setText(pref.getSP_Created_At());
+        binding.updatedAt.setText(pref.getSP_Edited_At());
         binding.editUser.setOnClickListener(view1 -> {
             toEditUserFragment();
         });
         binding.logout.setOnClickListener(v->{
             logOut();
         });
-    }
-
-    private void getUserData() {
-        AndroidNetworking.get(BASE_URL+"user")
-                .addHeaders("Accept", "application/json")
-                .addHeaders("Authorization","Bearer "+pref.getSPToken())
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-//                        showLoading(false);
-                        Log.d("USER RESPON", String.valueOf(response));
-
-                        try {
-                                JSONObject dataUser = response.getJSONObject("data");
-                                binding.createdAt.setText(dataUser.getString("created_at"));
-                                binding.updatedAt.setText(dataUser.getString("updated_at"));
-
-                        }catch (JSONException e){
-                            Toast.makeText(getContext(),"Data gagal diakses"+e,Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    @Override
-                    public void onError(ANError error) {
-//                        showLoading(false);
-                        // handle error
-                        Toast.makeText(getContext(),""+error, Toast.LENGTH_SHORT).show();
-                        Log.d("ERROR", String.valueOf(error));
-                    }
-                });
-
     }
 
     private void logOut() {

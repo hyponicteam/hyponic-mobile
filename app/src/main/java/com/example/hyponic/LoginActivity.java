@@ -78,6 +78,8 @@ public class LoginActivity extends AppCompatActivity{
                                     preferences.saveSPInt(String.valueOf(preferences.SP_ID),dataUser.getInt("id"));
                                     preferences.saveSPString(preferences.SP_TOKEN,token);
                                     preferences.saveSPBoolean(preferences.SP_IS_LOGIN,true);
+                                    preferences.saveSPString(preferences.SP_Created_At,dataUser.getString("created_at"));
+                                    preferences.saveSPString(preferences.SP_Edited_At,dataUser.getString("updated_at"));
 
                                     Intent moveIntent = new Intent(getApplicationContext(),MainActivity.class);
                                     startActivity(moveIntent);
@@ -94,7 +96,7 @@ public class LoginActivity extends AppCompatActivity{
                         public void onError(ANError error) {
                             showLoading(false);
                             // handle error
-                            Toast.makeText(getApplicationContext(),""+error, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"Email atau password tidak sesuai", Toast.LENGTH_SHORT).show();
                             Log.d("ERROR", String.valueOf(error));
                         }
                     });

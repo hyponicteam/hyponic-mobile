@@ -74,6 +74,7 @@ public class EditUserFragment extends Fragment {
                         Toast.makeText(getContext(),"Berhasil disimpan",Toast.LENGTH_SHORT).show();
                         try {
                             JSONObject dataUser = response.getJSONObject("data");
+                            pref.saveSPString(pref.SP_Edited_At,dataUser.getString("updated_at"));
 
                         }catch (JSONException e){
                             Toast.makeText(getContext(),"Data gagal diakses"+e,Toast.LENGTH_SHORT).show();

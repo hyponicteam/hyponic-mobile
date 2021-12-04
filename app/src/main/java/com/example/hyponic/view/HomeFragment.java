@@ -82,11 +82,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                     public void onResponse(JSONObject response) {
                         showLoading(false);
                         try {
-                            Log.d("TAG", "respon: " + response.getJSONArray("data"));
+                            Log.d("LAST EDIT PLANT", "respon: " + response.getJSONArray("data"));
                             JSONArray data = response.getJSONArray("data");
                             for(int i=0; i<data.length(); i++){
                                 JSONObject jsonPlant = data.getJSONObject(i);
-                                Log.d("TAG","ke -"+i+" : "+data.getJSONObject(i));
+                                Log.d("LAST EDIT PLANT","ke -"+i+" : "+data.getJSONObject(i));
                                 Plant plant = new Plant(jsonPlant.getString("id"),
                                         jsonPlant.getString("name"));
 
@@ -108,8 +108,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                     @Override
                     public void onError(ANError error) {
                         showLoading(false);
-                        Log.d("TAG", "onError: " + error); //untuk log pada onerror
-
+                        Log.d("LAST EDIT PLANT", "Belum ada data " + error); //untuk log pada onerror
+                        showNotFound(true);
                     }
                 });
     }
@@ -137,6 +137,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             binding.progressBar.setVisibility(View.VISIBLE);
         } else {
             binding.progressBar.setVisibility(View.GONE);
+        }
+    }
+    private void showNotFound(Boolean isAnyData){
+        if(isAnyData){
+            binding.notFound.setVisibility(View.VISIBLE);
+        }else{
+            binding.notFound.setVisibility(View.GONE);
         }
     }
 
