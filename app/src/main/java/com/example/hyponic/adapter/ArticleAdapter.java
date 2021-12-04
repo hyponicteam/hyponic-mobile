@@ -37,7 +37,7 @@ public class ArticleAdapter  extends RecyclerView.Adapter<ArticleAdapter.ListVie
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         Artikel artikel = list.get(position);
         holder.tvTitle.setText(artikel.getTitle());
-        holder.tvAuthor.setText(holder.tvAuthor.getText().toString()+" "+artikel.getAuthor2());
+        holder.tvAuthor.setText(holder.tvAuthor.getText().toString()+" "+artikel.getAuthor().getName());
         holder.itemView.setOnClickListener(v->{
 //            Toast.makeText(holder.itemView.getContext(), "Kamu memilih "
 //                    + list.get(holder.getAdapterPosition()).getTitle(), Toast.LENGTH_SHORT).show();

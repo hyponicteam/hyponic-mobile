@@ -11,13 +11,13 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
@@ -48,18 +48,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_dashboard" />
-            
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_NTopHeight"
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/topHeight"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginRight="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_insight" />
+                android:layout_height="250dp" />
 
             <TextView
                 android:id="@+id/text_insightWidht"
@@ -74,18 +67,12 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rv_NTopHeight" />
+                app:layout_constraintTop_toBottomOf="@+id/topHeight" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_NTopWidth"
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barTopWidth"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginRight="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_insightWidht" />
+                android:layout_height="250dp"/>
 
             <TextView
                 android:id="@+id/text_listPlant"
@@ -100,19 +87,18 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rv_NTopWidth" />
+                app:layout_constraintTop_toBottomOf="@id/barTopWidth" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_NLatestPlant"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="600dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="11dp"
                 android:layout_marginRight="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_listPlant" />
-
 
         </LinearLayout>
     </ScrollView>

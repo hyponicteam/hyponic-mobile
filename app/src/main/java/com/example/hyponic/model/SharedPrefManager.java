@@ -9,7 +9,7 @@ public class SharedPrefManager {
     public static final String SP_NAMA = "spNama";
     public static final String SP_EMAIL = "spEmail";
     public static final String SP_TOKEN = "spToken";
-    public static String SP_PLANT_ID="";
+    public static final String SP_PLANT_ID="";
     public static final String SP_IS_LOGIN = "isLogin";
 
 
@@ -49,7 +49,7 @@ public class SharedPrefManager {
         return sp.getInt(String.valueOf(SP_ID), 0);
     }
     public String getSPPlantId(){
-        return sp.getString(String.valueOf(SP_PLANT_ID), "");
+        return sp.getString(SP_PLANT_ID, "0");
     }
     public Boolean getSPIsLogin(){
         return sp.getBoolean(SP_IS_LOGIN, false);

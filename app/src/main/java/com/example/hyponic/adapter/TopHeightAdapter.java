@@ -32,7 +32,7 @@ public class TopHeightAdapter extends RecyclerView.Adapter<TopHeightAdapter.List
         TopGrowth growth = listGrowth.get(position);
         holder.tvNo.setText(position+1);
         holder.tvName.setText(growth.getName());
-        holder.tvGrowth.setText(growth.getGrowth_per_day()+" "+growth.getUnit());
+        holder.tvGrowth.setText(growth.getGrowth_per_day()+"mm/day");
     }
 
     @Override

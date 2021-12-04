@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:layout_height="wrap_content"
     android:padding="16dp">
     <TextView
         android:id="@+id/no"
@@ -31,4 +30,4 @@
         android:text="@string/growth_per_day"
         android:textColor="@color/black"
         android:textSize="14sp"/>
-</LinearLayout>
+</androidx.cardview.widget.CardView>
