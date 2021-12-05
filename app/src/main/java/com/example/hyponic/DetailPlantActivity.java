@@ -3,6 +3,7 @@ package com.example.hyponic;
 import static com.example.hyponic.constant.ApiConstant.BASE_URL;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
@@ -14,10 +15,14 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.example.hyponic.adapter.TableAdapter;
+import com.example.hyponic.adapter.GrowthsAdapter;
+import com.example.hyponic.adapter.GrowthsAdapter;
 import com.example.hyponic.databinding.ActivityDetailPlantBinding;
+import com.example.hyponic.model.Growths;
 import com.example.hyponic.model.SharedPrefManager;
-import com.example.hyponic.model.TabelModel;
+import com.example.hyponic.model.Growths;
+import com.example.hyponic.view.Plant.DeletePlantFragment;
+import com.example.hyponic.view.Plant.EditPlantFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,27 +32,80 @@ import java.util.ArrayList;
 
 public class DetailPlantActivity extends AppCompatActivity {
 
-    private ArrayList<TabelModel> growths = new ArrayList<>();
+    private ArrayList<Growths> growths = new ArrayList<>();
     private ActivityDetailPlantBinding binding;
     SharedPrefManager pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         binding = ActivityDetailPlantBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //private ArrayList<DetailPlant> detailPlantList = new ArrayList<>();
+
         pref = new SharedPrefManager(this);
-        //binding.rvListtabelTanaman.setHasFixedSize(true);
+        binding.rvlisttabeltanaman.setHasFixedSize(true);
+        getGrowth();
+
+        binding.btnAddPlant.setOnClickListener(view ->
+                {
+                    Intent moveIntent = new Intent(DetailPlantActivity.this, CreateDetailTanaman.class);
+                    startActivity(moveIntent);
+                }
+
+        );
+
+
         //getTabelGrowth();
 
-        binding.btnAddDataPlant.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent moveIntent = new Intent(DetailPlantActivity.this, CreateDetailTanaman.class);
-                startActivity(moveIntent);
-            }
-        });
+//        binding..setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent moveIntent = new Intent(DetailPlantActivity.this, CreateDetailTanaman.class);
+//                startActivity(moveIntent);
+//            }
+//        });
+    }
+
+    public void getGrowth(){
+        AndroidNetworking.get(BASE_URL+"plants/"+pref.getSPPlantId())
+                .addHeaders("Accept", "application/json")
+                .addHeaders("Authorization","Bearer "+pref.getSPToken())
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Log.d("growths", "respon: " + response.getJSONObject("data").getJSONArray("growths"));
+                            JSONArray data = response.getJSONObject("data").getJSONArray("growths");
+                            for(int i=0; i<data.length(); i++){
+                                JSONObject jsontabelList = data.getJSONObject(i);
+                                Log.d("GROW","ke -"+i+" : "+data.getJSONObject(i));
+                                Growths tabellist = new Growths(
+                                        jsontabelList.getString("id"),
+                                        jsontabelList.getString("plant_height"),
+                                        jsontabelList.getString("leaf_width"),
+                                        jsontabelList.getString("temperature"),
+                                        jsontabelList.getString("acidity"),
+                                        jsontabelList.getString("created_at"));
+                                growths.add(tabellist);
+                            }
+                            Log.d("SIZEGROW: ",""+growths.size());
+                            showTabelList(growths);
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        Log.d("TAG", "onError: " + error); //untuk log pada onerror
+                    }
+                });
     }
 
     public void getTabelGrowth(){
@@ -66,13 +124,13 @@ public class DetailPlantActivity extends AppCompatActivity {
                             for(int i=0; i<data.length(); i++){
                                 JSONObject jsontabelList = data.getJSONObject(i);
                                 Log.d("TAG","ke -"+i+" : "+data.getJSONObject(i));
-                                TabelModel tabellist = new TabelModel(jsontabelList.getString("id"),
+                                Growths growthslist = new Growths(jsontabelList.getString("id"),
                                         jsontabelList.getString("plant_height"),
                                         jsontabelList.getString("leaf_width"),
                                         jsontabelList.getString("temperature"),
                                         jsontabelList.getString("acidity"),
                                         jsontabelList.getString("created_at"));
-                                growths.add(tabellist);
+                                growths.add(growthslist);
                             }
                             Log.d("SIZE: ",""+growths.size());
                             showTabelList(growths);
@@ -89,9 +147,30 @@ public class DetailPlantActivity extends AppCompatActivity {
 
     }
 
-    private void showTabelList(ArrayList<TabelModel> tabellist ){
-        binding.rvListtabelTanaman.setLayoutManager(new LinearLayoutManager(this));
-        TableAdapter listTabelAdapter = new TableAdapter(tabellist,getSupportFragmentManager(),this);
-        binding.rvListtabelTanaman.setAdapter(listTabelAdapter);
+    private void showTabelList(ArrayList<Growths> tabellist ){
+        binding.rvlisttabeltanaman.setLayoutManager(new LinearLayoutManager(this));
+        GrowthsAdapter listGrowthsAdapter = new GrowthsAdapter(tabellist,getSupportFragmentManager(),this);
+        binding.rvlisttabeltanaman.setAdapter(listGrowthsAdapter);
+
+        listGrowthsAdapter.setOnItemClickCallback(new GrowthsAdapter.OnItemClickCallback() {
+            @Override
+            public void onEditClicked(Growths growths) {
+
+                pref.saveSPString(pref.SP_GROWTH_ID, growths.getId());
+                Intent moveIntent = new Intent(DetailPlantActivity.this, EditPlantActivity.class);
+                startActivity(moveIntent);
+            }
+
+            @Override
+            public void onDeleteClicked(Growths growths) {
+                pref.saveSPString(pref.SP_GROWTH_ID, growths.getId());
+
+                DeleteDetailPlantFragment deleteDetailPlantfragment = new DeleteDetailPlantFragment();
+                FragmentManager mFragmentManager = getSupportFragmentManager();
+                deleteDetailPlantfragment.show(mFragmentManager, DeleteDetailPlantFragment.class.getSimpleName());
+;
+            }
+        });
     }
+
 }

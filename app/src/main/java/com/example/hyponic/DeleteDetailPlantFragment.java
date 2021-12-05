@@ -2,10 +2,12 @@ package com.example.hyponic;
 
 import static com.example.hyponic.constant.ApiConstant.BASE_URL;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -25,7 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class DeleteDetailPlantFragment extends Fragment {
+public class DeleteDetailPlantFragment extends DialogFragment {
 
     private FragmentDeleteDetailPlantBinding binding;
     SharedPrefManager pref;
@@ -52,13 +54,17 @@ public class DeleteDetailPlantFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                deleteDetailPlant();
+                dismiss();
+//                Intent moveIntent = new Intent(getActivity(), DetailPlantActivity.class);
+//                startActivity(moveIntent);
             }
         });
 
     }
 
-    public void deletePlant(){
-        AndroidNetworking.delete(BASE_URL+"growths/"+pref.getSPPlantId())
+    public void deleteDetailPlant(){
+        AndroidNetworking.delete(BASE_URL+"growths/"+pref.getSpGrowthId())
                 .addHeaders("Authorization","Bearer "+pref.getSPToken())
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {

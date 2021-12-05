@@ -10,6 +10,7 @@ public class SharedPrefManager {
     public static final String SP_EMAIL = "spEmail";
     public static final String SP_TOKEN = "spToken";
     public static String SP_PLANT_ID="";
+    public static String SP_GROWTH_ID="";
     public static final String SP_IS_LOGIN = "isLogin";
 
 
@@ -50,6 +51,9 @@ public class SharedPrefManager {
     }
     public String getSPPlantId(){
         return sp.getString(String.valueOf(SP_PLANT_ID), "");
+    }
+    public String getSpGrowthId(){
+        return sp.getString(String.valueOf(SP_GROWTH_ID), "");
     }
     public Boolean getSPIsLogin(){
         return sp.getBoolean(SP_IS_LOGIN, false);

@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Hyponic"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".EditPlantActivity"
+            android:exported="true" />
+        <activity
             android:name=".DetailPlantActivity"
             android:exported="true" />
         <activity

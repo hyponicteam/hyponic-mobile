@@ -71,7 +71,7 @@ public class EditPlantFragment extends Fragment{
         super.onAttach(context);
     }
     private void getNamePlant() {
-        AndroidNetworking.get(BASE_URL+"plants/"+pref.getSPPlantId())
+        AndroidNetworking.get(BASE_URL+"plants/"+pref.getSpGrowthId())
                 .addHeaders("Authorization","Bearer "+pref.getSPToken())
                 .addHeaders("Accept", "application/json")
                 .setPriority(Priority.LOW)
@@ -95,7 +95,7 @@ public class EditPlantFragment extends Fragment{
                 });
     }
     public void editPlant(String name){
-        AndroidNetworking.patch(BASE_URL+"plants/"+pref.getSPPlantId())
+        AndroidNetworking.patch(BASE_URL+"plants/"+pref.getSpGrowthId())
                 .addHeaders("Authorization","Bearer "+pref.getSPToken())
                 .addHeaders("Accept", "application/json")
                 .addBodyParameter("name",name)

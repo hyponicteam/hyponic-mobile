@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@+id/ViewTanaman" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_listdet_tanaman"
+        android:id="@+id/rvlistdettanaman"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="35dp"
@@ -62,10 +62,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_listdet_tanaman" />
+        app:layout_constraintTop_toBottomOf="@+id/rvlistdettanaman" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_listtabel_tanaman"
+        android:id="@+id/rvlisttabeltanaman"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="35dp"

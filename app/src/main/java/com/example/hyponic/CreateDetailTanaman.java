@@ -40,7 +40,10 @@ public class CreateDetailTanaman extends AppCompatActivity {
         binding.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 saveDataPlant(view);
+                Intent moveIntent = new Intent(CreateDetailTanaman.this, DetailPlantActivity.class);
+                startActivity(moveIntent);
             }
         });
 
