@@ -13,14 +13,17 @@
         android:theme="@style/Theme.Hyponic"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".DetailPlantActivity"
+            android:name=".EditGrowthsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".GrowthsPlantActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main" />
         <activity
-            android:name=".CreateDetailTanaman"
+            android:name=".CreateGrowthsActivity"
             android:exported="true" />
         <activity
             android:name=".LihatArtikelActivity"

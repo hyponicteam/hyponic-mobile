@@ -4,7 +4,6 @@ import static com.example.hyponic.constant.ApiConstant.BASE_URL;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.fonts.Font;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,13 +20,10 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.example.hyponic.DetailPlantActivity;
+import com.example.hyponic.GrowthsPlantActivity;
 import com.example.hyponic.DummyData.GrowthDummyData;
-import com.example.hyponic.DummyData.PlantDummyData;
 import com.example.hyponic.R;
 import com.example.hyponic.adapter.PlantAdapter;
-import com.example.hyponic.adapter.TopHeightAdapter;
-import com.example.hyponic.adapter.TopWidthAdapter;
 import com.example.hyponic.databinding.FragmentPlantsBinding;
 import com.example.hyponic.model.Plant;
 import com.example.hyponic.model.SharedPrefManager;
@@ -319,7 +315,7 @@ public class PlantsFragment extends Fragment {
 
             @Override
             public void onViewClicked(Plant plant) {
-                Intent moveIntent = new Intent(getActivity(), DetailPlantActivity.class);
+                Intent moveIntent = new Intent(getActivity(), GrowthsPlantActivity.class);
                 startActivity(moveIntent);
             }
         });

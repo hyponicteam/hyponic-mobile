@@ -1,7 +1,6 @@
 package com.example.hyponic.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hyponic.DetailPlantActivity;
-//import com.example.hyponic.Detailplantfragment;
-import com.example.hyponic.MainActivity;
+//import com.example.hyponic.DetailGrowthsFragment;
 import com.example.hyponic.R;
-import com.example.hyponic.model.Artikel;
 import com.example.hyponic.model.Plant;
 import com.example.hyponic.model.SharedPrefManager;
-import com.example.hyponic.view.Plant.CreatePlantFragment;
 import com.example.hyponic.view.Plant.DeletePlantFragment;
 import com.example.hyponic.view.Plant.EditPlantFragment;
 import java.util.ArrayList;
