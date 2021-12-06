@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/d4dang/AndroidStudioProjects/hyponic-mobile/app/src/main/res/layout/activity_create_detail_tanaman.xml" value="0.1671195652173913" />
+        <entry key="..\:/Users/d4dang/AndroidStudioProjects/hyponic-mobile/app/src/main/res/layout/activity_edit_growths.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/d4dang/AndroidStudioProjects/hyponic-mobile/app/src/main/res/layout/activity_growths_plant.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/d4dang/AndroidStudioProjects/hyponic-mobile/app/src/main/res/layout/fragment_delete_growths.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/d4dang/AndroidStudioProjects/hyponic-mobile/app/src/main/res/layout/item_row_detailplant.xml" value="0.136" />
+        <entry key="..\:/Users/d4dang/AndroidStudioProjects/hyponic-mobile/app/src/main/res/layout/item_table_detailtanaman.xml" value="0.17028985507246377" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.15260416666666668" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.18697916666666667" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.1" />

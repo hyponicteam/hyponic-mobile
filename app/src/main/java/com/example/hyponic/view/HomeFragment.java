@@ -2,7 +2,6 @@ package com.example.hyponic.view;
 
 import static com.example.hyponic.constant.ApiConstant.BASE_URL;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,20 +20,15 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.example.hyponic.DetailPlantActivity;
-import com.example.hyponic.DummyData.PlantDummyData;
-import com.example.hyponic.LihatArtikelActivity;
+import com.example.hyponic.GrowthsPlantActivity;
 import com.example.hyponic.R;
-import com.example.hyponic.adapter.ArticleAdapter;
 import com.example.hyponic.adapter.PlantAdapter;
 import com.example.hyponic.databinding.FragmentHomeBinding;
-import com.example.hyponic.model.Artikel;
 import com.example.hyponic.model.Plant;
 import com.example.hyponic.model.SharedPrefManager;
 import com.example.hyponic.model.Time;
 import com.example.hyponic.view.Plant.CreatePlantFragment;
 import com.example.hyponic.view.Plant.EditPlantFragment;
-import com.example.hyponic.view.Profile.UserFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -167,7 +161,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
             @Override
             public void onViewClicked(Plant plant) {
-                Intent moveIntent = new Intent(getActivity(), DetailPlantActivity.class);
+                Intent moveIntent = new Intent(getActivity(), GrowthsPlantActivity.class);
                 startActivity(moveIntent);
             }
         });

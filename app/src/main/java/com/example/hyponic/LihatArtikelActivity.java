@@ -15,7 +15,6 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.bumptech.glide.Glide;
 import com.example.hyponic.R;
-import com.example.hyponic.databinding.ActivityDetailPlantBinding;
 import com.example.hyponic.databinding.ActivityLihatArtikelBinding;
 import com.example.hyponic.databinding.ActivityLoginBinding;
 import com.example.hyponic.model.SharedPrefManager;
