@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".GrowthsPlantActivity">
 
+
     <TextView
         android:id="@+id/ViewTanaman"
         android:layout_width="match_parent"
@@ -21,6 +22,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="200dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.36"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ViewTanaman"/>
+
     <TextView
         android:id="@+id/detailtanaman"
         android:layout_width="match_parent"
@@ -34,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.36"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ViewTanaman" />
+        app:layout_constraintTop_toBottomOf="@+id/lineChart" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvlistdettanaman"
@@ -68,9 +79,9 @@
         android:id="@+id/rvlisttabeltanaman"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginLeft="35dp"
+        android:layout_marginStart="35dp"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginEnd="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
@@ -88,6 +99,7 @@
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_action_add" />
+        app:srcCompat="@drawable/ic_action_add"
+        android:contentDescription="@string/description" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

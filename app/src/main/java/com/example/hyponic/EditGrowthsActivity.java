@@ -14,10 +14,8 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.hyponic.databinding.ActivityEditGrowthsBinding;
-import com.example.hyponic.model.Growths;
 import com.example.hyponic.model.SharedPrefManager;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,14 +32,18 @@ public class EditGrowthsActivity extends AppCompatActivity {
         binding = ActivityEditGrowthsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         pref = new SharedPrefManager(this);
-
         getData();
 
         binding.btnSave.setOnClickListener(view -> {
             editData();
-//            Intent moveIntent = new Intent(EditGrowthsActivity.this, GrowthsPlantActivity.class);
-//            startActivity(moveIntent);
-            finish();
+            Intent moveIntent = new Intent(EditGrowthsActivity.this, GrowthsPlantActivity.class);
+            startActivity(moveIntent);
+            //finish();
+        });
+        binding.btnCancel.setOnClickListener(v->{
+            pref.saveSPString(pref.SP_PLANT_ID,pref.getSPPlantId());
+            Intent moveIntent = new Intent(this,GrowthsPlantActivity.class);
+            startActivity(moveIntent);
         });
 
     }
@@ -92,6 +94,7 @@ public class EditGrowthsActivity extends AppCompatActivity {
                             String status = response.getJSONObject("meta").getString("status");
                             if(status.equals("success")){
                                 Toast.makeText(getApplicationContext(), "Berhasil diperbarui", Toast.LENGTH_SHORT).show();
+                                saveSPPlantID(response.getJSONObject("data").getString("plant_id"));
                             }else{
                                 Toast.makeText(getApplicationContext(), "Gagal diperbarui", Toast.LENGTH_SHORT).show();
 
@@ -105,5 +108,8 @@ public class EditGrowthsActivity extends AppCompatActivity {
                         Log.d("TAG", "onError: " + error); //untuk log pada onerror
                     }
                 });
+    }
+    public void saveSPPlantID(String id){
+        pref.saveSPString(pref.SP_PLANT_ID,id);
     }
 }

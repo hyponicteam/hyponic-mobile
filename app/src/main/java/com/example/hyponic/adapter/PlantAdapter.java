@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -51,7 +52,6 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ListViewHold
         pref = new SharedPrefManager(plantContext);
 
         holder.tvView.setOnClickListener(view -> {
-            pref.saveSPString(pref.SP_PLANT_ID,plant.getId());
             onItemClickCallback.onViewClicked(listPlant.get(holder.getAdapterPosition()));
         });
         holder.tvEdit.setOnClickListener(view -> {
@@ -79,7 +79,8 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ListViewHold
 
 
     public class ListViewHolder extends RecyclerView.ViewHolder {
-        TextView tvName, tvLastEdit, tvEdit, tvView, tvDelete;
+        TextView tvName, tvLastEdit, tvView;
+        ImageView tvEdit,tvDelete;
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.namePlant);
