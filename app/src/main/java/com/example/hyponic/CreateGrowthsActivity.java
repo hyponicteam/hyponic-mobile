@@ -48,12 +48,10 @@ public class CreateGrowthsActivity extends AppCompatActivity {
             }
         });
 
-//        binding.btnCancel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
+        binding.btnCancel.setOnClickListener(v->{
+            Intent moveIntent = new Intent(CreateGrowthsActivity.this, GrowthsPlantActivity.class);
+            startActivity(moveIntent);
+        });
     }
 
     public void saveDataPlant(View view){

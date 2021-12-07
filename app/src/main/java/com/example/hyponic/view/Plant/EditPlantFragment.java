@@ -81,11 +81,11 @@ public class EditPlantFragment extends Fragment{
                     public void onResponse(JSONObject response) {
                         try {
                             String name = response.getJSONObject("data").getString("name");
-                            binding.edNamePlat.setHint(name);
+                            binding.edNamePlat.setText(name);
                             Log.d("name",name);
                         }catch (JSONException e){
                             e.printStackTrace();
-                            binding.edNamePlat.setHint("Data tidak ditemukan");
+                            binding.edNamePlat.setText("Data tidak ditemukan");
                         }
                     }
                     @Override

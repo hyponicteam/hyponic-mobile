@@ -30,7 +30,6 @@ public class GrowthsAdapter extends RecyclerView.Adapter<GrowthsAdapter.ListView
         this.onItemClickCallback = onItemClickCallback;
     }
 
-
     public GrowthsAdapter(ArrayList<Growths> listTabel, FragmentManager fragmentManager, Context tabelContext) {
         this.listGrowths = listTabel;
         this.fragmentManager = fragmentManager;
@@ -53,11 +52,9 @@ public class GrowthsAdapter extends RecyclerView.Adapter<GrowthsAdapter.ListView
         holder.tvLebardaun.setText(growths.getLeaf_widht());
         holder.tvSuhu.setText(growths.getTemperature());
         holder.tvPhAir.setText(growths.getAcidity());
-        holder.btnEdit.setOnClickListener(view ->
-                {
-                    //pref.saveSPString(pref.SP_PLANT_ID, growths.getId());
-                    onItemClickCallback.onEditClicked(growths);
-                }
+        holder.btnEdit.setOnClickListener(view ->{
+            onItemClickCallback.onEditClicked(growths);
+        }
         );
         holder.btnDelete.setOnClickListener(view ->{
             onItemClickCallback.onDeleteClicked(growths);
