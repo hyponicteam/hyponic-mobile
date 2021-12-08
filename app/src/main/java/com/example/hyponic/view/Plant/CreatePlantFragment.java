@@ -48,9 +48,7 @@ public class CreatePlantFragment extends Fragment{
         binding.btnSave.setOnClickListener(v->{
             createPlant();
         });
-        binding.btnCancel.setOnClickListener(v->{
-            backToMainActivity();
-        });
+        binding.btnCancel.setOnClickListener(v-> backToMainActivity());
 
     }
 

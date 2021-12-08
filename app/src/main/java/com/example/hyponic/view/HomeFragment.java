@@ -58,6 +58,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         binding.username.setText("Hai "+pref.getSPNama()+",");
         showLoading(true);
         getPlantData();
+        Log.d("TOKEN USER",pref.getSPToken());
         binding.rvNLatestPlant.setHasFixedSize(true);
         //planList.addAll(PlantDummyData.getListData());tr
         //showRecyclerList(planList);

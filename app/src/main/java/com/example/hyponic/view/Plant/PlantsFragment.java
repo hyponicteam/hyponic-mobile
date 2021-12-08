@@ -84,18 +84,18 @@ public class PlantsFragment extends Fragment {
 
     private void showTopWidth(ArrayList<TopGrowth> top) {
         // Data-data yang akan ditampilkan di Chart
-        List<BarEntry> dataPemasukan = new ArrayList<BarEntry>();
+        List<BarEntry> widthData = new ArrayList<BarEntry>();
         if(top.size()!=0){
             binding.barTopWidth.setMinimumHeight(400);
             for(int i=0; i<top.size(); i++){
-                dataPemasukan.add(new BarEntry(i,(float)top.get(i).getGrowth_per_day()));
+                widthData.add(new BarEntry(i,(float)top.get(i).getGrowth_per_day()));
             }
+        }else{
+            widthData.add(new BarEntry(0,0f));
         }
 
-
-
         // Pengaturan atribut bar, seperti warna dan lain-lain
-        BarDataSet dataSet1 = new BarDataSet(dataPemasukan, "Pertumbuhan Lebar Daun "+top.get(0).getUnit());
+        BarDataSet dataSet1 = new BarDataSet(widthData, "Pertumbuhan Lebar Daun "+top.get(0).getUnit());
         dataSet1.setColor(ColorTemplate.JOYFUL_COLORS[1]);
         dataSet1.setValueTextColor(Color.BLACK);
         dataSet1.setValueTextSize(16f);
@@ -113,7 +113,7 @@ public class PlantsFragment extends Fragment {
         // Ini berfungsi untuk menghilankan koma, dan tanda ribuah pada tahun
         xAxis.setValueFormatter(new IndexAxisValueFormatter() {
             @Override
-            public String getFormattedValue(float value, AxisBase axis) {
+            public String getFormattedValue(float value) {
                 //return String.valueOf((int) value);
                 return top.get((int)value).getName();
             }
@@ -129,17 +129,19 @@ public class PlantsFragment extends Fragment {
 
     private void showTopHeight(ArrayList<TopGrowth> top) {
         // Data-data yang akan ditampilkan di Chart
-        List<BarEntry> dataPemasukan = new ArrayList<BarEntry>();
+        List<BarEntry> heightData = new ArrayList<BarEntry>();
         if(top.size()!=0){
             binding.topHeight.setMinimumHeight(400);
             for(int i=0; i<top.size(); i++){
-                dataPemasukan.add(new BarEntry(i,(float)top.get(i).getGrowth_per_day()));
+                heightData.add(new BarEntry(i,(float)top.get(i).getGrowth_per_day()));
             }
+        }else{
+            heightData.add(new BarEntry(0,0f));
         }
 
 
         // Pengaturan atribut bar, seperti warna dan lain-lain
-        BarDataSet dataSet1 = new BarDataSet(dataPemasukan, "Pertumbuhan Tinggi Tanaman "+top.get(0).getUnit());
+        BarDataSet dataSet1 = new BarDataSet(heightData, "Pertumbuhan Tinggi Tanaman "+top.get(0).getUnit());
         dataSet1.setColor(ColorTemplate.JOYFUL_COLORS[1]);
         dataSet1.setValueTextColor(Color.BLACK);
         dataSet1.setValueTextSize(16f);
@@ -157,7 +159,7 @@ public class PlantsFragment extends Fragment {
         // Ini berfungsi untuk menghilankan koma, dan tanda ribuah pada tahun
         xAxis.setValueFormatter(new IndexAxisValueFormatter() {
             @Override
-            public String getFormattedValue(float value, AxisBase axis) {
+            public String getFormattedValue(float value) {
                 //return String.valueOf((int) value);
                 return top.get((int)value).getName();
             }
@@ -259,7 +261,8 @@ public class PlantsFragment extends Fragment {
                     @Override
                     public void onError(ANError error) {
                         showLoading(false);
-                        Log.d("TOP HEIGHT", "onError: " + error); //untuk log pada onerror
+                        Log.d("TOP HEIGHT", "onError: " + error.getErrorBody()); //untuk log pada onerror
+                        showTopHeight(topHeightgrowths);
                     }
                 });
     }
@@ -300,6 +303,7 @@ public class PlantsFragment extends Fragment {
                     public void onError(ANError error) {
                         showLoading(false);
                         Log.d("TOP WIDTH", "onError: " + error); //untuk log pada onerror
+                        showTopHeight(topWidth);
                     }
                 });
     }

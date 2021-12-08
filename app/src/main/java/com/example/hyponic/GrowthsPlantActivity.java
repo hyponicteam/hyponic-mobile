@@ -17,6 +17,7 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.hyponic.adapter.GrowthsAdapter;
 import com.example.hyponic.databinding.ActivityGrowthsPlantBinding;
+import com.example.hyponic.model.DateFormatter;
 import com.example.hyponic.model.SharedPrefManager;
 import com.example.hyponic.model.Growths;
 import com.github.mikephil.charting.charts.LineChart;
@@ -25,6 +26,7 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -72,66 +74,54 @@ public class GrowthsPlantActivity extends AppCompatActivity {
 //                startActivity(moveIntent);
 //            }
 //        });
-        showGrafik();
+        //showGrafik();
     }
 
-    private void showGrafik() {
-        ArrayList<Entry> kasus = new ArrayList<>();
-        kasus.add(new Entry(0F, 149F));
-        kasus.add(new Entry(1F, 113F));
-        kasus.add(new Entry(2F, 196F));
-        kasus.add(new Entry(3F, 106F));
-        kasus.add(new Entry(4F, 181F));
-        kasus.add(new Entry(5F, 218F));
-        kasus.add(new Entry(6F, 247F));
-        kasus.add(new Entry(7F, 218F));
-        kasus.add(new Entry(8F, 337F));
-        kasus.add(new Entry(9F, 219F));
+    private void showGrafik(ArrayList<Growths> grow) {
+        ArrayList<Entry> leaf_width = new ArrayList<>();
+        ArrayList<Entry> height_plant = new ArrayList<>();
+        ArrayList<Entry> phAir = new ArrayList<>();
+        ArrayList<Entry> temperature = new ArrayList<>();
 
-        ArrayList<Entry> sembuh = new ArrayList<>();
-        sembuh.add(new Entry(0F, 22F));
-        sembuh.add(new Entry(1F, 9F));
-        sembuh.add(new Entry(2F, 22F));
-        sembuh.add(new Entry(3F, 16F));
-        sembuh.add(new Entry(4F, 14F));
-        sembuh.add(new Entry(5F, 28F));
-        sembuh.add(new Entry(6F, 12F));
-        sembuh.add(new Entry(7F, 18F));
-        sembuh.add(new Entry(8F, 30F));
-        sembuh.add(new Entry(9F, 30F));
+        if(grow.size()!=0){
+            for(int i =0; i<grow.size(); i++){
+                leaf_width.add(new Entry(i, (float)grow.get(i).getLeaf_widht()));
+                height_plant.add(new Entry(i,(float)grow.get(i).getPlant_height()));
+                phAir.add(new Entry(i,(float)grow.get(i).getAcidity()));
+                temperature.add(new Entry(i,(float)grow.get(i).getTemperature()));
+            }
+        }else{
+            leaf_width.add(new Entry(0, 0f));
+            height_plant.add(new Entry(0,0f));
+            phAir.add(new Entry(0,0f));
+            temperature.add(new Entry(0,0f));
+        }
 
-        ArrayList<Entry> meninggal = new ArrayList<Entry>();
-        meninggal.add(new Entry(0F, 21F));
-        meninggal.add(new Entry(1F, 13F));
-        meninggal.add(new Entry(2F, 11F));
-        meninggal.add(new Entry(3F, 10F));
-        meninggal.add(new Entry(4F, 7F));
-        meninggal.add(new Entry(5F, 11F));
-        meninggal.add(new Entry(6F, 12F));
-        meninggal.add(new Entry(7F, 19F));
-        meninggal.add(new Entry(8F, 40F));
-        meninggal.add(new Entry(9F, 26F));
+        LineDataSet leafWidthLineDataSet = new LineDataSet(leaf_width, "Lebar Daun");
+        leafWidthLineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        leafWidthLineDataSet.setColor(Color.GREEN);
+        leafWidthLineDataSet.setCircleRadius(5f);
+        leafWidthLineDataSet.setCircleColor(Color.GREEN);
 
-        LineDataSet kasusLineDataSet = new LineDataSet(kasus, "Suhu");
-        kasusLineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-        kasusLineDataSet.setColor(Color.BLUE);
-        kasusLineDataSet.setCircleRadius(5f);
-        kasusLineDataSet.setCircleColor(Color.BLUE);
+        LineDataSet heightPlantLineDataSet = new LineDataSet(height_plant, "Tinggi Tanaman");
+        heightPlantLineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        heightPlantLineDataSet.setColor(Color.GRAY);
+        heightPlantLineDataSet.setCircleRadius(5f);
+        heightPlantLineDataSet.setCircleColor(Color.GRAY);
 
-        LineDataSet sembuhLineDataSet = new LineDataSet(sembuh, "Tinggi Tanaman");
-        sembuhLineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-        sembuhLineDataSet.setColor(Color.GREEN);
-        sembuhLineDataSet.setCircleRadius(5f);
-        sembuhLineDataSet.setCircleColor(Color.GREEN);
+        LineDataSet AcidityLineDataSet = new LineDataSet(phAir, "PH Air");
+        AcidityLineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        AcidityLineDataSet.setColor(Color.BLUE);
+        AcidityLineDataSet.setCircleRadius(5f);
+        AcidityLineDataSet.setCircleColor(Color.BLUE);
 
-        LineDataSet meninggalLineDataSet = new LineDataSet(meninggal, "Lebar Daun");
-        meninggalLineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-        meninggalLineDataSet.setColor(Color.RED);
-        meninggalLineDataSet.setCircleRadius(5f);
-        meninggalLineDataSet.setCircleColor(Color.RED);
+        LineDataSet TemperatureLineDataSet = new LineDataSet(temperature, "Suhu");
+        TemperatureLineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        TemperatureLineDataSet.setColor(Color.RED);
+        TemperatureLineDataSet.setCircleRadius(5f);
+        TemperatureLineDataSet.setCircleColor(Color.RED);
 
         //Setup Legend
-        Legend legend =binding.lineChart.getLegend();
         binding.lineChart.getLegend().setEnabled(true);
         binding.lineChart.getLegend().setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
         binding.lineChart.getLegend().setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
@@ -140,7 +130,15 @@ public class GrowthsPlantActivity extends AppCompatActivity {
 
         binding.lineChart.getDescription().setEnabled(false);
         binding.lineChart.getXAxis().setPosition( XAxis.XAxisPosition.BOTTOM);
-        binding.lineChart.setData(new LineData(kasusLineDataSet, sembuhLineDataSet, meninggalLineDataSet));
+//        binding.lineChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(){
+//            @Override
+//            public String getFormattedValue(float value) {
+//                //return String.valueOf((int) value);
+//                DateFormatter date = new DateFormatter(grow.get((int)value).getDate());
+//                return date.getDate();
+//            }
+//        });
+        binding.lineChart.setData(new LineData(leafWidthLineDataSet, heightPlantLineDataSet,AcidityLineDataSet,TemperatureLineDataSet));
         binding.lineChart.animateXY(100,500);
 
     }
@@ -166,15 +164,16 @@ public class GrowthsPlantActivity extends AppCompatActivity {
                                 Log.d("GROW","ke -"+i+" : "+data.getJSONObject(i));
                                 Growths tabellist = new Growths(
                                         jsontabelList.getString("id"),
-                                        jsontabelList.getString("plant_height"),
-                                        jsontabelList.getString("leaf_width"),
-                                        jsontabelList.getString("temperature"),
-                                        jsontabelList.getString("acidity"),
+                                        jsontabelList.getDouble("plant_height"),
+                                        jsontabelList.getDouble("leaf_width"),
+                                        jsontabelList.getDouble("temperature"),
+                                        jsontabelList.getDouble("acidity"),
                                         jsontabelList.getString("created_at"));
                                 growths.add(tabellist);
                             }
                             Log.d("SIZEGROW: ",""+growths.size());
                             showTabelList(growths);
+                            showGrafik(growths);
 
                         }catch (JSONException e){
                             e.printStackTrace();
@@ -204,15 +203,16 @@ public class GrowthsPlantActivity extends AppCompatActivity {
                                 JSONObject jsontabelList = data.getJSONObject(i);
                                 Log.d("TAG","ke -"+i+" : "+data.getJSONObject(i));
                                 Growths growthslist = new Growths(jsontabelList.getString("id"),
-                                        jsontabelList.getString("plant_height"),
-                                        jsontabelList.getString("leaf_width"),
-                                        jsontabelList.getString("temperature"),
-                                        jsontabelList.getString("acidity"),
+                                        jsontabelList.getDouble("plant_height"),
+                                        jsontabelList.getDouble("leaf_width"),
+                                        jsontabelList.getDouble("temperature"),
+                                        jsontabelList.getDouble("acidity"),
                                         jsontabelList.getString("created_at"));
                                 growths.add(growthslist);
                             }
                             Log.d("SIZE: ",""+growths.size());
                             showTabelList(growths);
+
 
                         }catch (JSONException e){
                             e.printStackTrace();
