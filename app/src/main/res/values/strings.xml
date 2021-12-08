@@ -77,5 +77,7 @@
     <string name="article_subheading">Artikel utuk membantu anda</string>
     <string name="description1">deskripsi logo</string>
     <string name="edited_by">Oleh</string>
+    <string name="grafik_pertumbuhan">Grafik Pertumbuhan</string>
+    <string name="notFound">Tidak ada data</string>
 
 </resources>

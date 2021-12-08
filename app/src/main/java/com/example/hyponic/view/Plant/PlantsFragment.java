@@ -29,12 +29,10 @@ import com.example.hyponic.model.Plant;
 import com.example.hyponic.model.SharedPrefManager;
 import com.example.hyponic.model.Time;
 import com.example.hyponic.model.TopGrowth;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
@@ -298,6 +296,7 @@ public class PlantsFragment extends Fragment {
                             Log.d("SIZE: ",""+topWidth.size());
                             showTopWidth(topWidth);
 
+
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
@@ -305,14 +304,15 @@ public class PlantsFragment extends Fragment {
                     @Override
                     public void onError(ANError error) {
                         showLoading(false);
-                        Log.d("TOP WIDTH", "onError: " + error); //untuk log pada onerror
-                        //showTopHeight(topWidth);
+                        Log.d("TOP HEIGHT", "onError: " + error.getErrorBody()); //untuk log pada onerror
                         binding.barTopWidth.setVisibility(View.GONE);
-                        binding.notFoundTopWidth.setText("Butuh minimal 2 data perkembangan per tanaman untuk mendapatkan insight pertumbuhan!");
-                        binding.cardNotFoundTopWidth.setVisibility(View.VISIBLE);
+                        binding.notFoundTopWeight.setText("Butuh minimal 2 data perkembangan per tanaman untuk mendapatkan insight pertumbuhan!");
+                        binding.cardNotFoundTopWeight.setVisibility(View.VISIBLE);
+
                     }
                 });
     }
+
     private void showLoading(Boolean isLoading) {
         if (isLoading) {
             binding.progressBar.setVisibility(View.VISIBLE);

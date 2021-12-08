@@ -44,7 +44,7 @@ public class EditUserFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         pref= new SharedPrefManager(getContext());
-        binding.edName.setHint(pref.getSPNama());
+        binding.edName.setText(pref.getSPNama());
 
         binding.btnCancel.setOnClickListener(v-> backToUserFragment());
         binding.btnSave.setOnClickListener(v-> save());
@@ -56,7 +56,7 @@ public class EditUserFragment extends Fragment {
             pref.saveSPString(pref.SP_NAMA,binding.edName.getText().toString());
             backToUserFragment();
         }else{
-            binding.edName.setError("Nama tidak boleh kosong");
+            binding.inputLayoutName.setError("Nama tidak boleh kosong");
         }
     }
     private void saveApi() {

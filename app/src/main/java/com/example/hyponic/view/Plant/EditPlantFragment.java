@@ -51,8 +51,11 @@ public class EditPlantFragment extends Fragment{
         binding.btnSave.setOnClickListener(v->{
             if(!binding.edNamePlat.getText().toString().equals("")){
                 editPlant(binding.edNamePlat.getText().toString());
+                backToMainActivity();
+            }else{
+                binding.inputLayout.setError("Nama tanaman tidak boleh kosong");
             }
-            backToMainActivity();
+
         });
         binding.btnCancel.setOnClickListener(v->{
             backToMainActivity();

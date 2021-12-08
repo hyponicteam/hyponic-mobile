@@ -160,7 +160,8 @@ public class GrowthsPlantActivity extends AppCompatActivity {
                         try {
                             Log.d("growths", "respon: " + response.getJSONObject("data").getJSONArray("growths"));
                             JSONArray data = response.getJSONObject("data").getJSONArray("growths");
-                            binding.namePlant.setText(response.getJSONObject("data").getString("name"));
+                            String namePlant = response.getJSONObject("data").getString("name");
+                            binding.namePlant.setText(namePlant.toUpperCase());
                             for(int i=0; i<data.length(); i++){
                                 JSONObject jsontabelList = data.getJSONObject(i);
                                 Log.d("GROW","ke -"+i+" : "+data.getJSONObject(i));
