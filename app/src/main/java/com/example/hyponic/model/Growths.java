@@ -5,17 +5,17 @@ import javax.xml.transform.sax.SAXResult;
 public class Growths {
 
     private String id;
-    private String plant_height;
-    private String leaf_widht;
-    private String temperature;
-    private String acidity;
+    private double plant_height;
+    private double leaf_widht;
+    private double temperature;
+    private double acidity;
 
 
 
     private String date;
     private Time time;
 
-    public Growths(String id, String plant_height, String leaf_widht, String temperature, String acidity, String date) {
+    public Growths(String id, double plant_height, double leaf_widht, double temperature, double acidity, String date) {
         this.id = id;
         this.plant_height = plant_height;
         this.leaf_widht = leaf_widht;
@@ -44,35 +44,35 @@ public class Growths {
         this.id = id;
     }
 
-    public String getPlant_height() {
+    public double getPlant_height() {
         return plant_height;
     }
 
-    public void setPlant_height(String plant_height) {
+    public void setPlant_height(double plant_height) {
         this.plant_height = plant_height;
     }
 
-    public String getLeaf_widht() {
+    public double getLeaf_widht() {
         return leaf_widht;
     }
 
-    public void setLeaf_widht(String leaf_widht) {
+    public void setLeaf_widht(double leaf_widht) {
         this.leaf_widht = leaf_widht;
     }
 
-    public String getTemperature() {
+    public double getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(String temperature) {
+    public void setTemperature(double temperature) {
         this.temperature = temperature;
     }
 
-    public String getAcidity() {
+    public double getAcidity() {
         return acidity;
     }
 
-    public void setAcidity(String acidity) {
+    public void setAcidity(double acidity) {
         this.acidity = acidity;
     }
 
