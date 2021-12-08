@@ -4,46 +4,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GrowthsPlantActivity">
+    tools:context=".GrowthsPlantActivity"
+    android:padding="16dp">
 
 
     <TextView
-        android:id="@+id/ViewTanaman"
+        android:id="@+id/namePlant"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="40dp"
         android:textColor="@color/black"
         android:textSize="25sp"
+        android:fontFamily="@font/poppins_medium"
         android:text="Nama Tanaman"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlHardcoded" />
 
     <TextView
         android:id="@+id/textGrafik"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="35dp"
-        android:text="@string/terakhir"
+        android:text="@string/grafik_pertumbuhan"
         android:textColor="@color/hyponicLogo"
         android:fontFamily="@font/poppins_bold"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/ViewTanaman"/>
+        app:layout_constraintTop_toBottomOf="@+id/namePlant"/>
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/lineChart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="200dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.36"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,10 +49,8 @@
         android:id="@+id/detailtanaman"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
-        android:text="Pertumbuhan Tanaman"
+        android:layout_marginTop="16dp"
+        android:text="Insight Tanaman"
         android:textSize="16sp"
         android:textColor="@color/hyponicLogo"
         android:fontFamily="@font/poppins_bold"
@@ -69,9 +63,7 @@
         android:id="@+id/rvlistdettanaman"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.228"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,13 +73,11 @@
         android:id="@+id/insighttanaman"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="Insight Tanamanku"
+        android:layout_marginTop="16dp"
+        android:text="Pertumbuhan Tanaman"
         android:textSize="16sp"
         android:textColor="@color/hyponicLogo"
         android:fontFamily="@font/poppins_bold"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,15 +88,52 @@
         android:id="@+id/rvlisttabeltanaman"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/insighttanaman"
         app:layout_constraintVertical_bias="0.025" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardNotFoundGrowth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="4dp"
+        app:cardMaxElevation="4dp"
+        app:cardBackgroundColor="@color/pitch"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/insighttanaman">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+            <TextView
+                android:id="@+id/warning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="  Perhatian"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/yellow"
+                app:drawableLeftCompat="@drawable/ic_baseline_info_24" />
+            <TextView
+                android:id="@+id/notFoundGrowth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/notFound"
+                android:layout_marginStart="24dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

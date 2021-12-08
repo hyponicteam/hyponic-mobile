@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -159,6 +160,7 @@ public class GrowthsPlantActivity extends AppCompatActivity {
                         try {
                             Log.d("growths", "respon: " + response.getJSONObject("data").getJSONArray("growths"));
                             JSONArray data = response.getJSONObject("data").getJSONArray("growths");
+                            binding.namePlant.setText(response.getJSONObject("data").getString("name"));
                             for(int i=0; i<data.length(); i++){
                                 JSONObject jsontabelList = data.getJSONObject(i);
                                 Log.d("GROW","ke -"+i+" : "+data.getJSONObject(i));

@@ -46,7 +46,11 @@ public class CreatePlantFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
         pref = new SharedPrefManager(getContext());
         binding.btnSave.setOnClickListener(v->{
-            createPlant();
+            if(!binding.edNamePlat.getText().toString().equals("")){
+                createPlant();
+            }else{
+                binding.inputLayout.setError("Nama tanaman tidak boleh kosong");
+            }
         });
         binding.btnCancel.setOnClickListener(v-> backToMainActivity());
 
