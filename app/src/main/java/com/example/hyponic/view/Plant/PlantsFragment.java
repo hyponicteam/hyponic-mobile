@@ -262,7 +262,10 @@ public class PlantsFragment extends Fragment {
                     public void onError(ANError error) {
                         showLoading(false);
                         Log.d("TOP HEIGHT", "onError: " + error.getErrorBody()); //untuk log pada onerror
-                        showTopHeight(topHeightgrowths);
+                        binding.topHeight.setVisibility(View.GONE);
+                        binding.notFoundTopHeight.setText("Butuh minimal 2 data perkembangan per tanaman untuk mendapatkan insight pertumbuhan!");
+                        binding.cardNotFoundTopHeight.setVisibility(View.VISIBLE);
+
                     }
                 });
     }
@@ -303,7 +306,10 @@ public class PlantsFragment extends Fragment {
                     public void onError(ANError error) {
                         showLoading(false);
                         Log.d("TOP WIDTH", "onError: " + error); //untuk log pada onerror
-                        showTopHeight(topWidth);
+                        //showTopHeight(topWidth);
+                        binding.barTopWidth.setVisibility(View.GONE);
+                        binding.notFoundTopWidth.setText("Butuh minimal 2 data perkembangan per tanaman untuk mendapatkan insight pertumbuhan!");
+                        binding.cardNotFoundTopWidth.setVisibility(View.VISIBLE);
                     }
                 });
     }
