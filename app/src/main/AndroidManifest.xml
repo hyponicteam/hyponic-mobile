@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.hyponic">
+    package="com.penshyponic.hyponic">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -13,26 +13,26 @@
         android:theme="@style/Theme.Hyponic"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".EditGrowthsActivity"
+            android:name="com.penshyponic.hyponic.EditGrowthsActivity"
             android:exported="true" />
         <activity
-            android:name=".GrowthsPlantActivity"
+            android:name="com.penshyponic.hyponic.GrowthsPlantActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.penshyponic.hyponic.MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main" />
         <activity
-            android:name=".CreateGrowthsActivity"
+            android:name="com.penshyponic.hyponic.CreateGrowthsActivity"
             android:exported="true" />
         <activity
-            android:name=".LihatArtikelActivity"
+            android:name="com.penshyponic.hyponic.LihatArtikelActivity"
             android:exported="true" />
         <activity
-            android:name=".RegisterActivity"
+            android:name="com.penshyponic.hyponic.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name=".LoginActivity"
+            android:name="com.penshyponic.hyponic.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
