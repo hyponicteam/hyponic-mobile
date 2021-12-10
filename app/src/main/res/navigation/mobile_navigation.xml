@@ -8,23 +8,19 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.penshyponic.hyponic.view.HomeFragment"
-        android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_plants"
         android:name="com.penshyponic.hyponic.view.Plant.PlantsFragment"
-        android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_plants" />
     <fragment
         android:id="@+id/navigation_article"
         android:name="com.penshyponic.hyponic.view.Tutorial.HomeTutorialFragment"
-        android:label="@string/tutorial"
         tools:layout="@layout/fragment_home_tutorial" />
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.penshyponic.hyponic.view.Profile.UserFragment"
-        android:label="@string/title_notifications"
         tools:layout="@layout/fragment_user" />
 
 </navigation>

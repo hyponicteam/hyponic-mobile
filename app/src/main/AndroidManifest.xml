@@ -14,20 +14,27 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name="com.penshyponic.hyponic.EditGrowthsActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".GrowthsPlantActivity"
+            android:label=" "/>
         <activity
             android:name="com.penshyponic.hyponic.GrowthsPlantActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".MainActivity"
+            android:label=" "/>
         <activity
             android:name="com.penshyponic.hyponic.MainActivity"
             android:exported="true"
-            android:label="@string/title_activity_main" />
+            android:label=" " />
         <activity
             android:name="com.penshyponic.hyponic.CreateGrowthsActivity"
-            android:exported="true" />
+            android:parentActivityName=".GrowthsPlantActivity"
+            android:exported="true"
+            android:label=" "/>
         <activity
             android:name="com.penshyponic.hyponic.LihatArtikelActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:label=" "/>
         <activity
             android:name="com.penshyponic.hyponic.RegisterActivity"
             android:exported="true" />

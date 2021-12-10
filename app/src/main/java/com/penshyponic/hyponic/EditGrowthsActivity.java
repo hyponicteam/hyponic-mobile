@@ -33,7 +33,9 @@ public class EditGrowthsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         pref = new SharedPrefManager(this);
         getData();
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.logo);
         binding.btnSave.setOnClickListener(view -> {
             editData();
             Intent moveIntent = new Intent(EditGrowthsActivity.this, GrowthsPlantActivity.class);

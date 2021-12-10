@@ -13,9 +13,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.bumptech.glide.Glide;
-import com.penshyponic.hyponic.R;
 import com.penshyponic.hyponic.databinding.ActivityLihatArtikelBinding;
-import com.penshyponic.hyponic.databinding.ActivityLoginBinding;
 import com.penshyponic.hyponic.model.SharedPrefManager;
 
 import org.json.JSONException;
@@ -30,6 +28,10 @@ public class LihatArtikelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLihatArtikelBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.logo);
+
         pref = new SharedPrefManager(this);
         Log.d("PLANT ID",pref.getSPPlantId());
         //pref= new SharedPrefManager(this);

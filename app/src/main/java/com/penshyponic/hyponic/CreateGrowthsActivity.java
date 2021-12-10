@@ -35,7 +35,9 @@ public class CreateGrowthsActivity extends AppCompatActivity {
         binding = ActivityCreateGrowthsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         pref = new SharedPrefManager(this);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.logo);
         binding.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

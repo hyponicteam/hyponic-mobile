@@ -44,7 +44,9 @@ public class GrowthsPlantActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityGrowthsPlantBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.logo);
         //private ArrayList<DetailPlant> detailPlantList = new ArrayList<>();
 
         pref = new SharedPrefManager(this);

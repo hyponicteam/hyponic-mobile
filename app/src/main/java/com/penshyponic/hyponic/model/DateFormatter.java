@@ -4,15 +4,15 @@ public class DateFormatter {
     private String date;
     private String month;
     private String year;
-    private String dd_mm;
+    private String after_separated;
 
-    public DateFormatter(String data){
-        int indexSpasi = data.indexOf(" ");
-        String dd_mm_yy = data.substring(0,indexSpasi);
+    public DateFormatter(String data, Character separated){
+        int indexSeparated = data.indexOf(separated);
+        String dd_mm_yy = data.substring(0,indexSeparated);
         setYear(dd_mm_yy.substring(0,4));
         setMonth(dd_mm_yy.substring(6,7));
         setDate(dd_mm_yy);
-        setDd_mm(getDate()+"-"+getMonth());
+        setAfter_separated(getDate());
     }
     public String getDate() {
         return date;
@@ -63,11 +63,11 @@ public class DateFormatter {
         this.year = year;
     }
 
-    public String getDd_mm() {
-        return dd_mm;
+    public String getAfter_separated() {
+        return after_separated;
     }
 
-    public void setDd_mm(String dd_mm) {
-        this.dd_mm = dd_mm;
+    public void setAfter_separated(String after_separated) {
+        this.after_separated = after_separated;
     }
 }

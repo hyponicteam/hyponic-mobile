@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import com.penshyponic.hyponic.LoginActivity;
 import com.penshyponic.hyponic.R;
 import com.penshyponic.hyponic.databinding.FragmentUserBinding;
+import com.penshyponic.hyponic.model.DateFormatter;
 import com.penshyponic.hyponic.model.SharedPrefManager;
 
 public class UserFragment extends Fragment {
@@ -36,14 +37,23 @@ public class UserFragment extends Fragment {
 
         binding.username.setText(pref.getSPNama());
         binding.email.setText(pref.getSPEmail());
-        binding.createdAt.setText(pref.getSP_Created_At());
-        binding.updatedAt.setText(pref.getSP_Edited_At());
+
+        binding.createdAt.setText(getDate(pref.getSP_Created_At()));
+        binding.updatedAt.setText(getDate(pref.getSP_Edited_At()));
         binding.editUser.setOnClickListener(view1 -> {
             toEditUserFragment();
         });
         binding.logout.setOnClickListener(v->{
             logOut();
         });
+    }
+
+    private String getDate(String sp_created_at) {
+        DateFormatter formatter = new DateFormatter(sp_created_at,'T');
+        String date = formatter.getAfter_separated();
+        int indexT = sp_created_at.indexOf('T')+1;
+        String time = sp_created_at.substring(indexT,sp_created_at.indexOf('.'));
+        return date+"   "+time;
     }
 
     private void logOut() {
