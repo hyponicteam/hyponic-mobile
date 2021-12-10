@@ -25,6 +25,7 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.penshyponic.hyponic.model.TopGrowth;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 public class GrowthsPlantActivity extends AppCompatActivity {
 
     private ArrayList<Growths> growths = new ArrayList<>();
+    private ArrayList<TopGrowth> height = new ArrayList<>();
     private ActivityGrowthsPlantBinding binding;
     SharedPrefManager pref;
 
@@ -51,6 +53,9 @@ public class GrowthsPlantActivity extends AppCompatActivity {
         pref = new SharedPrefManager(this);
         binding.rvlisttabeltanaman.setHasFixedSize(true);
         getGrowth();
+        getTopHeigh();
+        getTopWidth();
+        Log.d("SIZE HEIGHT GLOBAL ",String.valueOf(this.height.size()));
 
         binding.btnAddPlant.setOnClickListener(view ->
                 {
@@ -60,19 +65,100 @@ public class GrowthsPlantActivity extends AppCompatActivity {
 
         );
 
-
         //getTabelGrowth();
-
-//        binding..setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent moveIntent = new Intent(DetailPlantActivity.this, CreateGrowthsActivity.class);
-//                startActivity(moveIntent);
-//            }
-//        });
-        //showGrafik();
     }
 
+    private void getTopHeigh() {
+        Log.d("TOKEN TOP HEIGHT", "respon: " + pref.getSPToken());
+        ArrayList<TopGrowth> topHeightgrowths = new ArrayList<>();
+        AndroidNetworking.get(BASE_URL+"top-growths?category=plant_height&n=3&plant_id="+pref.getSPPlantId())
+                .addHeaders("Authorization","Bearer "+pref.getSPToken())
+                .addHeaders("Accept", "application/json")
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener(){
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("TOP HEIGHT GROW", "respon: " + response);
+                        try {
+
+                            JSONArray data = response.getJSONArray("data");
+                            for(int i=0; i<data.length(); i++){
+                                JSONObject jsonGrowth = data.getJSONObject(i);
+                                Log.d("TAG","ke -"+i+" : "+data.getJSONObject(i));
+
+                                TopGrowth growth = new TopGrowth();
+                                growth.setGrowth_per_day(jsonGrowth.getJSONObject("growth").getDouble("growth_per_day"));
+                                growth.setUnit(jsonGrowth.getJSONObject("growth").getString("unit"));
+                                topHeightgrowths.add(growth);
+                            }
+                            Log.d("SIZE: ",""+topHeightgrowths.size());
+                            if(topHeightgrowths.size()==0){
+                                binding.notFoundGrowthIsight.setText("Butuh minimal 2 data perkembangan per tanaman untuk mendapatkan insight pertumbuhan!");
+                                binding.cardNotFoundGrowthIsight.setVisibility(View.VISIBLE);
+                            }
+                            height=topHeightgrowths;
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        Log.d("TOP HEIGHT GROW", "onError: " + error.getErrorBody()); //untuk log pada onerror
+                        //binding..setVisibility(View.GONE);
+                        binding.notFoundGrowthIsight.setText("Butuh minimal 2 data perkembangan per tanaman untuk mendapatkan insight pertumbuhan!");
+                        binding.cardNotFoundGrowthIsight.setVisibility(View.VISIBLE);
+                    }
+                });
+    }
+
+    private void getTopWidth() {
+        Log.d("TOKEN TOP WIDTH", "respon: " + pref.getSPToken());
+        ArrayList<TopGrowth> topWidthGrow = new ArrayList<>();
+        AndroidNetworking.get(BASE_URL+"top-growths?category=leaf_width&n=3&plant_id="+pref.getSPPlantId())
+                .addHeaders("Authorization","Bearer "+pref.getSPToken())
+                .addHeaders("Accept", "application/json")
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener(){
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("TOP WIDTH GROW", "respon: " + response);
+                        try {
+
+                            JSONArray data = response.getJSONArray("data");
+                            for(int i=0; i<data.length(); i++){
+                                JSONObject jsonGrowth = data.getJSONObject(i);
+                                Log.d("TAG","ke -"+i+" : "+data.getJSONObject(i));
+
+                                TopGrowth growth = new TopGrowth();
+                                growth.setGrowth_per_day(jsonGrowth.getJSONObject("growth").getDouble("growth_per_day"));
+                                growth.setUnit(jsonGrowth.getJSONObject("growth").getString("unit"));
+                                topWidthGrow.add(growth);
+                            }
+                            Log.d("SIZE: ",""+topWidthGrow.size());
+                            if(topWidthGrow.size()==0){
+                                binding.notFoundGrowthIsight.setText("Butuh minimal 2 data perkembangan per tanaman untuk mendapatkan insight pertumbuhan!");
+                                binding.cardNotFoundGrowthIsight.setVisibility(View.VISIBLE);
+                            }
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        Log.d("TOP WIDTH GROW", "onError: " + error.getErrorBody()); //untuk log pada onerror
+                        //binding..setVisibility(View.GONE);
+                        binding.notFoundGrowthIsight.setText("Butuh minimal 2 data perkembangan per tanaman untuk mendapatkan insight pertumbuhan!");
+                        binding.cardNotFoundGrowthIsight.setVisibility(View.VISIBLE);
+                    }
+                });
+    }
+    public void getHeightData(ArrayList<TopGrowth> height){
+        this.height=height;
+    }
     private void showGrafik(ArrayList<Growths> grow) {
         ArrayList<Entry> leaf_width = new ArrayList<>();
         ArrayList<Entry> height_plant = new ArrayList<>();
