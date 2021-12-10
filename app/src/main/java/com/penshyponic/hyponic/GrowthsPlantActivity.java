@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -39,15 +40,13 @@ public class GrowthsPlantActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         binding = ActivityGrowthsPlantBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.logo);
-        //private ArrayList<DetailPlant> detailPlantList = new ArrayList<>();
 
         pref = new SharedPrefManager(this);
         binding.rvlisttabeltanaman.setHasFixedSize(true);
@@ -171,8 +170,13 @@ public class GrowthsPlantActivity extends AppCompatActivity {
                                 growths.add(tabellist);
                             }
                             Log.d("SIZEGROW: ",""+growths.size());
-                            showTabelList(growths);
                             showGrafik(growths);
+                            if(growths.size()==0){
+                                binding.rvlisttabeltanaman.setVisibility(View.GONE);
+                                binding.cardNotFoundGrowth.setVisibility(View.VISIBLE);
+                            }else{
+                                showTabelList(growths);
+                            }
 
                         }catch (JSONException e){
                             e.printStackTrace();
@@ -180,7 +184,9 @@ public class GrowthsPlantActivity extends AppCompatActivity {
                     }
                     @Override
                     public void onError(ANError error) {
-                        Log.d("TAG", "onError: " + error); //untuk log pada onerror
+                        Log.d("TAG", "onError: " + error.getErrorBody()); //untuk log pada onerror
+                        binding.rvlisttabeltanaman.setVisibility(View.GONE);
+                        binding.cardNotFoundGrowth.setVisibility(View.VISIBLE);
                     }
                 });
     }
