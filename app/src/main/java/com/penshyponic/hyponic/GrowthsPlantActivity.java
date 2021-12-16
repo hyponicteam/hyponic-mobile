@@ -1,6 +1,7 @@
 package com.penshyponic.hyponic;
 
 import static com.penshyponic.hyponic.constant.ApiConstant.BASE_URL;
+import static com.penshyponic.hyponic.model.CreateGrowthHistory.history;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -11,13 +12,20 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.penshyponic.hyponic.adapter.GrowthsAdapter;
 import com.penshyponic.hyponic.databinding.ActivityGrowthsPlantBinding;
+import com.penshyponic.hyponic.model.GrowthHistory;
 import com.penshyponic.hyponic.model.SharedPrefManager;
 import com.penshyponic.hyponic.model.Growths;
 import com.github.mikephil.charting.components.Legend;
@@ -25,16 +33,20 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.penshyponic.hyponic.model.TopGrowth;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class GrowthsPlantActivity extends AppCompatActivity {
 
     private ArrayList<Growths> growths = new ArrayList<>();
+    private ArrayList<TopGrowth> height = new ArrayList<>();
     private ActivityGrowthsPlantBinding binding;
     SharedPrefManager pref;
 
@@ -51,28 +63,167 @@ public class GrowthsPlantActivity extends AppCompatActivity {
         pref = new SharedPrefManager(this);
         binding.rvlisttabeltanaman.setHasFixedSize(true);
         getGrowth();
+        getTopHeigh();
+        getTopWidth();
+        Log.d("SIZE HEIGHT GLOBAL ",String.valueOf(this.height.size()));
 
         binding.btnAddPlant.setOnClickListener(view ->
                 {
-                    Intent moveIntent = new Intent(this, CreateGrowthsActivity.class);
-                    startActivity(moveIntent);
+                    Calendar calendar = Calendar.getInstance();
+                    String nowDate = calendar.get(Calendar.YEAR)+"-"+calendar.get(Calendar.MONTH)+"-"+calendar.get(Calendar.DATE);
+                    boolean flag =false;
+                    for(int i=0; i<history.size(); i++){
+                        GrowthHistory histo = history.get(i);
+                        if(histo.getPlantId().equals(pref.getSPPlantId()) && histo.getTimeCreated().equals(nowDate)){
+                            flag=true;
+                        }
+                    }
+                    if(flag){
+                        Toast.makeText(getApplicationContext(), "Maaf anda dapat menginputkan data lagi esok hari", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Intent moveIntent = new Intent(this, CreateGrowthsActivity.class);
+                        startActivity(moveIntent);
+                    }
                 }
 
         );
 
-
         //getTabelGrowth();
-
-//        binding..setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent moveIntent = new Intent(DetailPlantActivity.this, CreateGrowthsActivity.class);
-//                startActivity(moveIntent);
-//            }
-//        });
-        //showGrafik();
     }
 
+    private void getTopHeigh() {
+        Log.d("TOKEN TOP HEIGHT", "respon: " + pref.getSPToken());
+        ArrayList<TopGrowth> topHeightgrowths = new ArrayList<>();
+        AndroidNetworking.get(BASE_URL+"top-growths?category=plant_height&n=3&plant_id="+pref.getSPPlantId())
+                .addHeaders("Authorization","Bearer "+pref.getSPToken())
+                .addHeaders("Accept", "application/json")
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener(){
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("TOP HEIGHT GROW", "respon: " + response);
+                        try {
+
+                            JSONArray data = response.getJSONArray("data");
+                            for(int i=0; i<data.length(); i++){
+                                JSONObject jsonGrowth = data.getJSONObject(i);
+                                Log.d("TAG","ke -"+i+" : "+data.getJSONObject(i));
+
+                                TopGrowth growth = new TopGrowth();
+                                growth.setGrowth_per_day(jsonGrowth.getJSONObject("growth").getDouble("growth_per_day"));
+                                growth.setUnit(jsonGrowth.getJSONObject("growth").getString("unit"));
+                                topHeightgrowths.add(growth);
+                            }
+                            Log.d("SIZE: ",""+topHeightgrowths.size());
+                            if(topHeightgrowths.size()==0){
+                                binding.topHeight.setVisibility(View.GONE);
+                                binding.notFoundGrowthIsight.setText("Butuh minimal dua data pantauan untuk mendapatkan insight pertumbuhan!");
+                                binding.cardNotFoundGrowthIsight.setVisibility(View.VISIBLE);
+                            }else{
+                                showTopHeight(topHeightgrowths);
+                            }
+                            height=topHeightgrowths;
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        Log.d("TOP HEIGHT GROW", "onError: " + error.getErrorBody()); //untuk log pada onerror
+                        binding.topHeight.setVisibility(View.GONE);
+                        binding.notFoundGrowthIsight.setText("Butuh minimal dua data pantauan untuk mendapatkan insight pertumbuhan!");
+                        binding.cardNotFoundGrowthIsight.setVisibility(View.VISIBLE);
+                    }
+                });
+    }
+
+    private void getTopWidth() {
+        Log.d("TOKEN TOP WIDTH", "respon: " + pref.getSPToken());
+        ArrayList<TopGrowth> topWidthGrow = new ArrayList<>();
+        AndroidNetworking.get(BASE_URL+"top-growths?category=leaf_width&n=3&plant_id="+pref.getSPPlantId())
+                .addHeaders("Authorization","Bearer "+pref.getSPToken())
+                .addHeaders("Accept", "application/json")
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener(){
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("TOP WIDTH GROW", "respon: " + response);
+                        try {
+
+                            JSONArray data = response.getJSONArray("data");
+                            for(int i=0; i<data.length(); i++){
+                                JSONObject jsonGrowth = data.getJSONObject(i);
+                                Log.d("TAG","ke -"+i+" : "+data.getJSONObject(i));
+
+                                TopGrowth growth = new TopGrowth();
+                                growth.setGrowth_per_day(jsonGrowth.getJSONObject("growth").getDouble("growth_per_day"));
+                                growth.setUnit(jsonGrowth.getJSONObject("growth").getString("unit"));
+                                topWidthGrow.add(growth);
+                            }
+                            Log.d("SIZE: ",""+topWidthGrow.size());
+                            if(topWidthGrow.size()==0){
+                                binding.notFoundGrowthIsight.setText("Butuh minimal dua data pantauan untuk mendapatkan insight pertumbuhan!");
+                                //binding.cardNotFoundGrowthIsight.setVisibility(View.VISIBLE);
+                            }
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        Log.d("TOP WIDTH GROW", "onError: " + error.getErrorBody()); //untuk log pada onerror
+                        //binding..setVisibility(View.GONE);
+                        binding.notFoundGrowthIsight.setText("Butuh minimal dua data pantauan untuk mendapatkan insight pertumbuhan!");
+                        binding.cardNotFoundGrowthIsight.setVisibility(View.VISIBLE);
+                    }
+                });
+    }
+    private void showTopHeight(ArrayList<TopGrowth> top) {
+        // Data-data yang akan ditampilkan di Chart
+        List<BarEntry> heightData = new ArrayList<BarEntry>();
+        if(top.size()!=0){
+            binding.topHeight.setMinimumHeight(400);
+            for(int i=0; i<top.size(); i++){
+                heightData.add(new BarEntry(i,(float)top.get(i).getGrowth_per_day()));
+            }
+        }
+
+        // Pengaturan atribut bar, seperti warna dan lain-lain
+        BarDataSet dataSet1 = new BarDataSet(heightData, "Pertumbuhan Tinggi Tanaman "+top.get(0).getUnit());
+        dataSet1.setColor(ColorTemplate.JOYFUL_COLORS[1]);
+        dataSet1.setValueTextColor(Color.BLACK);
+        dataSet1.setValueTextSize(16f);
+
+        // Membuat Bar data yang akan di set ke Chart
+        BarData barData = new BarData(dataSet1);
+        // Pengaturan sumbu X
+        XAxis xAxis = binding.topHeight.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM.BOTTOM);
+
+        // Agar ketika di zoom tidak menjadi pecahan
+        xAxis.setGranularity(1f);
+
+        // Diubah menjadi integer, kemudian dijadikan String
+        // Ini berfungsi untuk menghilankan koma, dan tanda ribuah pada tahun
+        xAxis.setValueFormatter(new IndexAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                //return String.valueOf((int) value);
+                return top.get((int)value).getName();
+            }
+        });
+
+        //Menghilangkan sumbu Y yang ada di sebelah kanan
+        binding.topHeight.getAxisRight().setEnabled(false);
+        binding.topHeight.setFitBars(true);
+        binding.topHeight.setData(barData);
+        binding.topHeight.getDescription().setEnabled(false);
+        binding.topHeight.animateY(2000);
+    }
     private void showGrafik(ArrayList<Growths> grow) {
         ArrayList<Entry> leaf_width = new ArrayList<>();
         ArrayList<Entry> height_plant = new ArrayList<>();

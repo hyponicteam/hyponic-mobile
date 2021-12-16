@@ -1,6 +1,7 @@
 package com.penshyponic.hyponic;
 
 import static com.penshyponic.hyponic.constant.ApiConstant.BASE_URL;
+import static com.penshyponic.hyponic.model.CreateGrowthHistory.history;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,11 +16,15 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.penshyponic.hyponic.databinding.ActivityCreateGrowthsBinding;
+import com.penshyponic.hyponic.model.GrowthHistory;
 import com.penshyponic.hyponic.model.Growths;
 import com.penshyponic.hyponic.model.SharedPrefManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class CreateGrowthsActivity extends AppCompatActivity {
 
@@ -43,6 +48,20 @@ public class CreateGrowthsActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 saveDataPlant(view);
+                Calendar calender = Calendar.getInstance();
+                String date =calender.get(Calendar.YEAR)+"-"+calender.get(Calendar.MONTH)+"-"+calender.get(Calendar.DATE);
+                int flag = -1;
+                for(int i =0; i<history.size();i++){
+                    if(history.get(i).getPlantId().equals(pref.getSPPlantId())){
+                        flag=i;
+                    }
+                }
+                if(flag==-1){
+                    history.add(new GrowthHistory(pref.getSPPlantId(),date));
+                }else{
+                    history.get(flag).setTimeCreated(date);
+                }
+
                 Intent moveIntent = new Intent(CreateGrowthsActivity.this, GrowthsPlantActivity.class);
                 startActivity(moveIntent);
             }
@@ -83,6 +102,9 @@ public class CreateGrowthsActivity extends AppCompatActivity {
                             try {
                                 if(response.getJSONObject("meta").getString("status").equals("success")){
                                     Log.d("Data",""+response.getJSONObject("data"));
+                                    Calendar calendar = Calendar.getInstance();
+                                    String date = calendar.get(Calendar.DATE)+"-"+calendar.get(Calendar.MONTH);
+                                    pref.saveSPString(pref.SP_Create_Growth,date);
                                     Toast.makeText(getApplicationContext(),"DATA BERHASIL DISIMPAN",Toast.LENGTH_SHORT).show();
                                 }else {
                                     Toast.makeText(getApplicationContext(),"DATA GAGAl DISIMPAN",Toast.LENGTH_SHORT).show();
