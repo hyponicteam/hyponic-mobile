@@ -85,8 +85,8 @@ public class DeletePlantFragment extends DialogFragment {
                     @Override
                     public void onError(ANError error) {
                         // handle error
-                        Toast.makeText(getParentFragment().getContext(),""+error, Toast.LENGTH_SHORT).show();
-                        Log.d("ERROR", String.valueOf(error));
+                        Toast.makeText(getParentFragment().getContext(),"Pastikan tanaman anda tidak memiliki data pantauan", Toast.LENGTH_SHORT).show();
+                        Log.d("ERROR", error.getErrorBody());
                     }
                 });
 

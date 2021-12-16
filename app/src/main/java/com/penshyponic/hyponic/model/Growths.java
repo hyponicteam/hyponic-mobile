@@ -8,8 +8,6 @@ public class Growths {
     private double temperature;
     private double acidity;
 
-
-
     private String date;
     private Time time;
 

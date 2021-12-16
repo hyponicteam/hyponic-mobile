@@ -11,10 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:text="Ubah Data Tanaman"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Ubah Data Pantau"
         android:textColor="@color/black"
+        android:fontFamily="@font/poppins_bold"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -25,10 +26,13 @@
         android:id="@+id/text3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginRight="16dp"
         android:text="Ubah data perkembangan tanamanmu!"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text1" />
@@ -50,7 +54,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:ems="10"
-            android:hint="@string/heightPlant" />
+            android:hint="@string/heightPlant"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,7 +77,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:ems="10"
-            android:hint="@string/leafWidth" />
+            android:hint="@string/leafWidth"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -91,7 +101,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:ems="10"
-            android:hint="@string/temperature" />
+            android:hint="@string/temperature"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -111,7 +124,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:ems="10"
-            android:hint="@string/Acidity" />
+            android:hint="@string/Acidity"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -123,6 +139,7 @@
         android:layout_marginStart="88dp"
         android:backgroundTint="@color/grey"
         android:text="@string/cancel"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnSave"
@@ -137,6 +154,7 @@
         android:layout_marginEnd="88dp"
         android:backgroundTint="@color/TextViewGreenLight"
         android:text="@string/save"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

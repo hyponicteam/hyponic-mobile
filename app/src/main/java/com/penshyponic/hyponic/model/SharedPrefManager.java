@@ -3,6 +3,8 @@ package com.penshyponic.hyponic.model;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.Date;
+
 public class SharedPrefManager {
     public static final String SP_USER = "spUser";
     public static final int SP_ID = 0;
@@ -14,6 +16,7 @@ public class SharedPrefManager {
     public static final String SP_IS_LOGIN = "isLogin";
     public static final String SP_Created_At= "spCreatedAt";
     public static final String SP_Edited_At="spEditedAt";
+    public static final String SP_Create_Growth = "";
 
     SharedPreferences sp;
     SharedPreferences.Editor spEditor;
@@ -64,5 +67,8 @@ public class SharedPrefManager {
     }
     public String getSP_Edited_At() {
         return sp.getString(SP_Edited_At,"null");
+    }
+    public String getSP_Create_Growth(){
+        return sp.getString(SP_Create_Growth,"null");
     }
 }
