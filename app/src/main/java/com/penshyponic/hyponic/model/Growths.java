@@ -7,6 +7,7 @@ public class Growths {
     private double leaf_widht;
     private double temperature;
     private double acidity;
+    private String plant_id;
 
     private String date;
     private Time time;
@@ -80,5 +81,11 @@ public class Growths {
         this.time = time;
     }
 
+    public String getPlant_id() {
+        return plant_id;
+    }
 
+    public void setPlant_id(String plant_id) {
+        this.plant_id = plant_id;
+    }
 }

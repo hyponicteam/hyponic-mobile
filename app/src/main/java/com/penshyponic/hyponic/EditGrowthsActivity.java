@@ -20,7 +20,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class EditGrowthsActivity extends AppCompatActivity {
-
+    public static final String EXTRA_PLANTID = "extra_plant_id";
+    public static final String EXTRA_GROWTH_ID = "extra_growth_id";
     ActivityEditGrowthsBinding binding;
     SharedPrefManager pref;
 
@@ -33,7 +34,6 @@ public class EditGrowthsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         pref = new SharedPrefManager(this);
         getData();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.logo);
         binding.btnSave.setOnClickListener(view -> {
@@ -42,9 +42,10 @@ public class EditGrowthsActivity extends AppCompatActivity {
         });
         binding.btnCancel.setOnClickListener(v->{
             pref.saveSPString(pref.SP_PLANT_ID,pref.getSPPlantId());
-            finish();
-//            Intent moveIntent = new Intent(this,GrowthsPlantActivity.class);
-//            startActivity(moveIntent);
+            //finish();
+            Intent moveIntent = new Intent(this,GrowthsPlantActivity.class);
+            moveIntent.putExtra(GrowthsPlantActivity.EXTRA_PLANTID,getIntent().getStringExtra(EXTRA_PLANTID));
+            startActivity(moveIntent);
         });
 
     }
@@ -62,14 +63,15 @@ public class EditGrowthsActivity extends AppCompatActivity {
             binding.inputPh.setError("Data tidak boleh kosong");
         }else{
             editData();
-            finish();
-//            Intent moveIntent = new Intent(EditGrowthsActivity.this, GrowthsPlantActivity.class);
-//            startActivity(moveIntent);
+            //finish();
+            Intent moveIntent = new Intent(EditGrowthsActivity.this, GrowthsPlantActivity.class);
+            moveIntent.putExtra(GrowthsPlantActivity.EXTRA_PLANTID,getIntent().getStringExtra(EXTRA_PLANTID));
+            startActivity(moveIntent);
         }
     }
 
     public void getData() {
-        AndroidNetworking.get(BASE_URL+"growths/"+pref.getSPGrowthsId())
+        AndroidNetworking.get(BASE_URL+"growths/"+getIntent().getStringExtra(EXTRA_GROWTH_ID))
                 .addHeaders("Accept", "application/json")
                 .addHeaders("Authorization","Bearer "+pref.getSPToken())
                 .setPriority(Priority.LOW)
@@ -98,7 +100,7 @@ public class EditGrowthsActivity extends AppCompatActivity {
     }
 
     public void editData() {
-        AndroidNetworking.patch(BASE_URL+"growths/"+pref.getSPGrowthsId())
+        AndroidNetworking.patch(BASE_URL+"growths/"+getIntent().getStringExtra(EXTRA_GROWTH_ID))
                 .addHeaders("Authorization","Bearer "+pref.getSPToken())
                 .addHeaders("Accept", "application/json")
                 .addBodyParameter("plant_height",binding.edPanjang.getText().toString())
