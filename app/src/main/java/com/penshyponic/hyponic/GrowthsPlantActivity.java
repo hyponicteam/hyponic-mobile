@@ -26,6 +26,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.penshyponic.hyponic.adapter.GrowthsAdapter;
 import com.penshyponic.hyponic.databinding.ActivityGrowthsPlantBinding;
 import com.penshyponic.hyponic.model.GrowthHistory;
+import com.penshyponic.hyponic.model.Plant;
 import com.penshyponic.hyponic.model.SharedPrefManager;
 import com.penshyponic.hyponic.model.Growths;
 import com.github.mikephil.charting.components.Legend;
@@ -45,8 +46,9 @@ import java.util.List;
 
 public class GrowthsPlantActivity extends AppCompatActivity {
 
+    public static final String EXTRA_PLANTID = "extra_plantID";
     private ArrayList<Growths> growths = new ArrayList<>();
-    private ArrayList<TopGrowth> height = new ArrayList<>();
+
     private ActivityGrowthsPlantBinding binding;
     SharedPrefManager pref;
 
@@ -65,27 +67,25 @@ public class GrowthsPlantActivity extends AppCompatActivity {
         getGrowth();
         getTopHeigh();
         getTopWidth();
-        Log.d("SIZE HEIGHT GLOBAL ",String.valueOf(this.height.size()));
 
-        binding.btnAddPlant.setOnClickListener(view ->
-                {
-                    Calendar calendar = Calendar.getInstance();
-                    String nowDate = calendar.get(Calendar.YEAR)+"-"+calendar.get(Calendar.MONTH)+"-"+calendar.get(Calendar.DATE);
-                    boolean flag =false;
-                    for(int i=0; i<history.size(); i++){
-                        GrowthHistory histo = history.get(i);
-                        if(histo.getPlantId().equals(pref.getSPPlantId()) && histo.getTimeCreated().equals(nowDate)){
-                            flag=true;
-                        }
-                    }
-                    if(flag){
-                        Toast.makeText(getApplicationContext(), "Maaf anda dapat menginputkan data lagi esok hari", Toast.LENGTH_SHORT).show();
-                    }else{
-                        Intent moveIntent = new Intent(this, CreateGrowthsActivity.class);
-                        startActivity(moveIntent);
-                    }
+        binding.btnAddPlant.setOnClickListener(view -> {
+            Calendar calendar = Calendar.getInstance();
+            String nowDate = calendar.get(Calendar.YEAR)+"-"+calendar.get(Calendar.MONTH)+"-"+calendar.get(Calendar.DATE);
+            boolean flag =false;
+            for(int i=0; i<history.size(); i++){
+                GrowthHistory histo = history.get(i);
+                if(histo.getPlantId().equals(pref.getSPPlantId()) && histo.getTimeCreated().equals(nowDate)){
+                    flag=true;
                 }
-
+            }
+            if(flag || pref.getSP_Create_Growth().equals(getIntent().getStringExtra(EXTRA_PLANTID)+nowDate)){
+                Toast.makeText(getApplicationContext(), "Maaf anda dapat menginputkan data lagi esok hari", Toast.LENGTH_SHORT).show();
+            }else{
+                Intent moveIntent = new Intent(this, CreateGrowthsActivity.class);
+                moveIntent.putExtra(CreateGrowthsActivity.EXTRA_PLANTID,getIntent().getStringExtra(EXTRA_PLANTID));
+                startActivity(moveIntent);
+            }
+        }
         );
 
         //getTabelGrowth();
@@ -119,11 +119,10 @@ public class GrowthsPlantActivity extends AppCompatActivity {
                             if(topHeightgrowths.size()==0){
                                 binding.topHeight.setVisibility(View.GONE);
                                 binding.notFoundGrowthIsight.setText("Butuh minimal dua data pantauan untuk mendapatkan insight pertumbuhan!");
-                                binding.cardNotFoundGrowthIsight.setVisibility(View.VISIBLE);
+                                //binding.cardNotFoundGrowthIsight.setVisibility(View.VISIBLE);
                             }else{
                                 showTopHeight(topHeightgrowths);
                             }
-                            height=topHeightgrowths;
 
                         }catch (JSONException e){
                             e.printStackTrace();
@@ -134,7 +133,7 @@ public class GrowthsPlantActivity extends AppCompatActivity {
                         Log.d("TOP HEIGHT GROW", "onError: " + error.getErrorBody()); //untuk log pada onerror
                         binding.topHeight.setVisibility(View.GONE);
                         binding.notFoundGrowthIsight.setText("Butuh minimal dua data pantauan untuk mendapatkan insight pertumbuhan!");
-                        binding.cardNotFoundGrowthIsight.setVisibility(View.VISIBLE);
+                        //binding.cardNotFoundGrowthIsight.setVisibility(View.VISIBLE);
                     }
                 });
     }
@@ -178,7 +177,7 @@ public class GrowthsPlantActivity extends AppCompatActivity {
                         Log.d("TOP WIDTH GROW", "onError: " + error.getErrorBody()); //untuk log pada onerror
                         //binding..setVisibility(View.GONE);
                         binding.notFoundGrowthIsight.setText("Butuh minimal dua data pantauan untuk mendapatkan insight pertumbuhan!");
-                        binding.cardNotFoundGrowthIsight.setVisibility(View.VISIBLE);
+                        //binding.cardNotFoundGrowthIsight.setVisibility(View.VISIBLE);
                     }
                 });
     }
@@ -295,7 +294,7 @@ public class GrowthsPlantActivity extends AppCompatActivity {
         super.onResume();
     }
     public void getGrowth(){
-        AndroidNetworking.get(BASE_URL+"plants/"+pref.getSPPlantId())
+        AndroidNetworking.get(BASE_URL+"plants/"+getIntent().getStringExtra(EXTRA_PLANTID))
                 .addHeaders("Accept", "application/json")
                 .addHeaders("Authorization","Bearer "+pref.getSPToken())
                 .setPriority(Priority.LOW)
@@ -318,6 +317,7 @@ public class GrowthsPlantActivity extends AppCompatActivity {
                                         jsontabelList.getDouble("temperature"),
                                         jsontabelList.getDouble("acidity"),
                                         jsontabelList.getString("created_at"));
+                                tabellist.setPlant_id(jsontabelList.getString("plant_id"));
                                 growths.add(tabellist);
                             }
                             Log.d("SIZEGROW: ",""+growths.size());
@@ -389,17 +389,23 @@ public class GrowthsPlantActivity extends AppCompatActivity {
 
         listGrowthsAdapter.setOnItemClickCallback(new GrowthsAdapter.OnItemClickCallback() {
             @Override
-            public void onEditClicked(Growths growths) {
-                pref.saveSPString(pref.SP_GROWTH_ID, growths.getId());
+            public void onEditClicked(Growths growth) {
+                //pref.saveSPString(pref.SP_GROWTH_ID, growth.getId());
                 Intent moveIntent = new Intent (GrowthsPlantActivity.this, EditGrowthsActivity.class);
+                moveIntent.putExtra(EditGrowthsActivity.EXTRA_GROWTH_ID,growth.getId());
+                moveIntent.putExtra(EditGrowthsActivity.EXTRA_PLANTID,growth.getPlant_id());
                 startActivity(moveIntent);
             }
 
             @Override
-            public void onDeleteClicked(Growths growths) {
-                pref.saveSPString(pref.SP_GROWTH_ID, growths.getId());
+            public void onDeleteClicked(Growths growth) {
+                pref.saveSPString(pref.SP_GROWTH_ID, growth.getId());
                 DeleteGrowthsFragment deleteDetailPlantfragment = new DeleteGrowthsFragment();
                 FragmentManager mFragmentManager = getSupportFragmentManager();
+                Bundle mBundle = new Bundle();
+                mBundle.putString(DeleteGrowthsFragment.EXTRA_PLANTID,growth.getPlant_id());
+                mBundle.putString(DeleteGrowthsFragment.EXTRA_GROWTH_ID,growth.getId());
+                deleteDetailPlantfragment.setArguments(mBundle);
                 deleteDetailPlantfragment.show(mFragmentManager, DeleteGrowthsFragment.class.getSimpleName());
                 ;
             }

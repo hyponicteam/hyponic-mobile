@@ -27,7 +27,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class CreateGrowthsActivity extends AppCompatActivity {
-
+    public static final String EXTRA_PLANTID = "extra_plant_id";
     private ActivityCreateGrowthsBinding binding;
     private String panjang, lebar, suhu, ph;
     SharedPrefManager pref;
@@ -40,7 +40,6 @@ public class CreateGrowthsActivity extends AppCompatActivity {
         binding = ActivityCreateGrowthsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         pref = new SharedPrefManager(this);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.logo);
         binding.btnSave.setOnClickListener(new View.OnClickListener() {
@@ -51,7 +50,9 @@ public class CreateGrowthsActivity extends AppCompatActivity {
         });
 
         binding.btnCancel.setOnClickListener(v->{
+              //finish();
             Intent moveIntent = new Intent(CreateGrowthsActivity.this, GrowthsPlantActivity.class);
+            moveIntent.putExtra(GrowthsPlantActivity.EXTRA_PLANTID,getIntent().getStringExtra(EXTRA_PLANTID));
             startActivity(moveIntent);
         });
     }
@@ -83,6 +84,7 @@ public class CreateGrowthsActivity extends AppCompatActivity {
                 history.get(flag).setTimeCreated(date);
             }
             Intent moveIntent = new Intent(CreateGrowthsActivity.this, GrowthsPlantActivity.class);
+            moveIntent.putExtra(GrowthsPlantActivity.EXTRA_PLANTID,pref.getSPPlantId());
             startActivity(moveIntent);
         }
     }
@@ -108,23 +110,24 @@ public class CreateGrowthsActivity extends AppCompatActivity {
                                 if(response.getJSONObject("meta").getString("status").equals("success")){
                                     Log.d("Data",""+response.getJSONObject("data"));
                                     Calendar calendar = Calendar.getInstance();
-                                    String date = calendar.get(Calendar.DATE)+"-"+calendar.get(Calendar.MONTH);
-                                    pref.saveSPString(pref.SP_Create_Growth,date);
-                                    Toast.makeText(getApplicationContext(),"DATA BERHASIL DISIMPAN",Toast.LENGTH_SHORT).show();
+                                    String plantId =response.getJSONObject("data").getString("plant_id");
+                                    String date = calendar.get(Calendar.YEAR)+"-"+calendar.get(Calendar.MONTH)+"-"+calendar.get(Calendar.DATE);
+                                    pref.saveSPString(pref.SP_Create_Growth,plantId+date);
+                                    Toast.makeText(getApplicationContext(),"Data Berhasil Disimpan",Toast.LENGTH_SHORT).show();
                                 }else {
-                                    Toast.makeText(getApplicationContext(),"DATA GAGAl DISIMPAN",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),"Data Gagal Disimpan",Toast.LENGTH_SHORT).show();
                                 }
 
                             }catch (JSONException e){
-                                Toast.makeText(getApplicationContext(),"Login Gagal"+e,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),"Gagal Disimpan"+e,Toast.LENGTH_SHORT).show();
                             }
                         }
                         @Override
                         public void onError(ANError error) {
                             //showLoading(false);
                             // handle error
-                            Toast.makeText(getApplicationContext(),""+error, Toast.LENGTH_SHORT).show();
-                            Log.d("ERROR", String.valueOf(error));
+                            Toast.makeText(getApplicationContext(),"Gagal Disimpan, hanya dapat memasukkan satu data pantauan dalam satu hari", Toast.LENGTH_SHORT).show();
+                            Log.d("CREATEERROR", String.valueOf(error.getErrorBody()));
                         }
                     });
 

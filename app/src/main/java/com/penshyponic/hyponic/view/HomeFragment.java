@@ -164,6 +164,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             public void onViewClicked(Plant plant) {
                 pref.saveSPString(pref.SP_PLANT_ID,plant.getId());
                 Intent moveIntent = new Intent(getActivity(), GrowthsPlantActivity.class);
+                moveIntent.putExtra(GrowthsPlantActivity.EXTRA_PLANTID,plant.getId());
                 startActivity(moveIntent);
             }
         });
