@@ -37,17 +37,35 @@ public class EditGrowthsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.logo);
         binding.btnSave.setOnClickListener(view -> {
-            editData();
-            Intent moveIntent = new Intent(EditGrowthsActivity.this, GrowthsPlantActivity.class);
-            startActivity(moveIntent);
-            //finish();
+            cekEdit();
+
         });
         binding.btnCancel.setOnClickListener(v->{
             pref.saveSPString(pref.SP_PLANT_ID,pref.getSPPlantId());
-            Intent moveIntent = new Intent(this,GrowthsPlantActivity.class);
-            startActivity(moveIntent);
+            finish();
+//            Intent moveIntent = new Intent(this,GrowthsPlantActivity.class);
+//            startActivity(moveIntent);
         });
 
+    }
+
+    private void cekEdit() {
+        String panjang = binding.edPanjang.getText().toString();
+        String lebar = binding.edLebar.getText().toString();
+        String suhu = binding.edSuhu.getText().toString();
+        String ph = binding.edPh.getText().toString();
+
+        if(panjang.equals("")|| lebar.equals("") || suhu.equals("") || ph.equals("")){
+            binding.inputpanjang.setError("Data tidak boleh kosong");
+            binding.inputLebar.setError("Data tidak boleh kosong");
+            binding.inputSuhu.setError("Data tidak boleh kosong");
+            binding.inputPh.setError("Data tidak boleh kosong");
+        }else{
+            editData();
+            finish();
+//            Intent moveIntent = new Intent(EditGrowthsActivity.this, GrowthsPlantActivity.class);
+//            startActivity(moveIntent);
+        }
     }
 
     public void getData() {

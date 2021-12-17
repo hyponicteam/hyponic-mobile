@@ -57,6 +57,9 @@ public class DeleteGrowthsFragment extends DialogFragment {
 //                startActivity(moveIntent);
             }
         });
+        binding.btnCancel.setOnClickListener(v->{
+            dismiss();
+        });
 
     }
 

@@ -46,24 +46,7 @@ public class CreateGrowthsActivity extends AppCompatActivity {
         binding.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                saveDataPlant(view);
-                Calendar calender = Calendar.getInstance();
-                String date =calender.get(Calendar.YEAR)+"-"+calender.get(Calendar.MONTH)+"-"+calender.get(Calendar.DATE);
-                int flag = -1;
-                for(int i =0; i<history.size();i++){
-                    if(history.get(i).getPlantId().equals(pref.getSPPlantId())){
-                        flag=i;
-                    }
-                }
-                if(flag==-1){
-                    history.add(new GrowthHistory(pref.getSPPlantId(),date));
-                }else{
-                    history.get(flag).setTimeCreated(date);
-                }
-
-                Intent moveIntent = new Intent(CreateGrowthsActivity.this, GrowthsPlantActivity.class);
-                startActivity(moveIntent);
+                cekSave(view);
             }
         });
 
@@ -72,17 +55,39 @@ public class CreateGrowthsActivity extends AppCompatActivity {
             startActivity(moveIntent);
         });
     }
-
-    public void saveDataPlant(View view){
+    public void cekSave(View view){
         panjang = binding.edPanjang.getText().toString();
         lebar = binding.edLebar.getText().toString();
         suhu = binding.edSuhu.getText().toString();
         ph = binding.edPh.getText().toString();
 
         if(panjang.equals("")|| lebar.equals("") || suhu.equals("") || ph.equals("")){
-            Toast.makeText(this,"Data tidak boleh kosong", Toast.LENGTH_LONG).show();
+            binding.inputpanjang.setError("Data tidak boleh kosong");
+            binding.inputLebar.setError("Data tidak boleh kosong");
+            binding.inputSuhu.setError("Data tidak boleh kosong");
+            binding.inputPh.setError("Data tidak boleh kosong");
         }
         else{
+            saveDataPlant(view);
+            Calendar calender = Calendar.getInstance();
+            String date =calender.get(Calendar.YEAR)+"-"+calender.get(Calendar.MONTH)+"-"+calender.get(Calendar.DATE);
+            int flag = -1;
+            for(int i =0; i<history.size();i++){
+                if(history.get(i).getPlantId().equals(pref.getSPPlantId())){
+                    flag=i;
+                }
+            }
+            if(flag==-1){
+                history.add(new GrowthHistory(pref.getSPPlantId(),date));
+            }else{
+                history.get(flag).setTimeCreated(date);
+            }
+            Intent moveIntent = new Intent(CreateGrowthsActivity.this, GrowthsPlantActivity.class);
+            startActivity(moveIntent);
+        }
+    }
+    public void saveDataPlant(View view){
+
             AndroidNetworking.post(BASE_URL+"growths")
                     .addHeaders("Authorization","Bearer "+pref.getSPToken())
                     .addHeaders("Accept", "application/json")
@@ -122,6 +127,6 @@ public class CreateGrowthsActivity extends AppCompatActivity {
                             Log.d("ERROR", String.valueOf(error));
                         }
                     });
-        }
+
     }
 }
