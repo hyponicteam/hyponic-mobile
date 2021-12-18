@@ -13,37 +13,42 @@
         android:theme="@style/Theme.Hyponic"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.penshyponic.hyponic.EditGrowthsActivity"
+            android:name=".SplashActivity"
             android:exported="true"
-            android:label=" "/>
+            android:label=" "
+            android:theme="@style/Theme.Hyponic.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
-            android:name="com.penshyponic.hyponic.GrowthsPlantActivity"
-            android:exported="true"
-            android:parentActivityName=".MainActivity"
-            android:label=" "/>
-        <activity
-            android:name="com.penshyponic.hyponic.MainActivity"
+            android:name=".EditGrowthsActivity"
             android:exported="true"
             android:label=" " />
         <activity
-            android:name="com.penshyponic.hyponic.CreateGrowthsActivity"
+            android:name=".GrowthsPlantActivity"
             android:exported="true"
-            android:label=" "/>
+            android:label=" "
+            android:parentActivityName=".MainActivity" />
         <activity
-            android:name="com.penshyponic.hyponic.LihatArtikelActivity"
+            android:name=".MainActivity"
             android:exported="true"
-            android:label=" "/>
+            android:label=" " />
         <activity
-            android:name="com.penshyponic.hyponic.RegisterActivity"
+            android:name=".CreateGrowthsActivity"
+            android:exported="true"
+            android:label=" " />
+        <activity
+            android:name=".LihatArtikelActivity"
+            android:exported="true"
+            android:label=" " />
+        <activity
+            android:name=".RegisterActivity"
             android:exported="true" />
         <activity
-            android:name="com.penshyponic.hyponic.LoginActivity"
+            android:name=".LoginActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
