@@ -18,9 +18,11 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.penshyponic.hyponic.adapter.GrowthsAdapter;
@@ -327,6 +329,7 @@ public class GrowthsPlantActivity extends AppCompatActivity {
                                 binding.cardNotFoundGrowth.setVisibility(View.VISIBLE);
                             }else{
                                 showTabelList(growths);
+                                showGrowthBarChart(growths);
                             }
 
                         }catch (JSONException e){
@@ -410,5 +413,74 @@ public class GrowthsPlantActivity extends AppCompatActivity {
                 ;
             }
         });
+    }
+    public void showGrowthBarChart(ArrayList<Growths> growth){
+        float groupSpace = 0.08f;
+        float barSpace = 0.02f;
+        float barWidth = 0.2f;
+        float tahunAwal = 0f;
+
+        List<BarEntry> heighPlant = new ArrayList<BarEntry>();
+        List<BarEntry> leafWidth = new ArrayList<BarEntry>();
+        List<BarEntry> temperature = new ArrayList<BarEntry>();
+        List<BarEntry> acidity= new ArrayList<BarEntry>();
+        // Data-data yang akan ditampilkan di Chart
+        for(int i=0; i<growth.size(); i++){
+            heighPlant.add(new BarEntry(i, (float)growth.get(i).getPlant_height()));
+            leafWidth.add(new BarEntry(i, (float)growth.get(i).getLeaf_widht()));
+            temperature.add(new BarEntry(i,(float)growth.get(i).getTemperature()));
+            acidity.add(new BarEntry(i, (float)growth.get(i).getAcidity()));
+        }
+
+        // Pengaturan atribut bar, seperti warna dan lain-lain
+        BarDataSet dataSet1 = new BarDataSet(heighPlant, "Tinggi Tanaman");
+        dataSet1.setColor(Color.MAGENTA);
+
+        BarDataSet dataSet2 = new BarDataSet(leafWidth, "Lebar Daun");
+        dataSet2.setColor(Color.GREEN);
+
+        BarDataSet dataSet3 = new BarDataSet(temperature, "Suhu");
+        dataSet1.setColor(Color.RED);
+
+        BarDataSet dataSet4 = new BarDataSet(acidity, "PH Air");
+        dataSet2.setColor(Color.BLUE);
+
+        // Membuat Bar data yang akan di set ke Chart
+        BarData barData = new BarData(dataSet1, dataSet2,dataSet3,dataSet4);
+
+        // Pengaturan sumbu X
+        XAxis xAxis = binding.GrowthBarChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM.BOTTOM);
+        xAxis.setCenterAxisLabels(true);
+
+        // Agar ketika di zoom tidak menjadi pecahan
+        xAxis.setGranularity(1f);
+
+        // Diubah menjadi integer, kemudian dijadikan String
+        // Ini berfungsi untuk menghilankan koma, dan tanda ribuah pada tahun
+//        xAxis.setValueFormatter(new IndexAxisValueFormatter() {
+//            @Override
+//            public String getFormattedValue(float value) {
+//                //return String.valueOf((int) value);
+//                String date = growth.get((int)value).getDate();
+//                return date;
+//            }
+//        });
+
+        //Menghilangkan sumbu Y yang ada di sebelah kanan
+        binding.GrowthBarChart.getAxisRight().setEnabled(false);
+
+        // Menghilankan deskripsi pada Chart
+        binding.GrowthBarChart.getDescription().setEnabled(false);
+
+        // Set data ke Chart
+        // Tambahkan invalidate setiap kali mengubah data chart
+        binding.GrowthBarChart.setData(barData);
+        binding.GrowthBarChart.getBarData().setBarWidth(barWidth);
+        binding.GrowthBarChart.getXAxis().setAxisMinimum(0);
+//        binding.GrowthBarChart.getXAxis().setAxisMaximum(tahunAwal + binding.GrowthBarChart.getBarData().getGroupWidth(groupSpace, barSpace) * 4);
+        binding.GrowthBarChart.groupBars(0, groupSpace, barSpace);
+        binding.GrowthBarChart.setDragEnabled(true);
+        binding.GrowthBarChart.invalidate();
     }
 }
