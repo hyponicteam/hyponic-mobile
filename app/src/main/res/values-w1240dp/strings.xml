@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Hyponic</string>
     <string name="dialog_create_new_plant">Buat Tanaman Baruku</string>
     <string name="save">SIMPAN</string>
     <string name="tutorial">Tutorial</string>
