@@ -83,9 +83,11 @@ public class PlantsFragment extends Fragment {
     private void showTopWidth(ArrayList<TopGrowth> top) {
         // Data-data yang akan ditampilkan di Chart
         List<BarEntry> widthData = new ArrayList<BarEntry>();
+        String names[] = new String[top.size()];
         if(top.size()!=0){
             binding.barTopWidth.setMinimumHeight(400);
             for(int i=0; i<top.size(); i++){
+                names[i]=top.get(i).getName();
                 widthData.add(new BarEntry(i,(float)top.get(i).getGrowth_per_day()));
             }
         }else{
@@ -106,17 +108,7 @@ public class PlantsFragment extends Fragment {
 
         // Agar ketika di zoom tidak menjadi pecahan
         xAxis.setGranularity(1f);
-
-        // Diubah menjadi integer, kemudian dijadikan String
-        // Ini berfungsi untuk menghilankan koma, dan tanda ribuah pada tahun
-        xAxis.setValueFormatter(new IndexAxisValueFormatter() {
-            @Override
-            public String getFormattedValue(float value) {
-                //return String.valueOf((int) value);
-                return top.get((int)value).getName();
-            }
-        });
-
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(names));
         //Menghilangkan sumbu Y yang ada di sebelah kanan
         binding.barTopWidth.getAxisRight().setEnabled(false);
         binding.barTopWidth.setFitBars(true);
@@ -128,10 +120,12 @@ public class PlantsFragment extends Fragment {
     private void showTopHeight(ArrayList<TopGrowth> top) {
         // Data-data yang akan ditampilkan di Chart
         List<BarEntry> heightData = new ArrayList<BarEntry>();
+        String nama[] = new String[top.size()];
         if(top.size()!=0){
             binding.topHeight.setMinimumHeight(400);
             for(int i=0; i<top.size(); i++){
                 heightData.add(new BarEntry(i,(float)top.get(i).getGrowth_per_day()));
+                nama[i]=top.get(i).getName();
             }
         }else{
             heightData.add(new BarEntry(0,0f));
@@ -152,16 +146,12 @@ public class PlantsFragment extends Fragment {
 
         // Agar ketika di zoom tidak menjadi pecahan
         xAxis.setGranularity(1f);
+        xAxis.setAxisMaximum(0);
+        xAxis.setAxisMaximum(0+(1*3));
 
         // Diubah menjadi integer, kemudian dijadikan String
         // Ini berfungsi untuk menghilankan koma, dan tanda ribuah pada tahun
-        xAxis.setValueFormatter(new IndexAxisValueFormatter() {
-            @Override
-            public String getFormattedValue(float value) {
-                //return String.valueOf((int) value);
-                return top.get((int)value).getName();
-            }
-        });
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(nama));
 
         //Menghilangkan sumbu Y yang ada di sebelah kanan
         binding.topHeight.getAxisRight().setEnabled(false);
