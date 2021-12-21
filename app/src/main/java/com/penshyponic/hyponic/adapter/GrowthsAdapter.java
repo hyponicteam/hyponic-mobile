@@ -39,7 +39,7 @@ public class GrowthsAdapter extends RecyclerView.Adapter<GrowthsAdapter.ListView
     @NonNull
     @Override
     public GrowthsAdapter.ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row_detailplant, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row_growth, parent, false);
         return new GrowthsAdapter.ListViewHolder(view);
     }
 

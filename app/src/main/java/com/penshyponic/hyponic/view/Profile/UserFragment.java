@@ -1,10 +1,14 @@
 package com.penshyponic.hyponic.view.Profile;
 
+import static com.penshyponic.hyponic.constant.ApiConstant.BASE_URL;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -12,11 +16,18 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.penshyponic.hyponic.LoginActivity;
 import com.penshyponic.hyponic.R;
 import com.penshyponic.hyponic.databinding.FragmentUserBinding;
 import com.penshyponic.hyponic.model.DateFormatter;
 import com.penshyponic.hyponic.model.SharedPrefManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class UserFragment extends Fragment {
 
@@ -35,11 +46,12 @@ public class UserFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         pref= new SharedPrefManager(getContext());
 
+
         binding.username.setText(pref.getSPNama());
         binding.email.setText(pref.getSPEmail());
-
         binding.createdAt.setText(getDate(pref.getSP_Created_At()));
-        binding.updatedAt.setText(getDate(pref.getSP_Edited_At()));
+        binding.updated.setText(getDate(pref.getSP_Edited_At()));
+
         binding.editUser.setOnClickListener(view1 -> {
             toEditUserFragment();
         });
@@ -47,7 +59,6 @@ public class UserFragment extends Fragment {
             logOut();
         });
     }
-
     private String getDate(String sp_created_at) {
         DateFormatter formatter = new DateFormatter(sp_created_at,'T');
         String date = formatter.getAfter_separated();

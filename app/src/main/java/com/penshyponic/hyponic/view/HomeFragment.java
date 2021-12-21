@@ -39,7 +39,6 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private FragmentHomeBinding binding;
-    private RecyclerView rvPlant;
     private ArrayList<Plant> planList = new ArrayList<>();
     SharedPrefManager pref;
 
