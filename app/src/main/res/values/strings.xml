@@ -43,8 +43,8 @@
     <string name="dialog_edit_plant">Ubah Nama Tanamanmu</string>
     <string name="namePlant">Nama Tanaman</string>
     <string name="DatePantau">Tanggal Pantau</string>
-    <string name="heightPlant">Panjang Tanaman (mm)</string>
-    <string name="leafWidth">Lebar Daun (mm)</string>
+    <string name="heightPlant">Panjang Tanaman (cm)</string>
+    <string name="leafWidth">Lebar Daun (cm)</string>
     <string name="temperature">Suhu °C</string>
     <string name="Acidity">PH Air</string>
     <string name="dialog_delete_detailplant">Yakin menghapus data perkembangan tanamanmu</string>
@@ -76,7 +76,7 @@
     <string name="article_subheading">Artikel utuk membantu anda</string>
     <string name="description1">deskripsi logo</string>
     <string name="edited_by">Oleh</string>
-    <string name="grafik_pertumbuhan">Grafik Pertumbuhan Lima Hari Terakhir</string>
+    <string name="grafik_pertumbuhan">Grafik Pertumbuhan </string>
     <string name="notFound">Tidak ada data</string>
 
 </resources>

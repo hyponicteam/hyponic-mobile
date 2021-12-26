@@ -206,13 +206,13 @@ public class GrowthsPlantActivity extends AppCompatActivity {
                             }
                             Log.d("SIZEGROW: ",""+growths.size());
                             if(growths.size()==0){
-                                binding.cardNoGrowthData.setVisibility(View.VISIBLE);
+                                binding.cardNoGrowthData.getRoot().setVisibility(View.VISIBLE);
                                 binding.rvlisttabeltanaman.setVisibility(View.GONE);
                                 binding.height.setVisibility(View.GONE);
                                 binding.leafWidth.setVisibility(View.GONE);
                                 binding.temperature.setVisibility(View.GONE);
                                 binding.acidity.setVisibility(View.GONE);
-                                binding.cardNotFoundGrowth.setVisibility(View.VISIBLE);
+                                binding.cardNotFoundGrowth.getRoot().setVisibility(View.VISIBLE);
                             }else{
                                 showTabelGrowth(growths);
                                 showHeight(growths);
@@ -233,8 +233,8 @@ public class GrowthsPlantActivity extends AppCompatActivity {
                         binding.leafWidth.setVisibility(View.GONE);
                         binding.temperature.setVisibility(View.GONE);
                         binding.acidity.setVisibility(View.GONE);
-                        binding.cardNotFoundGrowth.setVisibility(View.VISIBLE);
-                        binding.cardNoGrowthData.setVisibility(View.VISIBLE);
+                        binding.cardNotFoundGrowth.getRoot().setVisibility(View.VISIBLE);
+                        binding.cardNoGrowthData.getRoot().setVisibility(View.VISIBLE);
 
                     }
                 });
@@ -287,7 +287,7 @@ public class GrowthsPlantActivity extends AppCompatActivity {
 
 
         // Pengaturan atribut bar, seperti warna dan lain-lain
-        BarDataSet dataSet1 = new BarDataSet(heightData, "Tinggi Tanaman (mm) ");
+        BarDataSet dataSet1 = new BarDataSet(heightData, "Tinggi Tanaman (cm) ");
         dataSet1.setColor(ColorTemplate.rgb("#FF38AC91"));
         dataSet1.setValueTextColor(Color.BLACK);
         dataSet1.setValueTextSize(16f);
@@ -329,7 +329,7 @@ public class GrowthsPlantActivity extends AppCompatActivity {
             heightData.add(new BarEntry(0,0f));
         }
 
-        BarDataSet dataSet1 = new BarDataSet(heightData, "Lebar Daun (mm) ");
+        BarDataSet dataSet1 = new BarDataSet(heightData, "Lebar Daun (cm) ");
         dataSet1.setColor(ColorTemplate.rgb("#FF38AC91"));
         dataSet1.setValueTextColor(Color.BLACK);
         dataSet1.setValueTextSize(16f);
