@@ -39,7 +39,6 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private FragmentHomeBinding binding;
-    private ArrayList<Plant> planList = new ArrayList<>();
     SharedPrefManager pref;
 
     public HomeFragment() {
@@ -65,6 +64,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     }
     private void getPlantData() {
+        ArrayList<Plant> planList = new ArrayList<>();
         AndroidNetworking.get(BASE_URL+"latest-plants?n=3")
                 .addHeaders("Authorization","Bearer "+pref.getSPToken())
                 .addHeaders("Accept", "application/json")

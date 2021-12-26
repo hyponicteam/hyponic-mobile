@@ -28,6 +28,7 @@
         android:id="@+id/rvarticle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        tools:listitem="@layout/item_row_artikel"/>
 
 </LinearLayout>

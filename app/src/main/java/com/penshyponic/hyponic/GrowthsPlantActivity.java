@@ -113,11 +113,9 @@ public class GrowthsPlantActivity extends AppCompatActivity {
                             }
                             Log.d("SIZE: ",""+topHeightgrowths.size());
                             if(topHeightgrowths.size()==0){
-                                binding.topHeight.setVisibility(View.GONE);
-                                binding.notFoundGrowthIsight.setText("Butuh minimal dua data pantauan untuk mendapatkan insight pertumbuhan!");
-                                //binding.cardNotFoundGrowthIsight.setVisibility(View.VISIBLE);
+
                             }else{
-                                showTopHeight(topHeightgrowths);
+
                             }
 
                         }catch (JSONException e){
@@ -127,9 +125,7 @@ public class GrowthsPlantActivity extends AppCompatActivity {
                     @Override
                     public void onError(ANError error) {
                         Log.d("TOP HEIGHT GROW", "onError: " + error.getErrorBody()); //untuk log pada onerror
-                        binding.topHeight.setVisibility(View.GONE);
-                        binding.notFoundGrowthIsight.setText("Butuh minimal dua data pantauan untuk mendapatkan insight pertumbuhan!");
-                        //binding.cardNotFoundGrowthIsight.setVisibility(View.VISIBLE);
+
                     }
                 });
     }
@@ -163,7 +159,6 @@ public class GrowthsPlantActivity extends AppCompatActivity {
                                 binding.notFoundGrowthIsight.setText("Butuh minimal dua data pantauan untuk mendapatkan insight pertumbuhan!");
                                 //binding.cardNotFoundGrowthIsight.setVisibility(View.VISIBLE);
                             }
-
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
@@ -176,48 +171,6 @@ public class GrowthsPlantActivity extends AppCompatActivity {
                         //binding.cardNotFoundGrowthIsight.setVisibility(View.VISIBLE);
                     }
                 });
-    }
-    private void showTopHeight(ArrayList<TopGrowth> top) {
-        // Data-data yang akan ditampilkan di Chart
-        List<BarEntry> heightData = new ArrayList<BarEntry>();
-        if(top.size()!=0){
-            binding.topHeight.setMinimumHeight(400);
-            for(int i=0; i<top.size(); i++){
-                heightData.add(new BarEntry(i,(float)top.get(i).getGrowth_per_day()));
-            }
-        }
-
-        // Pengaturan atribut bar, seperti warna dan lain-lain
-        BarDataSet dataSet1 = new BarDataSet(heightData, "Pertumbuhan Tinggi Tanaman "+top.get(0).getUnit());
-        dataSet1.setColor(ColorTemplate.JOYFUL_COLORS[1]);
-        dataSet1.setValueTextColor(Color.BLACK);
-        dataSet1.setValueTextSize(16f);
-
-        // Membuat Bar data yang akan di set ke Chart
-        BarData barData = new BarData(dataSet1);
-        // Pengaturan sumbu X
-        XAxis xAxis = binding.topHeight.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM.BOTTOM);
-
-        // Agar ketika di zoom tidak menjadi pecahan
-        xAxis.setGranularity(1f);
-
-        // Diubah menjadi integer, kemudian dijadikan String
-        // Ini berfungsi untuk menghilankan koma, dan tanda ribuah pada tahun
-        xAxis.setValueFormatter(new IndexAxisValueFormatter() {
-            @Override
-            public String getFormattedValue(float value) {
-                //return String.valueOf((int) value);
-                return top.get((int)value).getName();
-            }
-        });
-
-        //Menghilangkan sumbu Y yang ada di sebelah kanan
-        binding.topHeight.getAxisRight().setEnabled(false);
-        binding.topHeight.setFitBars(true);
-        binding.topHeight.setData(barData);
-        binding.topHeight.getDescription().setEnabled(false);
-        binding.topHeight.animateY(2000);
     }
 
     @Override
@@ -254,13 +207,19 @@ public class GrowthsPlantActivity extends AppCompatActivity {
                             Log.d("SIZEGROW: ",""+growths.size());
                             if(growths.size()==0){
                                 binding.cardNoGrowthData.setVisibility(View.VISIBLE);
-                                binding.GrowthBarChart.setVisibility(View.GONE);
                                 binding.rvlisttabeltanaman.setVisibility(View.GONE);
+                                binding.height.setVisibility(View.GONE);
+                                binding.leafWidth.setVisibility(View.GONE);
+                                binding.temperature.setVisibility(View.GONE);
+                                binding.acidity.setVisibility(View.GONE);
                                 binding.cardNotFoundGrowth.setVisibility(View.VISIBLE);
                             }else{
                                 showTabelGrowth(growths);
-                                showGrowthBarChart(growths);
-                            }
+                                showHeight(growths);
+                                showLeafWidth(growths);
+                                showTemperature(growths);
+                                showAcidity(growths);
+                                                            }
 
                         }catch (JSONException e){
                             e.printStackTrace();
@@ -270,9 +229,13 @@ public class GrowthsPlantActivity extends AppCompatActivity {
                     public void onError(ANError error) {
                         Log.d("TAG", "onError: " + error.getErrorBody()); //untuk log pada onerror
                         binding.rvlisttabeltanaman.setVisibility(View.GONE);
+                        binding.height.setVisibility(View.GONE);
+                        binding.leafWidth.setVisibility(View.GONE);
+                        binding.temperature.setVisibility(View.GONE);
+                        binding.acidity.setVisibility(View.GONE);
                         binding.cardNotFoundGrowth.setVisibility(View.VISIBLE);
                         binding.cardNoGrowthData.setVisibility(View.VISIBLE);
-                        binding.GrowthBarChart.setVisibility(View.GONE);
+
                     }
                 });
     }
@@ -306,66 +269,167 @@ public class GrowthsPlantActivity extends AppCompatActivity {
             }
         });
     }
-    public void showGrowthBarChart(ArrayList<Growths> growth){
-        float groupSpace = 0.01f;
-        float barSpace = 0.1f;
-        float barWidth = 0.15f;
-
-        String[] days = new String[growth.size()];
-        List<BarEntry> heighPlant = new ArrayList<BarEntry>();
-        List<BarEntry> leafWidth = new ArrayList<BarEntry>();
-        List<BarEntry> temperature = new ArrayList<BarEntry>();
-        List<BarEntry> acidity= new ArrayList<BarEntry>();
+    private void showHeight(ArrayList<Growths> grow) {
         // Data-data yang akan ditampilkan di Chart
-        for(int i=0; i<growth.size(); i++){
-            DateFormatter tgl = new DateFormatter(growth.get(i).getDate(),' ');
-            days[i]=tgl.getAfter_separated();
-            heighPlant.add(new BarEntry(i, (float)growth.get(i).getPlant_height()));
-            leafWidth.add(new BarEntry(i, (float)growth.get(i).getLeaf_widht()));
-            temperature.add(new BarEntry(i,(float)growth.get(i).getTemperature()));
-            acidity.add(new BarEntry(i, (float)growth.get(i).getAcidity()));
+        List<BarEntry> heightData = new ArrayList<BarEntry>();
+        String tgl[] = new String[grow.size()];
+        if(grow.size()!=0){
+            binding.height.setMinimumHeight(400);
+            for(int i=0; i<grow.size(); i++){
+                heightData.add(new BarEntry(i,(float)grow.get(i).getPlant_height()));
+                DateFormatter date = new DateFormatter(grow.get(i).getDate(),' ');
+                tgl[i]=date.getAfter_separated().substring(5);
+                tgl[i]=tgl[i].replace('-','/');
+            }
+        }else{
+            heightData.add(new BarEntry(0,0f));
         }
 
+
         // Pengaturan atribut bar, seperti warna dan lain-lain
-        BarDataSet dataSet1 = new BarDataSet(heighPlant, "Tinggi Tanaman");
-        dataSet1.setColor(ColorTemplate.rgb("#FFCFB784"));
-
-        BarDataSet dataSet2 = new BarDataSet(leafWidth, "Lebar Daun");
-        dataSet2.setColor(ColorTemplate.rgb("#FF8ED486"));
-
-        BarDataSet dataSet3 = new BarDataSet(temperature, "Suhu");
-        dataSet3.setColor(ColorTemplate.JOYFUL_COLORS[1]);
-
-        BarDataSet dataSet4 = new BarDataSet(acidity, "PH Air");
-        dataSet4.setColor(ColorTemplate.rgb("#FF318FB5"));
+        BarDataSet dataSet1 = new BarDataSet(heightData, "Tinggi Tanaman (mm) ");
+        dataSet1.setColor(ColorTemplate.rgb("#FF38AC91"));
+        dataSet1.setValueTextColor(Color.BLACK);
+        dataSet1.setValueTextSize(16f);
 
         // Membuat Bar data yang akan di set ke Chart
-        BarData barData = new BarData(dataSet1, dataSet2,dataSet3,dataSet4);
-
+        BarData barData = new BarData(dataSet1);
         // Pengaturan sumbu X
-        XAxis xAxis = binding.GrowthBarChart.getXAxis();
+        XAxis xAxis = binding.height.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM.BOTTOM);
-       xAxis.setCenterAxisLabels(true);
 
         // Agar ketika di zoom tidak menjadi pecahan
         xAxis.setGranularity(1f);
-        xAxis.setGranularityEnabled(true);
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(days));
+
+        // Diubah menjadi integer, kemudian dijadikan String
+        // Ini berfungsi untuk menghilankan koma, dan tanda ribuah pada tahun
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(tgl));
 
         //Menghilangkan sumbu Y yang ada di sebelah kanan
-        binding.GrowthBarChart.getAxisRight().setEnabled(false);
-
-        // Menghilankan deskripsi pada Chart
-        binding.GrowthBarChart.getDescription().setEnabled(false);
-
-        // Set data ke Chart
-        // Tambahkan invalidate setiap kali mengubah data chart
-        binding.GrowthBarChart.setData(barData);
-        binding.GrowthBarChart.getBarData().setBarWidth(barWidth);
-        binding.GrowthBarChart.getXAxis().setAxisMinimum(0);
-        binding.GrowthBarChart.getXAxis().setAxisMaximum(0 + binding.GrowthBarChart.getBarData().getGroupWidth(groupSpace, barSpace) * 5);
-        binding.GrowthBarChart.groupBars(0, groupSpace, barSpace);
-        binding.GrowthBarChart.setDragEnabled(true);
-        binding.GrowthBarChart.invalidate();
+        binding.height.getAxisRight().setEnabled(false);
+        binding.height.setFitBars(true);
+        binding.height.setData(barData);
+        binding.height.getDescription().setEnabled(false);
+        binding.height.animateY(2000);
     }
+
+    private void showLeafWidth(ArrayList<Growths> grow) {
+        // Data-data yang akan ditampilkan di Chart
+        List<BarEntry> heightData = new ArrayList<>();
+        String tgl[] = new String[grow.size()];
+        if(grow.size()!=0){
+            binding.leafWidth.setMinimumHeight(400);
+            for(int i=0; i<grow.size(); i++){
+                heightData.add(new BarEntry(i,(float)grow.get(i).getLeaf_widht()));
+                DateFormatter date = new DateFormatter(grow.get(i).getDate(),' ');
+                tgl[i]=date.getAfter_separated().substring(5);
+                tgl[i]=tgl[i].replace('-','/');
+            }
+        }else{
+            heightData.add(new BarEntry(0,0f));
+        }
+
+        BarDataSet dataSet1 = new BarDataSet(heightData, "Lebar Daun (mm) ");
+        dataSet1.setColor(ColorTemplate.rgb("#FF38AC91"));
+        dataSet1.setValueTextColor(Color.BLACK);
+        dataSet1.setValueTextSize(16f);
+
+        BarData barData = new BarData(dataSet1);
+        XAxis xAxis = binding.leafWidth.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM.BOTTOM);
+
+        xAxis.setGranularity(1f);
+
+        // Diubah menjadi integer, kemudian dijadikan String
+        // Ini berfungsi untuk menghilankan koma, dan tanda ribuah pada tahun
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(tgl));
+
+        //Menghilangkan sumbu Y yang ada di sebelah kanan
+        binding.leafWidth.getAxisRight().setEnabled(false);
+        binding.leafWidth.setFitBars(true);
+        binding.leafWidth.setData(barData);
+        binding.leafWidth.getDescription().setEnabled(false);
+        binding.leafWidth.animateY(2000);
+    }
+
+    public void showTemperature(ArrayList<Growths> grow) {
+        // Data-data yang akan ditampilkan di Chart
+        List<BarEntry> heightData = new ArrayList<>();
+        String tgl[] = new String[grow.size()];
+        if(grow.size()!=0){
+            binding.temperature.setMinimumHeight(400);
+            for(int i=0; i<grow.size(); i++){
+                heightData.add(new BarEntry(i,(float)grow.get(i).getTemperature()));
+                DateFormatter date = new DateFormatter(grow.get(i).getDate(),' ');
+                tgl[i]=date.getAfter_separated().substring(5);
+                tgl[i]=tgl[i].replace('-','/');
+            }
+        }else{
+            heightData.add(new BarEntry(0,0f));
+        }
+
+
+        // Pengaturan atribut bar, seperti warna dan lain-lain
+        BarDataSet dataSet1 = new BarDataSet(heightData, "Suhu (C) ");
+        dataSet1.setColor(ColorTemplate.rgb("#FF38AC91"));
+        dataSet1.setValueTextColor(Color.BLACK);
+        dataSet1.setValueTextSize(16f);
+
+        // Membuat Bar data yang akan di set ke Chart
+        BarData barData = new BarData(dataSet1);
+        // Pengaturan sumbu X
+        XAxis xAxis = binding.temperature.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM.BOTTOM);
+
+        // Agar ketika di zoom tidak menjadi pecahan
+        xAxis.setGranularity(1f);
+
+        // Diubah menjadi integer, kemudian dijadikan String
+        // Ini berfungsi untuk menghilankan koma, dan tanda ribuah pada tahun
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(tgl));
+
+        //Menghilangkan sumbu Y yang ada di sebelah kanan
+        binding.temperature.getAxisRight().setEnabled(false);
+        binding.temperature.setFitBars(true);
+        binding.temperature.setData(barData);
+        binding.temperature.getDescription().setEnabled(false);
+        binding.temperature.animateY(2000);
+    }
+    private void showAcidity(ArrayList<Growths> grow) {
+
+        List<BarEntry> heightData = new ArrayList<BarEntry>();
+        String tgl[] = new String[grow.size()];
+        if(grow.size()!=0){
+            binding.acidity.setMinimumHeight(400);
+            for(int i=0; i<grow.size(); i++){
+                heightData.add(new BarEntry(i,(float)grow.get(i).getAcidity()));
+                DateFormatter date = new DateFormatter(grow.get(i).getDate(),' ');
+                tgl[i]=date.getAfter_separated().substring(5);
+                tgl[i]=tgl[i].replace('-','/');
+            }
+        }else{
+            heightData.add(new BarEntry(0,0f));
+        }
+
+        BarDataSet dataSet1 = new BarDataSet(heightData, "PH Air");
+        dataSet1.setColor(ColorTemplate.rgb("#FF38AC91"));
+        dataSet1.setValueTextColor(Color.BLACK);
+        dataSet1.setValueTextSize(16f);
+
+        BarData barData = new BarData(dataSet1);
+
+        XAxis xAxis = binding.acidity.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM.BOTTOM);
+
+        xAxis.setGranularity(1f);
+
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(tgl));
+
+        binding.acidity.getAxisRight().setEnabled(false);
+        binding.acidity.setFitBars(true);
+        binding.acidity.setData(barData);
+        binding.acidity.getDescription().setEnabled(false);
+        binding.acidity.animateY(2000);
+    }
+
 }

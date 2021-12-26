@@ -63,6 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:justificationMode="inter_word"
+                android:autoLink="web"
                 android:text="@string/isiArtikel"
                 android:textColor="@color/black"
                 android:textSize="14sp"

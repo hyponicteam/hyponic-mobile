@@ -46,7 +46,6 @@ import java.util.List;
 public class PlantsFragment extends Fragment {
     private FragmentPlantsBinding binding;
     SharedPrefManager pref;
-    ArrayList<TopGrowth> growths = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -69,14 +68,8 @@ public class PlantsFragment extends Fragment {
         binding.rvNLatestPlant.setHasFixedSize(true);
 
         getPlantData();
-        growths.addAll(GrowthDummyData.getListData());
-        Log.d("DUMMY TOP", String.valueOf(growths));
-        //showTopHeight();
-        //showTopWidth();
         getTopHeigh();
         getTopWidth();
-        Log.d("USER TOKEN ", pref.getSPToken());
-//        getTopWidth();
     }
 
 
