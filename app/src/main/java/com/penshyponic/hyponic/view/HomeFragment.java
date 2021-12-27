@@ -24,6 +24,7 @@ import com.penshyponic.hyponic.GrowthsPlantActivity;
 import com.penshyponic.hyponic.R;
 import com.penshyponic.hyponic.adapter.PlantAdapter;
 import com.penshyponic.hyponic.databinding.FragmentHomeBinding;
+import com.penshyponic.hyponic.model.DateFormatter;
 import com.penshyponic.hyponic.model.Plant;
 import com.penshyponic.hyponic.model.SharedPrefManager;
 import com.penshyponic.hyponic.model.Time;
@@ -53,7 +54,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         pref = new SharedPrefManager(getContext());
-        binding.username.setText("Hai "+pref.getSPNama()+",");
+        binding.rvCardGreeting.username.setText("Hai "+showName(pref.getSPNama())+",");
         showLoading(true);
         getPlantData();
         Log.d("TOKEN USER",pref.getSPToken());
@@ -62,6 +63,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         //showRecyclerList(planList);
         binding.btnAddPlant.setOnClickListener(this);
 
+    }
+
+    private String showName(String spNama) {
+        if(spNama.length()<10){
+            return spNama;
+        }else{
+            return spNama.substring(0,spNama.indexOf(' '));
+        }
     }
     private void getPlantData() {
         ArrayList<Plant> planList = new ArrayList<>();
@@ -95,9 +104,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
-
-
-
                     }
                     @Override
                     public void onError(ANError error) {

@@ -21,7 +21,7 @@
     <string name="title">Judul</string>
     <string name="description">Kategori artikel</string>
     <string name="tanamanku">Tanamanku</string>
-    <string name="terakhir">Terakhir di ubah</string>
+    <string name="terakhir">Tanaman Terakhir di ubah</string>
     <string name="selengkapnya">Selengkapnya ></string>
     <string name="title_activity_home1">Home1Activity</string>
     <!-- Strings used for fragments for navigation -->

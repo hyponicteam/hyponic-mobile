@@ -101,6 +101,7 @@ public class PlantsFragment extends Fragment {
 
         // Agar ketika di zoom tidak menjadi pecahan
         xAxis.setGranularity(1f);
+        xAxis.setAxisMaximum(0+(1*3));
         xAxis.setValueFormatter(new IndexAxisValueFormatter(names));
         //Menghilangkan sumbu Y yang ada di sebelah kanan
         binding.barTopWidth.getAxisRight().setEnabled(false);
@@ -139,7 +140,6 @@ public class PlantsFragment extends Fragment {
 
         // Agar ketika di zoom tidak menjadi pecahan
         xAxis.setGranularity(1f);
-        xAxis.setAxisMaximum(0);
         xAxis.setAxisMaximum(0+(1*3));
 
         // Diubah menjadi integer, kemudian dijadikan String
