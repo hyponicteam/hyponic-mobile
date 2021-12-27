@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -20,7 +21,6 @@ import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    //viewBinding
     private ActivityRegisterBinding binding;
     private String name, email, password, konfpass;
 
@@ -45,13 +45,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-//        binding.daftarGoogle.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent moveIntent = new Intent(RegisterActivity.this, RegisterActivity.class);
-//                startActivity(moveIntent);
-//            }
-//        });
     }
 
     public void simpanData() {
@@ -59,8 +52,6 @@ public class RegisterActivity extends AppCompatActivity {
         email = binding.mailRegisLabel.getText().toString();
         password = binding.RegisPasswordLabel.getText().toString();
         konfpass = binding.KonfPassLabel.getText().toString();
-
-        //binding.cobaview.setText(String.valueOf(password)+String.valueOf(konfpass));
 
         if(email.equals("")|| password.equals("") || name.equals("") || konfpass.equals("")){
             Toast.makeText(this,"Data tidak boleh kosong", Toast.LENGTH_LONG).show();
@@ -100,7 +91,8 @@ public class RegisterActivity extends AppCompatActivity {
                             public void onError(ANError error) {
                                 showLoading(false);
                                 // handle error
-                                Toast.makeText(getApplicationContext(),""+error, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),"Pastikan email anda belum terdaftar di Hyponic", Toast.LENGTH_SHORT).show();
+                                Log.d("REGIS EROR",error.getErrorBody());
                             }
                         });
             }

@@ -48,9 +48,9 @@ public class GrowthsAdapter extends RecyclerView.Adapter<GrowthsAdapter.ListView
         Growths growths = listGrowths.get(position);
 
         holder.tvTanggal.setText(growths.getDate());
-        holder.tvPanjang.setText(String.valueOf(growths.getPlant_height()));
-        holder.tvLebardaun.setText(String.valueOf(growths.getLeaf_widht()));
-        holder.tvSuhu.setText(String.valueOf(growths.getTemperature()));
+        holder.tvPanjang.setText(growths.getPlant_height()+"cm");
+        holder.tvLebardaun.setText(growths.getLeaf_widht()+"cm");
+        holder.tvSuhu.setText(growths.getTemperature()+"°C");
         holder.tvPhAir.setText(String.valueOf(growths.getAcidity()));
         holder.btnEdit.setOnClickListener(view ->{
             onItemClickCallback.onEditClicked(growths);
