@@ -135,9 +135,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     }
     private void showNotFound(Boolean isAnyData){
         if(isAnyData){
-            binding.notFound.setVisibility(View.VISIBLE);
+            binding.notFound.getRoot().setVisibility(View.VISIBLE);
         }else{
-            binding.notFound.setVisibility(View.GONE);
+            binding.notFound.getRoot().setVisibility(View.GONE);
         }
     }
 

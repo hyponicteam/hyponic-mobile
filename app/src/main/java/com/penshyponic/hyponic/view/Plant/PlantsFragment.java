@@ -244,8 +244,8 @@ public class PlantsFragment extends Fragment {
                         showLoading(false);
                         Log.d("TOP HEIGHT", "onError: " + error.getErrorBody()); //untuk log pada onerror
                         binding.topHeight.setVisibility(View.GONE);
-                        binding.notFoundTopHeight.setText("Butuh minimal 2 data perkembangan per tanaman untuk mendapatkan insight pertumbuhan!");
-                        binding.cardNotFoundTopHeight.setVisibility(View.VISIBLE);
+                        binding.cardNotFoundTopHeight.message.setText("Butuh minimal 2 data perkembangan per tanaman untuk mendapatkan insight pertumbuhan!");
+                        binding.cardNotFoundTopHeight.getRoot().setVisibility(View.VISIBLE);
 
                     }
                 });
@@ -289,8 +289,8 @@ public class PlantsFragment extends Fragment {
                         showLoading(false);
                         Log.d("TOP HEIGHT", "onError: " + error.getErrorBody()); //untuk log pada onerror
                         binding.barTopWidth.setVisibility(View.GONE);
-                        binding.notFoundTopWeight.setText("Butuh minimal 2 data perkembangan per tanaman untuk mendapatkan insight pertumbuhan!");
-                        binding.cardNotFoundTopWeight.setVisibility(View.VISIBLE);
+                        binding.cardNotFoundTopWeight.message.setText("Butuh minimal 2 data perkembangan per tanaman untuk mendapatkan insight pertumbuhan!");
+                        binding.cardNotFoundTopWeight.getRoot().setVisibility(View.VISIBLE);
 
                     }
                 });
@@ -331,9 +331,9 @@ public class PlantsFragment extends Fragment {
     }
     private void showNotFound(Boolean isAnyData){
         if(isAnyData){
-            binding.notFound.setVisibility(View.VISIBLE);
+            binding.notFound.getRoot().setVisibility(View.VISIBLE);
         }else{
-            binding.notFound.setVisibility(View.GONE);
+            binding.notFound.getRoot().setVisibility(View.GONE);
         }
     }
 }

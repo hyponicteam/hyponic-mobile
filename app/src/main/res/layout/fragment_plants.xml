@@ -17,16 +17,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <TextView
                 android:id="@+id/text_dashboard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
                 android:text="@string/myPlant"
                 android:textColor="@color/black"
                 android:textSize="30sp"
@@ -38,9 +36,7 @@
                 android:id="@+id/text_insight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="7dp"
-                android:layout_marginEnd="16dp"
                 android:text="@string/insight"
                 android:textColor="@color/hyponicLogo"
                 android:textSize="14sp"
@@ -52,54 +48,19 @@
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/topHeight"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"/>
-            <androidx.cardview.widget.CardView
+                android:layout_height="250dp" />
+            <include
                 android:id="@+id/cardNotFoundTopHeight"
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_marginTop="10dp"
-                android:visibility="gone"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="4dp"
-                app:cardMaxElevation="4dp"
-                app:cardBackgroundColor="@color/pitch"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="  Perhatian"
-                        android:drawableLeft="@drawable/ic_baseline_info_24"
-                        android:textColor="@color/yellow"
-                        android:fontFamily="@font/poppins_medium"
-                        android:textSize="14sp"/>
-                    <TextView
-                        android:id="@+id/notFoundTopHeight"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/notFound"
-                        android:textSize="14sp"
-                        android:layout_marginLeft="22dp"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
+                layout="@layout/card_not_found"/>
 
             <TextView
                 android:id="@+id/text_insightWidht"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="7dp"
-                android:layout_marginEnd="16dp"
                 android:text="@string/insightWidth"
                 android:textColor="@color/hyponicLogo"
                 android:textSize="14sp"
@@ -111,54 +72,19 @@
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barTopWidth"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"/>
-            <androidx.cardview.widget.CardView
+                android:layout_height="250dp" />
+            <include
                 android:id="@+id/cardNotFoundTopWeight"
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_marginTop="10dp"
-                android:visibility="gone"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="4dp"
-                app:cardMaxElevation="4dp"
-                app:cardBackgroundColor="@color/pitch"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="  Perhatian"
-                        android:drawableLeft="@drawable/ic_baseline_info_24"
-                        android:textColor="@color/yellow"
-                        android:fontFamily="@font/poppins_medium"
-                        android:textSize="14sp"/>
-                    <TextView
-                        android:id="@+id/notFoundTopWeight"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/notFound"
-                        android:textSize="14sp"
-                        android:layout_marginLeft="22dp"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
+                layout="@layout/card_not_found"/>
 
             <TextView
                 android:id="@+id/text_listPlant"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="7dp"
-                android:layout_marginEnd="16dp"
                 android:text="@string/listPlant"
                 android:textColor="@color/hyponicLogo"
                 android:textSize="14sp"
@@ -167,51 +93,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/barTopWidth" />
 
-            <androidx.cardview.widget.CardView
+            <include
                 android:id="@+id/notFound"
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_marginTop="10dp"
-                android:visibility="gone"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="4dp"
-                app:cardMaxElevation="4dp"
-                app:cardBackgroundColor="@color/pitch"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="  Perhatian"
-                        android:drawableLeft="@drawable/ic_baseline_info_24"
-                        android:textColor="@color/yellow"
-                        android:fontFamily="@font/poppins_medium"
-                        android:textSize="14sp"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/notFound"
-                        android:textSize="14sp"
-                        android:layout_marginStart="22dp"
-                        android:fontFamily="@font/poppins_regular"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
+                layout="@layout/card_not_found"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_NLatestPlant"
                 tools:listitem="@layout/item_row_plant"
                 android:layout_width="match_parent"
                 android:layout_height="600dp"
-                android:layout_marginLeft="16dp"
                 android:layout_marginTop="11dp"
-                android:layout_marginRight="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_listPlant" />
@@ -225,7 +119,6 @@
         android:layout_height="100dp"
         android:layout_gravity="center"
         android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
         android:layout_marginBottom="0dp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"

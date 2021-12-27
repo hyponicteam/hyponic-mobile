@@ -26,6 +26,7 @@
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/activity_splash.xml" value="0.1" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/blank_data.xml" value="0.14427083333333332" />
+        <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/card_not_found.xml" value="0.18840579710144928" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/content_home1.xml" value="0.13858695652173914" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/fragment_create_plant.xml" value="0.14402173913043478" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/fragment_delete_plant.xml" value="0.14402173913043478" />
@@ -36,9 +37,11 @@
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/fragment_notifications.xml" value="0.1" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/fragment_plants.xml" value="0.1" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/fragment_profile.xml" value="0.22" />
-        <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/fragment_user.xml" value="0.22" />
+        <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/fragment_user.xml" value="0.15" />
+        <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/header_table_growth.xml" value="0.25" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/item_row_artikel.xml" value="0.18631178707224336" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/item_row_detailplant.xml" value="0.25" />
+        <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/item_row_growth.xml" value="0.1" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/item_row_plant.xml" value="0.33" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/item_table_detailtanaman.xml" value="0.15" />
         <entry key="..\:/kuliah/SOFTWARE EXPO/hyponic-mobile/app/src/main/res/layout/item_top_height_growth.xml" value="0.33" />
@@ -90,7 +93,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.22" />
+        <option name="scale" value="0.15" />
       </ProjectState>
     </option>
   </component>
