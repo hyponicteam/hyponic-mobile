@@ -3,6 +3,7 @@ package com.penshyponic.hyponic;
 import static com.penshyponic.hyponic.constant.ApiConstant.BASE_URL;
 import static com.penshyponic.hyponic.model.CreateGrowthHistory.history;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -65,26 +66,58 @@ public class GrowthsPlantActivity extends AppCompatActivity {
         getTopWidth();
 
         binding.btnAddPlant.setOnClickListener(view -> {
-            Calendar calendar = Calendar.getInstance();
-            String nowDate = calendar.get(Calendar.YEAR)+"-"+calendar.get(Calendar.MONTH)+"-"+calendar.get(Calendar.DATE);
-            boolean flag =false;
-            for(int i=0; i<history.size(); i++){
-                GrowthHistory histo = history.get(i);
-                if(histo.getPlantId().equals(pref.getSPPlantId()) && histo.getTimeCreated().equals(nowDate)){
-                    flag=true;
-                }
-            }
-            if(flag || pref.getSP_Create_Growth().equals(getIntent().getStringExtra(EXTRA_PLANTID)+nowDate)){
-                Toast.makeText(getApplicationContext(), "Maaf anda dapat menginputkan data lagi esok hari", Toast.LENGTH_SHORT).show();
-            }else{
-                Intent moveIntent = new Intent(this, CreateGrowthsActivity.class);
-                moveIntent.putExtra(CreateGrowthsActivity.EXTRA_PLANTID,getIntent().getStringExtra(EXTRA_PLANTID));
-                startActivity(moveIntent);
-            }
+            cekAvailableToCreate();
+//            Calendar calendar = Calendar.getInstance();
+//            String nowDate = calendar.get(Calendar.YEAR)+"-"+calendar.get(Calendar.MONTH)+"-"+calendar.get(Calendar.DATE);
+//            boolean flag =false;
+//            for(int i=0; i<history.size(); i++){
+//                GrowthHistory histo = history.get(i);
+//                if(histo.getPlantId().equals(pref.getSPPlantId()) && histo.getTimeCreated().equals(nowDate)){
+//                    flag=true;
+//                }
+//            }
+//            if(flag || pref.getSP_Create_Growth().equals(getIntent().getStringExtra(EXTRA_PLANTID)+nowDate)){
+//                Toast.makeText(getApplicationContext(), "Maaf anda dapat menginputkan data lagi esok hari", Toast.LENGTH_SHORT).show();
+//            }else{
+//                Intent moveIntent = new Intent(this, CreateGrowthsActivity.class);
+//                moveIntent.putExtra(CreateGrowthsActivity.EXTRA_PLANTID,getIntent().getStringExtra(EXTRA_PLANTID));
+//                startActivity(moveIntent);
+//            }
         }
         );
 
         //getTabelGrowth();
+    }
+
+    private void cekAvailableToCreate() {
+        AndroidNetworking.get(BASE_URL+"available-to-update?plant_id="+getIntent().getStringExtra(EXTRA_PLANTID))
+                .addHeaders("Authorization","Bearer "+pref.getSPToken())
+                .addHeaders("Accept", "application/json")
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener(){
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("TOP HEIGHT GROW", "respon: " + response);
+                        try {
+                            JSONObject data = response.getJSONObject("data");
+                            if(data.getBoolean("available_to_update")){
+                                Intent moveIntent = new Intent(GrowthsPlantActivity.this, CreateGrowthsActivity.class);
+                                moveIntent.putExtra(CreateGrowthsActivity.EXTRA_PLANTID,getIntent().getStringExtra(EXTRA_PLANTID));
+                                startActivity(moveIntent);
+                            }else{
+                                Toast.makeText(getApplicationContext(), "Maaf, tunggu 24 jam untuk menginputkan data pantauan baru", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        Toast.makeText(getApplicationContext(), "Maaf, tunggu 24 jam untuk menginputkan data pantauan baru", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void getTopHeigh() {
@@ -270,7 +303,6 @@ public class GrowthsPlantActivity extends AppCompatActivity {
         });
     }
     private void showHeight(ArrayList<Growths> grow) {
-        // Data-data yang akan ditampilkan di Chart
         List<BarEntry> heightData = new ArrayList<BarEntry>();
         String tgl[] = new String[grow.size()];
         if(grow.size()!=0){
@@ -384,8 +416,6 @@ public class GrowthsPlantActivity extends AppCompatActivity {
         // Agar ketika di zoom tidak menjadi pecahan
         xAxis.setGranularity(1f);
 
-        // Diubah menjadi integer, kemudian dijadikan String
-        // Ini berfungsi untuk menghilankan koma, dan tanda ribuah pada tahun
         xAxis.setValueFormatter(new IndexAxisValueFormatter(tgl));
 
         //Menghilangkan sumbu Y yang ada di sebelah kanan

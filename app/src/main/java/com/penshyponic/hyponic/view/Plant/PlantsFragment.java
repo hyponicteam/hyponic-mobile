@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -22,6 +23,7 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.penshyponic.hyponic.GrowthsPlantActivity;
 import com.penshyponic.hyponic.DummyData.GrowthDummyData;
+import com.penshyponic.hyponic.MainActivity;
 import com.penshyponic.hyponic.R;
 import com.penshyponic.hyponic.adapter.PlantAdapter;
 import com.penshyponic.hyponic.databinding.FragmentPlantsBinding;
@@ -70,6 +72,7 @@ public class PlantsFragment extends Fragment {
         getPlantData();
         getTopHeigh();
         getTopWidth();
+
     }
 
 

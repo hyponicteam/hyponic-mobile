@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity{
             finish();
         }
         binding.loginAsGuest.setOnClickListener(v->{
-            loginApi("ivan@aulia.com","ivanaulia");
+            loginApi("demo@hyponic.com","demohyponic");
         });
     }
     public void init(){
