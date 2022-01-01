@@ -3,6 +3,7 @@ package com.penshyponic.hyponic;
 import static com.penshyponic.hyponic.constant.ApiConstant.BASE_URL;
 import static com.penshyponic.hyponic.model.CreateGrowthHistory.history;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -64,33 +65,38 @@ public class GrowthsPlantActivity extends AppCompatActivity {
         getTopHeigh();
         getTopWidth();
 
+        Log.d("TOKEN",pref.getSPToken());
+        Log.d("PLANT ID",getIntent().getStringExtra(EXTRA_PLANTID));
         binding.btnAddPlant.setOnClickListener(view -> {
-            Calendar calendar = Calendar.getInstance();
-            String nowDate = calendar.get(Calendar.YEAR)+"-"+calendar.get(Calendar.MONTH)+"-"+calendar.get(Calendar.DATE);
-            boolean flag =false;
-            for(int i=0; i<history.size(); i++){
-                GrowthHistory histo = history.get(i);
-                if(histo.getPlantId().equals(pref.getSPPlantId()) && histo.getTimeCreated().equals(nowDate)){
-                    flag=true;
-                }
-            }
-            if(flag || pref.getSP_Create_Growth().equals(getIntent().getStringExtra(EXTRA_PLANTID)+nowDate)){
-                Toast.makeText(getApplicationContext(), "Maaf anda dapat menginputkan data lagi esok hari", Toast.LENGTH_SHORT).show();
-            }else{
-                Intent moveIntent = new Intent(this, CreateGrowthsActivity.class);
-                moveIntent.putExtra(CreateGrowthsActivity.EXTRA_PLANTID,getIntent().getStringExtra(EXTRA_PLANTID));
-                startActivity(moveIntent);
-            }
+            cekAvailableToCreate();
         }
         );
 
-        //getTabelGrowth();
+    }
+
+    private void cekAvailableToCreate() {
+        Calendar calendar = Calendar.getInstance();
+        String nowDate = calendar.get(Calendar.YEAR)+"-"+calendar.get(Calendar.MONTH)+"-"+calendar.get(Calendar.DATE);
+        boolean flag =false;
+        for(int i=0; i<history.size(); i++){
+            GrowthHistory histo = history.get(i);
+            if(histo.getPlantId().equals(pref.getSPPlantId()) && histo.getTimeCreated().equals(nowDate)){
+                flag=true;
+            }
+        }
+        if(flag || pref.getSP_Create_Growth().equals(getIntent().getStringExtra(EXTRA_PLANTID)+nowDate)){
+            Toast.makeText(getApplicationContext(), "Maaf anda dapat menginputkan data lagi esok hari", Toast.LENGTH_SHORT).show();
+        }else{
+            Intent moveIntent = new Intent(this, CreateGrowthsActivity.class);
+            moveIntent.putExtra(CreateGrowthsActivity.EXTRA_PLANTID,getIntent().getStringExtra(EXTRA_PLANTID));
+            startActivity(moveIntent);
+        }
     }
 
     private void getTopHeigh() {
         Log.d("TOKEN TOP HEIGHT", "respon: " + pref.getSPToken());
         ArrayList<TopGrowth> topHeightgrowths = new ArrayList<>();
-        AndroidNetworking.get(BASE_URL+"top-growths?category=plant_height&n=3&plant_id="+pref.getSPPlantId())
+        AndroidNetworking.get(BASE_URL+"top-growths?category=plant_height&n=1&plant_id="+pref.getSPPlantId())
                 .addHeaders("Authorization","Bearer "+pref.getSPToken())
                 .addHeaders("Accept", "application/json")
                 .setPriority(Priority.LOW)
@@ -102,16 +108,7 @@ public class GrowthsPlantActivity extends AppCompatActivity {
                         try {
 
                             JSONArray data = response.getJSONArray("data");
-                            for(int i=0; i<data.length(); i++){
-                                JSONObject jsonGrowth = data.getJSONObject(i);
-                                Log.d("TAG","ke -"+i+" : "+data.getJSONObject(i));
-
-                                TopGrowth growth = new TopGrowth();
-                                growth.setGrowth_per_day(jsonGrowth.getJSONObject("growth").getDouble("growth_per_day"));
-                                growth.setUnit(jsonGrowth.getJSONObject("growth").getString("unit"));
-                                topHeightgrowths.add(growth);
-                            }
-                            Log.d("SIZE: ",""+topHeightgrowths.size());
+                            Log.d("DATA TOP HEIGHT",""+data);
                             if(topHeightgrowths.size()==0){
 
                             }else{
@@ -270,7 +267,6 @@ public class GrowthsPlantActivity extends AppCompatActivity {
         });
     }
     private void showHeight(ArrayList<Growths> grow) {
-        // Data-data yang akan ditampilkan di Chart
         List<BarEntry> heightData = new ArrayList<BarEntry>();
         String tgl[] = new String[grow.size()];
         if(grow.size()!=0){
@@ -384,8 +380,6 @@ public class GrowthsPlantActivity extends AppCompatActivity {
         // Agar ketika di zoom tidak menjadi pecahan
         xAxis.setGranularity(1f);
 
-        // Diubah menjadi integer, kemudian dijadikan String
-        // Ini berfungsi untuk menghilankan koma, dan tanda ribuah pada tahun
         xAxis.setValueFormatter(new IndexAxisValueFormatter(tgl));
 
         //Menghilangkan sumbu Y yang ada di sebelah kanan

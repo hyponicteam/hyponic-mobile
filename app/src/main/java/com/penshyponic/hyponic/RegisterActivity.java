@@ -15,6 +15,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.penshyponic.hyponic.databinding.ActivityRegisterBinding;
+import com.penshyponic.hyponic.model.SharedPrefManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,14 +24,19 @@ public class RegisterActivity extends AppCompatActivity {
 
     private ActivityRegisterBinding binding;
     private String name, email, password, konfpass;
-
+    SharedPrefManager preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        preferences = new SharedPrefManager(this);
 
-
+        if (preferences.getSPIsLogin()){
+            startActivity(new Intent(RegisterActivity.this, MainActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            finish();
+        }
         binding.buttonRegis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
