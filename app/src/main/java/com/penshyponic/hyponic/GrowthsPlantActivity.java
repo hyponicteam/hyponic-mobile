@@ -65,65 +65,38 @@ public class GrowthsPlantActivity extends AppCompatActivity {
         getTopHeigh();
         getTopWidth();
 
+        Log.d("TOKEN",pref.getSPToken());
+        Log.d("PLANT ID",getIntent().getStringExtra(EXTRA_PLANTID));
         binding.btnAddPlant.setOnClickListener(view -> {
             cekAvailableToCreate();
-//            Calendar calendar = Calendar.getInstance();
-//            String nowDate = calendar.get(Calendar.YEAR)+"-"+calendar.get(Calendar.MONTH)+"-"+calendar.get(Calendar.DATE);
-//            boolean flag =false;
-//            for(int i=0; i<history.size(); i++){
-//                GrowthHistory histo = history.get(i);
-//                if(histo.getPlantId().equals(pref.getSPPlantId()) && histo.getTimeCreated().equals(nowDate)){
-//                    flag=true;
-//                }
-//            }
-//            if(flag || pref.getSP_Create_Growth().equals(getIntent().getStringExtra(EXTRA_PLANTID)+nowDate)){
-//                Toast.makeText(getApplicationContext(), "Maaf anda dapat menginputkan data lagi esok hari", Toast.LENGTH_SHORT).show();
-//            }else{
-//                Intent moveIntent = new Intent(this, CreateGrowthsActivity.class);
-//                moveIntent.putExtra(CreateGrowthsActivity.EXTRA_PLANTID,getIntent().getStringExtra(EXTRA_PLANTID));
-//                startActivity(moveIntent);
-//            }
         }
         );
 
-        //getTabelGrowth();
     }
 
     private void cekAvailableToCreate() {
-        AndroidNetworking.get(BASE_URL+"available-to-update?plant_id="+getIntent().getStringExtra(EXTRA_PLANTID))
-                .addHeaders("Authorization","Bearer "+pref.getSPToken())
-                .addHeaders("Accept", "application/json")
-                .setPriority(Priority.LOW)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener(){
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("TOP HEIGHT GROW", "respon: " + response);
-                        try {
-                            JSONObject data = response.getJSONObject("data");
-                            if(data.getBoolean("available_to_update")){
-                                Intent moveIntent = new Intent(GrowthsPlantActivity.this, CreateGrowthsActivity.class);
-                                moveIntent.putExtra(CreateGrowthsActivity.EXTRA_PLANTID,getIntent().getStringExtra(EXTRA_PLANTID));
-                                startActivity(moveIntent);
-                            }else{
-                                Toast.makeText(getApplicationContext(), "Maaf, tunggu 24 jam untuk menginputkan data pantauan baru", Toast.LENGTH_SHORT).show();
-
-                            }
-                        }catch (JSONException e){
-                            e.printStackTrace();
-                        }
-                    }
-                    @Override
-                    public void onError(ANError error) {
-                        Toast.makeText(getApplicationContext(), "Maaf, tunggu 24 jam untuk menginputkan data pantauan baru", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        Calendar calendar = Calendar.getInstance();
+        String nowDate = calendar.get(Calendar.YEAR)+"-"+calendar.get(Calendar.MONTH)+"-"+calendar.get(Calendar.DATE);
+        boolean flag =false;
+        for(int i=0; i<history.size(); i++){
+            GrowthHistory histo = history.get(i);
+            if(histo.getPlantId().equals(pref.getSPPlantId()) && histo.getTimeCreated().equals(nowDate)){
+                flag=true;
+            }
+        }
+        if(flag || pref.getSP_Create_Growth().equals(getIntent().getStringExtra(EXTRA_PLANTID)+nowDate)){
+            Toast.makeText(getApplicationContext(), "Maaf anda dapat menginputkan data lagi esok hari", Toast.LENGTH_SHORT).show();
+        }else{
+            Intent moveIntent = new Intent(this, CreateGrowthsActivity.class);
+            moveIntent.putExtra(CreateGrowthsActivity.EXTRA_PLANTID,getIntent().getStringExtra(EXTRA_PLANTID));
+            startActivity(moveIntent);
+        }
     }
 
     private void getTopHeigh() {
         Log.d("TOKEN TOP HEIGHT", "respon: " + pref.getSPToken());
         ArrayList<TopGrowth> topHeightgrowths = new ArrayList<>();
-        AndroidNetworking.get(BASE_URL+"top-growths?category=plant_height&n=3&plant_id="+pref.getSPPlantId())
+        AndroidNetworking.get(BASE_URL+"top-growths?category=plant_height&n=1&plant_id="+pref.getSPPlantId())
                 .addHeaders("Authorization","Bearer "+pref.getSPToken())
                 .addHeaders("Accept", "application/json")
                 .setPriority(Priority.LOW)
@@ -135,16 +108,7 @@ public class GrowthsPlantActivity extends AppCompatActivity {
                         try {
 
                             JSONArray data = response.getJSONArray("data");
-                            for(int i=0; i<data.length(); i++){
-                                JSONObject jsonGrowth = data.getJSONObject(i);
-                                Log.d("TAG","ke -"+i+" : "+data.getJSONObject(i));
-
-                                TopGrowth growth = new TopGrowth();
-                                growth.setGrowth_per_day(jsonGrowth.getJSONObject("growth").getDouble("growth_per_day"));
-                                growth.setUnit(jsonGrowth.getJSONObject("growth").getString("unit"));
-                                topHeightgrowths.add(growth);
-                            }
-                            Log.d("SIZE: ",""+topHeightgrowths.size());
+                            Log.d("DATA TOP HEIGHT",""+data);
                             if(topHeightgrowths.size()==0){
 
                             }else{
